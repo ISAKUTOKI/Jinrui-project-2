@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e24315b068eff2748b9790e75e774f6e, type: 3}
+  m_Name: 1boss 1
+  m_EditorClassIdentifier: 
+  characterId: boss
+  content: are you willing to fight against me for the sake of a selfish, pathetic
+    man? No matter...all your struggles will be futile in the face of my absolute
+    strength!
+  soundName: 1
+  chatSpecialAction: 0
+  next: {fileID: 11400000, guid: 9f4ce8bce7aaaa243aa2b20ccfff958b, type: 2}
+  flag: 
