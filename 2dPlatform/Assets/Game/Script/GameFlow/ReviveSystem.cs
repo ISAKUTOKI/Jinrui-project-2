@@ -1,6 +1,4 @@
-﻿using Mono.Cecil.Cil;
-using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
 
