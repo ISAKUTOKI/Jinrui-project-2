@@ -87,7 +87,7 @@ public class EnemyBehaviour : MonoBehaviour
 
         if (isBoss)
         {
-            (GameFlowSystem.instance as GameFlow1).OnBossDead();
+            //(GameFlowSystem.instance as GameFlow1).OnBossDead();
             GameFlowSystem.instance.ToggleBossHpBar(false);
         }
     }

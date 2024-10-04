@@ -66,7 +66,7 @@ public class ChatSystem : MonoBehaviour
         }
         if (flag == "kick girl")
         {
-            (GameFlow1.instance as GameFlow1).PlayCinematic_打输的Boss战();
+           
         }
         _chat = null;
     }
