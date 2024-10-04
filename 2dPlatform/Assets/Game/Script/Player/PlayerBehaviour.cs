@@ -5,23 +5,11 @@ public class PlayerBehaviour : MonoBehaviour
 {
     public static PlayerBehaviour instance;
 
-    [HideInInspector]
-    public PlayerHealthBehaviour health;
-    [HideInInspector]
-    public PlayerMove move;
-    [HideInInspector]
-    public PlayerAttackBehaviour attack;
-    [HideInInspector]
-    public Animator animator;
-    public Animator animator_warrier;
-    public Animator animator_nonWarrier;
-
-    [HideInInspector]
-    public Transform flip;
-    public Transform flip_warrier;
-    public Transform flip_nonWarrier;
-    NpcController _npcController;
-    public bool isWarrierState;
+    public PlayerHealthBehaviour health { get;private set;}
+    public PlayerMove move{ get;private set;}
+    public PlayerAttackBehaviour attack{ get;private set;}
+    public Animator animator{ get;private set;}
+    public Transform flip{ get;private set;}
 
     private void Awake()
     {
@@ -29,20 +17,10 @@ public class PlayerBehaviour : MonoBehaviour
         attack = GetComponent<PlayerAttackBehaviour>();
         move = GetComponent<PlayerMove>();
         health = GetComponent<PlayerHealthBehaviour>();
-        _npcController = GetComponent<NpcController>();
-
-        ToggleWarrierState(false);
     }
 
-    public void ToggleWarrierState(bool b)
+    public void Init()
     {
-        isWarrierState = b;
-        animator = b ? animator_warrier : animator_nonWarrier;
-        flip = b ? flip_warrier : flip_nonWarrier;
-        flip_warrier.gameObject.SetActive(b);
-        flip_nonWarrier.gameObject.SetActive(!b);
-
-        _npcController.Reinit(animator, flip);
-        health.FullFill(b);
+         health.FullFill();
     }
 }

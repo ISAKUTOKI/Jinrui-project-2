@@ -3,12 +3,15 @@ using UnityEngine;
 
 public class PlayerAnimationEventReceiver : MonoBehaviour
 {
-    public PlayerMove playerMove;
-    public PlayerAttackBehaviour playerAttack;
+    public PlayerBehaviour player;
 
+    private void Awake()
+    {
+        player = GetComponentInParent<PlayerBehaviour>();
+    }
     public void OnAttacked()
     {
         //Debug.Log("PlayerAnimationEventReceiver OnAttacked");
-        playerAttack.OnAttacked();
+        player.attack.OnAttacked();
     }
 }

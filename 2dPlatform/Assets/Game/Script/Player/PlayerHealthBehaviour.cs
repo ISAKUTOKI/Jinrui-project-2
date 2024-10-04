@@ -7,8 +7,7 @@ using UnityEngine;
 public class PlayerHealthBehaviour : MonoBehaviour
 {
     public HpBarFixedWidthBehaviour hpbar;
-    public int hpMax_girl;
-    public int hpMax_warrior;
+    public int hpMax;
 
     private int _hpMax;
     private int _hp;
@@ -18,9 +17,9 @@ public class PlayerHealthBehaviour : MonoBehaviour
     public float deathFadeDelay;
 
 
-    public void FullFill(bool isWarrior)
+    public void FullFill()
     {
-        _hpMax = isWarrior ? hpMax_warrior : hpMax_girl;
+        _hpMax = hpMax;
         hpbar.Set(1, true);
         _hp = _hpMax;
     }

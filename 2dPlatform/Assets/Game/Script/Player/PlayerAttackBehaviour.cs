@@ -32,8 +32,6 @@ public class PlayerAttackBehaviour : MonoBehaviour
     {
         if (_health.isDead)
             return;
-        if (!PlayerBehaviour.instance.isWarrierState)
-            return;
         if (Input.GetKeyDown(KeyCode.J))
             TryAttack();
     }
@@ -56,8 +54,6 @@ public class PlayerAttackBehaviour : MonoBehaviour
 
     public void OnAttacked()
     {
-        //Debug.Log("OnAttacked");
-        //test enemy distance
         var targets = Physics2D.OverlapCircleAll(damageOrigin.position, damageRadius);
         foreach (var t in targets)
         {
