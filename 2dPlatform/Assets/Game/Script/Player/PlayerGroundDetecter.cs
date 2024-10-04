@@ -6,9 +6,7 @@ public class PlayerGroundDetecter : MonoBehaviour
 {
     public bool isGrounded;
     public List<GameObject> toIgnores;
-    public PlayerJump jump;
     List<GameObject> _currentGrounds = new List<GameObject>();
-    public PlayerHealthBehaviour health;
 
     public float radius;
 
@@ -16,7 +14,6 @@ public class PlayerGroundDetecter : MonoBehaviour
 
     private void Awake()
     {
-        health = GetComponentInParent<PlayerHealthBehaviour>();
         _cols = new List<Collider2D>();
     }
 
@@ -54,7 +51,7 @@ public class PlayerGroundDetecter : MonoBehaviour
     {
         if (col.tag == "Kill")
         {
-            health.Die(true);
+            PlayerBehaviour.instance.health.Die(true);
             return;
         }
 
@@ -72,7 +69,7 @@ public class PlayerGroundDetecter : MonoBehaviour
         if (!_currentGrounds.Contains(col.gameObject))
             _currentGrounds.Add(col.gameObject);
         isGrounded = _currentGrounds.Count > 0;
-        jump.OnGrounded();
+        PlayerBehaviour.instance.jump.OnGrounded();
     }
 
     private void OnExit(Collider2D col)

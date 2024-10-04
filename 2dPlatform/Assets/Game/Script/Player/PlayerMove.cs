@@ -5,19 +5,14 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     public float speed;
-    private PlayerMovePosition _movePosition;
     private float _speedX;
-    private PlayerJump _jump;
-    private PlayerAttackBehaviour _attack;
-    private PlayerHealthBehaviour _health;
     public bool isMoving { get; private set; }
+    private Vector3 _defaultFilpScale;
+
 
     void Start()
     {
-        _movePosition = GetComponent<PlayerMovePosition>();
-        _jump = GetComponent<PlayerJump>();
-        _attack = GetComponent<PlayerAttackBehaviour>();
-        _health = GetComponent<PlayerHealthBehaviour>();
+        _defaultFilpScale = PlayerBehaviour.instance.flip.localScale;
     }
 
     void Update()
@@ -41,16 +36,17 @@ public class PlayerMove : MonoBehaviour
     /// </summary>
     void ReadInput()
     {
-        if (_health.isDead)
+        if (PlayerBehaviour.instance.health.isDead)
             return;
 
-        if (_attack.isAttacking)
+        if (PlayerBehaviour.instance.attack.isAttacking)
         {
-            if (!_jump.IsJumping)
+            if (!PlayerBehaviour.instance.jump.IsJumping)
             {
                 _speedX = 0;
             }
             PlayerBehaviour.instance.animator.SetBool("walk", false);
+            PlayerBehaviour.instance.weaponView.SetState(PlayerWeaponView.State.hide);
             return;
         }
 
@@ -63,22 +59,31 @@ public class PlayerMove : MonoBehaviour
         if (_speedX > 0)
         {
             isMoving = true;
-            if (!_jump.IsJumping)
+            if (!PlayerBehaviour.instance.jump.IsJumping)
+            {
                 PlayerBehaviour.instance.animator.SetBool("walk", true);
+                PlayerBehaviour.instance.weaponView.SetState(PlayerWeaponView.State.run);
+            }
             FlipRight();
         }
         else if (_speedX < 0)
         {
             isMoving = true;
             FlipLeft();
-            if (!_jump.IsJumping)
+            if (!PlayerBehaviour.instance.jump.IsJumping)
+            {
                 PlayerBehaviour.instance.animator.SetBool("walk", true);
+                PlayerBehaviour.instance.weaponView.SetState(PlayerWeaponView.State.run);
+            }
         }
         else
         {
             isMoving = false;
-            if (!_jump.IsJumping)
+            if (!PlayerBehaviour.instance.jump.IsJumping)
+            {
                 PlayerBehaviour.instance.animator.SetBool("walk", false);
+                //PlayerBehaviour.instance.weaponView.SetState(PlayerWeaponView.State.idle);
+            }
         }
     }
 
@@ -88,18 +93,20 @@ public class PlayerMove : MonoBehaviour
     void Move()
     {
         if (_speedX != 0)
-            _movePosition.AddXMovement(Vector3.right * _speedX * speed);
+            PlayerBehaviour.instance.movePosition.AddXMovement(Vector3.right * _speedX * speed);
         else
-            _movePosition.StopXMovement();
+            PlayerBehaviour.instance.movePosition.StopXMovement();
     }
 
     void FlipRight()
     {
-        PlayerBehaviour.instance.flip.localScale = new Vector3(1, 1, 1);
+        PlayerBehaviour.instance.flip.localScale = _defaultFilpScale;
     }
 
     void FlipLeft()
     {
-        PlayerBehaviour.instance.flip.localScale = new Vector3(-1, 1, 1);
+        var s = _defaultFilpScale;
+        s.x = -s.x;
+        PlayerBehaviour.instance.flip.localScale = s;
     }
 }

@@ -5,18 +5,10 @@ public class PlayerJump : MonoBehaviour
 {
     public float jumpPower = 10;
     public PlayerGroundDetecter groundDetecter;
-    PlayerMovePosition _movePosition;
     bool _isFloating { get { return !groundDetecter.isGrounded; } }
-    bool _isAttacking;
-
-    PlayerAttackBehaviour _attack;
-    PlayerHealthBehaviour _health;
 
     void Awake()
     {
-        _movePosition = GetComponent<PlayerMovePosition>();
-        _attack = GetComponent<PlayerAttackBehaviour>();
-        _health = GetComponent<PlayerHealthBehaviour>();
     }
 
     void Update()
@@ -30,12 +22,12 @@ public class PlayerJump : MonoBehaviour
     {
         if (com.GameTime.timeScale == 0)
             return;
-        if (ChatSystem.instance.IsChating())
-            return;
+        //    if (ChatSystem.instance.IsChating())
+        //       return;
 
-        if (_attack.isAttacking)
+        if (PlayerBehaviour.instance.attack.isAttacking)
             return;
-        if (_health.isDead)
+        if (PlayerBehaviour.instance.health.isDead)
             return;
         if (Input.GetKeyDown(KeyCode.W))
             TryJump();
@@ -49,24 +41,26 @@ public class PlayerJump : MonoBehaviour
         DoJump();
     }
 
-    bool canNotJump { get { return _isFloating || _isAttacking || PlayerBehaviour.instance.health.isDead; } }
+    bool canNotJump { get { return _isFloating || PlayerBehaviour.instance.attack.isAttacking || PlayerBehaviour.instance.health.isDead; } }
 
     void DoJump()
     {
         //_speedY = jumpPower;
         PlayerBehaviour.instance.animator.SetBool("walk", false);
-        PlayerBehaviour.instance.animator.SetTrigger("jump");
-        _movePosition.rb.AddForce(new Vector2(0, jumpPower));
+        PlayerBehaviour.instance.weaponView.SetState(PlayerWeaponView.State.idle);
+        //PlayerBehaviour.instance.animator.SetTrigger("jump");
+        PlayerBehaviour.instance.movePosition.rb.AddForce(new Vector2(0, jumpPower));
     }
 
     public void OnGrounded()
     {
-        var v = _movePosition.rb.velocity;
+        var v = PlayerBehaviour.instance.movePosition.rb.velocity;
         if (v.y > 0)
             return;
         v.y = 0;
-        _movePosition.rb.velocity = v;
-        _movePosition.StopXMovement();
+        PlayerBehaviour.instance.movePosition.rb.velocity = v;
+        PlayerBehaviour.instance.movePosition.StopXMovement();
         PlayerBehaviour.instance.animator.SetBool("walk", false);
+        PlayerBehaviour.instance.weaponView.SetState(PlayerWeaponView.State.idle);
     }
 }

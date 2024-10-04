@@ -49,6 +49,7 @@ public class PlayerAttackBehaviour : MonoBehaviour
     void PerformAttack()
     {
         PlayerBehaviour.instance.animator.SetTrigger("attack");
+        PlayerBehaviour.instance.weaponView.SetState(PlayerWeaponView.State.hide);
         nextCanAttackTimestamp = Time.time + attackInterval;
     }
 

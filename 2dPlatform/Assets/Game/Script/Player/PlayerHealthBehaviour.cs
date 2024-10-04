@@ -16,7 +16,10 @@ public class PlayerHealthBehaviour : MonoBehaviour
     public string dieSound;
     public float deathFadeDelay;
 
-
+    private void Start()
+    {
+        FullFill();
+    }
     public void FullFill()
     {
         _hpMax = hpMax;
