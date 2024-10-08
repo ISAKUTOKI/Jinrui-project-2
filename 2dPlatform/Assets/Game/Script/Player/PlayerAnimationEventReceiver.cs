@@ -4,7 +4,10 @@ using UnityEngine;
 public class PlayerAnimationEventReceiver : MonoBehaviour
 {
 
-
+    public void OnCheckCombo()
+    {
+          PlayerBehaviour.instance.attack.OnCheckCombo();
+    }
     public void OnAttacked()
     {
         //Debug.Log("PlayerAnimationEventReceiver OnAttacked");

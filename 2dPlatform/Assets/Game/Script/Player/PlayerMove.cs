@@ -9,6 +9,7 @@ public class PlayerMove : MonoBehaviour
     public bool isMoving { get; private set; }
     private Vector3 _defaultFilpScale;
 
+    public PlayerActionPerformDependency dependency;
 
     void Start()
     {

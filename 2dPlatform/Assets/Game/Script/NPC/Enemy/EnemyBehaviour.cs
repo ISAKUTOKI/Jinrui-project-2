@@ -12,7 +12,6 @@ public class EnemyBehaviour : MonoBehaviour
 
     public string dieSound;
     public float deathFadeDelay;
-    public HeadKickSlay headKickSlay;
 
     [HideInInspector]
     public NpcController npcController;
@@ -25,7 +24,6 @@ public class EnemyBehaviour : MonoBehaviour
     [HideInInspector]
     public Animator animator;
     public bool isBoss;
-
     private void Awake()
     {
         npcController = GetComponent<NpcController>();
@@ -67,8 +65,15 @@ public class EnemyBehaviour : MonoBehaviour
         float ratio = (float)_hp / hpMax;
         if (hpbar != null)
             hpbar.Set(ratio, false);
+
         if (_hp <= 0)
             Die();
+        else
+        {
+            animator.SetTrigger("jump");
+            CombatSystem.instance.ShakeMid();
+            CombatSystem.instance.BloodWeak();
+        }
     }
 
     void Die()
@@ -85,11 +90,7 @@ public class EnemyBehaviour : MonoBehaviour
         //col.size = new Vector2(col.size.x * 0.25f, col.size.y * 0.25f);
         StartCoroutine(DieProcess());
 
-        if (isBoss)
-        {
-            //(GameFlowSystem.instance as GameFlow1).OnBossDead();
-            GameFlowSystem.instance.ToggleBossHpBar(false);
-        }
+        // GameFlowSystem.instance.ToggleBossHpBar(false);
     }
 
     IEnumerator DieProcess()

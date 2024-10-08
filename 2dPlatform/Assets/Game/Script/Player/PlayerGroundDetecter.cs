@@ -55,13 +55,13 @@ public class PlayerGroundDetecter : MonoBehaviour
             return;
         }
 
-        var colEnemy = col.gameObject.GetComponent<EnemyBehaviour>();
-        if (colEnemy != null
-            && colEnemy.headKickSlay != null
-            && colEnemy.headKickSlay.CheckHit(transform.position))
-        {
-            colEnemy.TakeDamage(colEnemy.headKickSlay.damage);
-        }
+        //var colEnemy = col.gameObject.GetComponent<EnemyBehaviour>();
+        //if (colEnemy != null
+        //    && colEnemy.headKickSlay != null
+        //    && colEnemy.headKickSlay.CheckHit(transform.position))
+        //{
+        //    colEnemy.TakeDamage(colEnemy.headKickSlay.damage);
+        //}
 
         if (col.isTrigger)
             return;
