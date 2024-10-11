@@ -15,9 +15,11 @@ public class ChatBoxSystem : MonoBehaviour
     public UiImageAnimation.UiImageAnimationClip clip_shock { get { return _uia.GetClip(3); } }
     public UiImageAnimation.UiImageAnimationClip clip_show { get { return _uia.GetClip(4); } }
     public UiImageAnimation.UiImageAnimationClip clip_talk { get { return _uia.GetClip(5); } }
+    public UiImageAnimation.UiImageAnimationClip clip_hurt { get { return _uia.GetClip(6); } }
 
     [SerializeField] int idleLoopCount = 3;
     [SerializeField] int stateLoopCount = 3;
+
     private void Awake()
     {
         instance = this;
@@ -40,6 +42,11 @@ public class ChatBoxSystem : MonoBehaviour
     {
         _uia.AbortPlayQueue();
         AddBasicPostStateQueue();
+    }
+
+    public void IWantHurt()
+    {
+        AddStateAnim(clip_hurt);
     }
 
     void AddBasicPostStateQueue()

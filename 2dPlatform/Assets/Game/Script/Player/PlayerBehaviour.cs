@@ -35,4 +35,10 @@ public class PlayerBehaviour : MonoBehaviour
     {
         weaponView.SetState(PlayerWeaponView.State.idle);
     }
+
+    public void OnHit()
+    {
+        health.TakeDamage(1);
+        ChatBoxSystem.instance.IWantHurt();
+    }
 }

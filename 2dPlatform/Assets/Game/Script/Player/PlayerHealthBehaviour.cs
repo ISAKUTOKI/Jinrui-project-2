@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class PlayerHealthBehaviour : MonoBehaviour
 {
-    public HpBarFixedWidthBehaviour hpbar;
+    public HpHalfHeartsBehaviour hpView;
     public int hpMax;
 
     private int _hpMax;
@@ -23,7 +23,7 @@ public class PlayerHealthBehaviour : MonoBehaviour
     public void FullFill()
     {
         _hpMax = hpMax;
-        hpbar.Set(1, true);
+        hpView.FullFillAll();
         _hp = _hpMax;
     }
 
@@ -41,8 +41,8 @@ public class PlayerHealthBehaviour : MonoBehaviour
         if (_hp < 0)
             _hp = 0;
 
-        float ratio = (float)_hp / _hpMax;
-        hpbar.Set(ratio, false);
+        //float ratio = (float)_hp / _hpMax;
+        hpView.SetHp(_hp, true);
         if (_hp <= 0)
             Die();
     }
@@ -60,7 +60,7 @@ public class PlayerHealthBehaviour : MonoBehaviour
         if (_dead) return;
 
         _dead = true;
-        ReviveSystem.instance.QueueDie(fromFall);
+        //ReviveSystem.instance.QueueDie(fromFall);
         SoundSystem.instance.Play(dieSound);
 
         if (!fromFall)

@@ -54,10 +54,19 @@ public class EnemyPatrolBehaviour : MonoBehaviour
         _enemy = GetComponent<EnemyBehaviour>();
         npcController = GetComponent<NpcController>();
 
+        InitPatrolPoints();
+    }
+
+    void InitPatrolPoints()
+    {
         patrolPoint_Left.SetParent(transform.parent);
+        patrolPoint_Left.gameObject.SetActive(false);
         patrolPoint_Right.SetParent(transform.parent);
+        patrolPoint_Right.gameObject.SetActive(false);
         safePoint_Left.SetParent(transform.parent);
+        safePoint_Left.gameObject.SetActive(false);
         safePoint_Right.SetParent(transform.parent);
+        safePoint_Right.gameObject.SetActive(false);
     }
 
     void Update()
