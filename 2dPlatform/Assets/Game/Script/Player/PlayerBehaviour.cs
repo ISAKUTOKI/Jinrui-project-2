@@ -39,6 +39,5 @@ public class PlayerBehaviour : MonoBehaviour
     public void OnHit()
     {
         health.TakeDamage(1);
-        ChatBoxSystem.instance.IWantHurt();
     }
 }

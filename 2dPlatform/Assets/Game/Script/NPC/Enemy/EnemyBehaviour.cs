@@ -70,12 +70,14 @@ public class EnemyBehaviour : MonoBehaviour
             hpbar.Set(ratio, false);
 
         if (_hp <= 0)
+        {
             Die();
+            CombatSystem.instance.ShakeMid();
+        }
         else
         {
             animator.SetTrigger("jump");
-            CombatSystem.instance.ShakeMid();
-            CombatSystem.instance.BloodWeak();
+            CombatSystem.instance.ShakeWeak();
         }
     }
 

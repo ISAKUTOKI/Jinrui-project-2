@@ -44,7 +44,16 @@ public class PlayerHealthBehaviour : MonoBehaviour
         //float ratio = (float)_hp / _hpMax;
         hpView.SetHp(_hp, true);
         if (_hp <= 0)
+        {
+            CombatSystem.instance.BloodStrong();
             Die();
+        }
+        else
+        {
+            CombatSystem.instance.BloodWeak();
+            ChatBoxSystem.instance.IWantHurt();
+        }
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

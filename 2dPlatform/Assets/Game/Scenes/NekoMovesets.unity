@@ -526,7 +526,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpbar: {fileID: 1404627194}
-  hpMax: 500
+  hpMax: 190
   dieSound: 
   deathFadeDelay: 0.1
   npcController: {fileID: 0}
