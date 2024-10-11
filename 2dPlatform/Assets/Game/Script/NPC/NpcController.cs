@@ -10,13 +10,20 @@ public class NpcController : MonoBehaviour
     [HideInInspector]
     public Collider2D myCollider;
     private Animator _animator;
+    private Vector3 _startScale;
     public bool isMoving { get; private set; }
+    public bool defaultFacingRight;
+
     void Awake()
     {
         _movePosition = GetComponent<NpcMovePosition>();
         myCollider = GetComponent<Collider2D>();
         if (_animator == null)
             _animator = GetComponentInChildren<Animator>();
+
+        _startScale = flipTransfrom.localScale;
+        if (!defaultFacingRight)
+            _startScale.x = -_startScale.x;
     }
 
     public void Reinit(Animator a, Transform f)
@@ -41,6 +48,12 @@ public class NpcController : MonoBehaviour
             _movePosition.StopXMovement();
     }
 
+    public void StopMove()
+    {
+        _speedX = 0;
+        SetAnimBool("walk", false);
+    }
+
     public void SetMove(bool rightOrLeft, bool startOrEnd)
     {
         if (startOrEnd)
@@ -60,21 +73,19 @@ public class NpcController : MonoBehaviour
         }
         else
         {
-            _speedX = 0;
-            SetAnimBool("walk", false);
+            StopMove();
         }
 
     }
 
-
     public void FlipRight()
     {
-        flipTransfrom.localScale = new Vector3(1, 1, 1);
+        flipTransfrom.localScale = _startScale;
     }
 
     public void FlipLeft()
     {
-        flipTransfrom.localScale = new Vector3(-1, 1, 1);
+        flipTransfrom.localScale = new Vector3(-_startScale.x, _startScale.y, _startScale.z);
     }
 
     public void SetAnimTrigger(string key, bool isReset = false)

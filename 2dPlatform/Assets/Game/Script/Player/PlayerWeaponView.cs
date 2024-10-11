@@ -23,7 +23,7 @@ public class PlayerWeaponView : MonoBehaviour
 
     public void SetState(State s)
     {
-        Debug.Log("SetState " + s);
+        //Debug.Log("SetState " + s);
         state = s;
         switch (state)
         {

@@ -60,7 +60,7 @@ public class PlayerAttackBehaviour : MonoBehaviour
             case 1:
                 if (_comboOn)
                 {
-                    Debug.LogWarning("进入第2段");
+                    //Debug.LogWarning("进入第2段");
                     SetAttackPhase(2);
                     PlayerBehaviour.instance.weaponView.SetState(PlayerWeaponView.State.hide);
                     PlayerBehaviour.instance.animator.SetTrigger("combo");
@@ -70,7 +70,7 @@ public class PlayerAttackBehaviour : MonoBehaviour
             case 2:
                 if (_comboOn)
                 {
-                    Debug.LogWarning("进入第3段");
+                    //Debug.LogWarning("进入第3段");
                     SetAttackPhase(3);
                     PlayerBehaviour.instance.weaponView.SetState(PlayerWeaponView.State.hide);
                     PlayerBehaviour.instance.animator.SetTrigger("combo");
@@ -80,7 +80,7 @@ public class PlayerAttackBehaviour : MonoBehaviour
             case 3:
                 if (_comboOn)
                 {
-                    Debug.LogWarning("进入第1段");
+                    //Debug.LogWarning("进入第1段");
                     SetAttackPhase(1);
                     PlayerBehaviour.instance.weaponView.SetState(PlayerWeaponView.State.hide);
                     PlayerBehaviour.instance.animator.SetTrigger("combo");
@@ -102,14 +102,14 @@ public class PlayerAttackBehaviour : MonoBehaviour
             case 0:
                 if (clip == clip_swing1.clip || clip == clip_swing2.clip || clip == clip_swing3.clip)
                 {
-                    Debug.Log(clip);
+                    //Debug.Log(clip);
                     Debug.LogWarning("不该出现这个情况");
                 }
                 break;
             case 1:
                 if (clip != clip_swing1.clip && clip != clip_swing3.clip)
                 {
-                    Debug.Log(clip);
+                    //Debug.Log(clip);
                     Debug.LogWarning("第1段攻击被打断");
                     InterruptAttack();
                 }
@@ -117,7 +117,7 @@ public class PlayerAttackBehaviour : MonoBehaviour
             case 2:
                 if (clip != clip_swing1.clip && clip != clip_swing2.clip)
                 {
-                    Debug.Log(clip);
+                    //Debug.Log(clip);
                     Debug.LogWarning("第2段攻击被打断");
                     InterruptAttack();
                 }
@@ -125,7 +125,7 @@ public class PlayerAttackBehaviour : MonoBehaviour
             case 3:
                 if (clip != clip_swing2.clip && clip != clip_swing3.clip)
                 {
-                    Debug.Log(clip);
+                    //Debug.Log(clip);
                     Debug.LogWarning("第3段攻击被打断");
                     InterruptAttack();
                 }
@@ -144,7 +144,7 @@ public class PlayerAttackBehaviour : MonoBehaviour
 
     void InterruptAttack()
     {
-        Debug.LogWarning("攻击被打断 " + currentAttackSwingPhase);
+        //Debug.LogWarning("攻击被打断 " + currentAttackSwingPhase);
         _comboOn = false;
         currentAttackSwingPhase = 0;
         PlayerBehaviour.instance.weaponView.SetState(PlayerWeaponView.State.idle);
@@ -152,7 +152,7 @@ public class PlayerAttackBehaviour : MonoBehaviour
 
     void SetAttackPhase(int i)
     {
-        Debug.LogWarning("进入第" + i + "段攻击");
+        //Debug.LogWarning("进入第" + i + "段攻击");
         currentAttackSwingPhase = i;
     }
 

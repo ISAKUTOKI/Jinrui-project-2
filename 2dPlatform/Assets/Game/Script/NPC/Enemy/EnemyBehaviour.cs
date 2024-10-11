@@ -90,6 +90,7 @@ public class EnemyBehaviour : MonoBehaviour
 
         SoundSystem.instance.Play(dieSound);
         npcController.SetAnimTrigger("die");
+        npcController.StopMove();
         //npcController.myCollider.enabled = false;
 
         //CapsuleCollider2D col = npcController.myCollider as CapsuleCollider2D;

@@ -36,8 +36,8 @@ public class EnemyPatrolBehaviour : MonoBehaviour
     public Transform safePoint_Right;
     public float stopDuration = 0.5f;
     float _stopTimer;
-    public float speed;
-
+    [HideInInspector]
+    public NpcController npcController;
 
     public enum PatrolState
     {
@@ -52,9 +52,14 @@ public class EnemyPatrolBehaviour : MonoBehaviour
     {
         _rb2D = GetComponent<Rigidbody2D>();
         _enemy = GetComponent<EnemyBehaviour>();
+        npcController = GetComponent<NpcController>();
+
+        patrolPoint_Left.SetParent(transform.parent);
+        patrolPoint_Right.SetParent(transform.parent);
+        safePoint_Left.SetParent(transform.parent);
+        safePoint_Right.SetParent(transform.parent);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (_enemy.IsDead)
@@ -76,12 +81,14 @@ public class EnemyPatrolBehaviour : MonoBehaviour
         {
             case PatrolState.GoRight:
                 _enemy.animator.SetBool("walk", true);
-                _rb2D.MovePosition((Vector2)transform.position + Vector2.right * speed * Time.fixedDeltaTime);
+                npcController.SetMove(true, true);
+                // _rb2D.MovePosition((Vector2)transform.position + Vector2.right * speed * Time.fixedDeltaTime);
                 break;
 
             case PatrolState.GoLeft:
                 _enemy.animator.SetBool("walk", true);
-                _rb2D.MovePosition((Vector2)transform.position + Vector2.left * speed * Time.fixedDeltaTime);
+                npcController.SetMove(false, true);
+                // _rb2D.MovePosition((Vector2)transform.position + Vector2.left * speed * Time.fixedDeltaTime);
                 break;
         }
     }
@@ -89,6 +96,7 @@ public class EnemyPatrolBehaviour : MonoBehaviour
     void CheckState()
     {
         var alerted = _enemy.playerChecker.FoundPlayer();
+        //Debug.Log("alerted " + alerted);
         var x = transform.position.x;
         var pp_l = patrolPoint_Left.position.x;
         var pp_r = patrolPoint_Right.position.x;
@@ -156,7 +164,7 @@ public class EnemyPatrolBehaviour : MonoBehaviour
             SetState(PatrolState.GoRight);
             return;
         }
-        if (_enemy.playerChecker.FoundPlayer() && !_enemy.playerChecker.PlayerInRawSight())
+        if (alerted && !_enemy.playerChecker.PlayerInRawSight())
         {
             if (facingRight)
                 SetState(PatrolState.GoLeft);
@@ -168,29 +176,32 @@ public class EnemyPatrolBehaviour : MonoBehaviour
     void SetState(PatrolState newState)
     {
         //Debug.Log("newState " + newState);
-        var flipTrans = _enemy.npcController.flipTransfrom;
         state = newState;
         switch (state)
         {
             case PatrolState.GoRight:
                 _enemy.animator.SetBool("walk", true);
-                flipTrans.localScale = new Vector3(1, 1, 1);
+                _enemy.npcController.FlipRight();
                 _stopTimer = 0;
+                npcController.SetMove(true, true);
                 break;
             case PatrolState.GoLeft:
                 _enemy.animator.SetBool("walk", true);
-                flipTrans.localScale = new Vector3(-1, 1, 1);
+                _enemy.npcController.FlipLeft();
                 _stopTimer = 0;
+                npcController.SetMove(false, true);
                 break;
             case PatrolState.StopFacingLeft:
                 _enemy.animator.SetBool("walk", false);
-                flipTrans.localScale = new Vector3(-1, 1, 1);
+                _enemy.npcController.FlipLeft();
                 _stopTimer = stopDuration;
+                npcController.SetMove(false, false);
                 break;
             case PatrolState.StopFacingRight:
                 _enemy.animator.SetBool("walk", false);
-                flipTrans.localScale = new Vector3(1, 1, 1);
+                _enemy.npcController.FlipRight();
                 _stopTimer = stopDuration;
+                npcController.SetMove(true, false);
                 break;
         }
     }
@@ -200,6 +211,8 @@ public class EnemyPatrolBehaviour : MonoBehaviour
         get
         {
             var flipTrans = _enemy.npcController.flipTransfrom;
+            if (!_enemy.npcController.defaultFacingRight)
+                return flipTrans.localScale.x < 0;
             return flipTrans.localScale.x > 0;
         }
     }
