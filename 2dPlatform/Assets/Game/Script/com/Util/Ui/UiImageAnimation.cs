@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,6 +20,9 @@ namespace com
         float _nextTimestamp;
 
         Action _playEndCallback;
+
+        List<UiImageAnimationClip> _queue = new List<UiImageAnimationClip>();
+
         [System.Serializable]
         public class UiImageAnimationClip
         {
@@ -27,21 +31,42 @@ namespace com
             public float speedRatio = 1;
         }
 
-        // Use this for initialization
+        private void Awake()
+        {
+            if (_img == null)
+                _img = GetComponent<Image>();
+        }
+
         void Start()
         {
             if (_startPlay)
                 Play(0);
         }
 
+        public UiImageAnimationClip GetClip(int i)
+        {
+            return _clips[i];
+        }
+
+        public bool IsPlayingClip(UiImageAnimationClip c)
+        {
+            return _clip == c;
+        }
+
         public void Play(int i)
         {
-            Play(_clips[i]);
+            Play(GetClip(i));
+        }
+
+        public void ToggleDisplay(bool b)
+        {
+            _img.enabled = b;
         }
 
         public void Stop()
         {
             _playing = false;
+            _clip = null;
         }
 
         public void Play(UiImageAnimationClip c)
@@ -58,6 +83,24 @@ namespace com
             _playEndCallback = a;
         }
 
+        public void AddPlayQueue(UiImageAnimationClip c)
+        {
+            _queue.Add(c);
+        }
+        public void AddPlayQueueToNext(UiImageAnimationClip c)
+        {
+            AddPlayQueueIfIndex(c, 0);
+        }
+        public void AddPlayQueueIfIndex(UiImageAnimationClip c, int i)
+        {
+            _queue.Insert(i, c);
+        }
+
+        public void AbortPlayQueue()
+        {
+            _queue.Clear();
+        }
+
         private void Update()
         {
             if (!_playing)
@@ -70,12 +113,22 @@ namespace com
                 if (_index >= _clip.sps.Length)
                 {
                     if (_clip.loop)
+                    {
                         _index = 0;
+                    }
                     else
                     {
-                        Stop();
-                        if (_playEndCallback != null)
-                            _playEndCallback?.Invoke();
+                        if (_queue.Count > 0)
+                        {
+                            Play(_queue[0]);
+                            _queue.RemoveAt(0);
+                        }
+                        else
+                        {
+                            Stop();
+                            if (_playEndCallback != null)
+                                _playEndCallback?.Invoke();
+                        }
                     }
 
                 }
