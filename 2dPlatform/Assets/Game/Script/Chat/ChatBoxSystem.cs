@@ -23,6 +23,7 @@ public class ChatBoxSystem : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        _uia.SetPlayEndCallback(() => { _uia.ToggleDisplay(false); });
     }
 
     public void IWantShow()
@@ -43,7 +44,14 @@ public class ChatBoxSystem : MonoBehaviour
         _uia.AbortPlayQueue();
         AddBasicPostStateQueue();
     }
-
+    public void IWantFastStop()
+    {
+        _uia.AbortPlayQueue();
+        if (IsPlayingInOrStates())
+        {
+            _uia.Play(clip_out);
+        }
+    }
     public void IWantHurt()
     {
         AddStateAnim(clip_hurt);
@@ -60,7 +68,6 @@ public class ChatBoxSystem : MonoBehaviour
     void AddStateAnim(UiImageAnimation.UiImageAnimationClip clip)
     {
         _uia.ToggleDisplay(true);
-        _uia.SetPlayEndCallback(() => { _uia.ToggleDisplay(false); });
         if (IsPlayingInOrStates())
         {
             _uia.AbortPlayQueue();
@@ -93,6 +100,7 @@ public class ChatBoxSystem : MonoBehaviour
             _uia.IsPlayingClip(clip_shock) ||
             _uia.IsPlayingClip(clip_show) ||
             _uia.IsPlayingClip(clip_talk) ||
+            _uia.IsPlayingClip(clip_hurt) ||
             _uia.IsPlayingClip(clip_in);
     }
 
