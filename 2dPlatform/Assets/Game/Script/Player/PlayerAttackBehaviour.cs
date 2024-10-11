@@ -52,7 +52,8 @@ public class PlayerAttackBehaviour : MonoBehaviour
 
     public void OnCheckCombo()
     {
-        Debug.LogWarning("OnCheckCombo " + _comboOn);
+        //Debug.LogWarning("OnCheckCombo " + _comboOn);
+        PlayerBehaviour.instance.animator.ResetTrigger("combo");
 
         switch (currentAttackSwingPhase)
         {
@@ -71,6 +72,16 @@ public class PlayerAttackBehaviour : MonoBehaviour
                 {
                     Debug.LogWarning("进入第3段");
                     SetAttackPhase(3);
+                    PlayerBehaviour.instance.weaponView.SetState(PlayerWeaponView.State.hide);
+                    PlayerBehaviour.instance.animator.SetTrigger("combo");
+                    _comboOn = false;
+                }
+                break;
+            case 3:
+                if (_comboOn)
+                {
+                    Debug.LogWarning("进入第1段");
+                    SetAttackPhase(1);
                     PlayerBehaviour.instance.weaponView.SetState(PlayerWeaponView.State.hide);
                     PlayerBehaviour.instance.animator.SetTrigger("combo");
                     _comboOn = false;
@@ -96,7 +107,7 @@ public class PlayerAttackBehaviour : MonoBehaviour
                 }
                 break;
             case 1:
-                if (clip != clip_swing1.clip)
+                if (clip != clip_swing1.clip && clip != clip_swing3.clip)
                 {
                     Debug.Log(clip);
                     Debug.LogWarning("第1段攻击被打断");
@@ -144,6 +155,7 @@ public class PlayerAttackBehaviour : MonoBehaviour
         Debug.LogWarning("进入第" + i + "段攻击");
         currentAttackSwingPhase = i;
     }
+
     public bool isAttacking { get { return currentAttackSwingPhase != 0; } }
 
     void TryAttack()
@@ -168,6 +180,7 @@ public class PlayerAttackBehaviour : MonoBehaviour
                 _comboOn = true;
                 break;
             case 3:
+                _comboOn = true;
                 break;
         }
 

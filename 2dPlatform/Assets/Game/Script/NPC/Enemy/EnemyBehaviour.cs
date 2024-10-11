@@ -50,6 +50,9 @@ public class EnemyBehaviour : MonoBehaviour
 
     public void TakeFatalDamage()
     {
+        if (_dead)
+            return;
+
         TakeDamage(hpMax + 1);
     }
 
@@ -78,6 +81,9 @@ public class EnemyBehaviour : MonoBehaviour
 
     void Die()
     {
+        if (_dead)
+            return;
+
         _dead = true;
         if (hpbar != null)
             hpbar.Hide();
@@ -96,12 +102,12 @@ public class EnemyBehaviour : MonoBehaviour
     IEnumerator DieProcess()
     {
         yield return new WaitForSeconds(deathFadeDelay);
-        npcController.myCollider.enabled = false;
+        //npcController.myCollider.enabled = false;
         SpriteRenderer[] srs = GetComponentsInChildren<SpriteRenderer>();
         foreach (var sr in srs)
-            sr.DOFade(0, 2).SetDelay(Random.Range(1, 3f));
-
-        yield return new WaitForSeconds(5);
+            sr.DOFade(0, 1.5f).SetDelay(Random.Range(0.6f, 1f));
+        transform.DOShakeRotation(2, 15, 10);
+        yield return new WaitForSeconds(3);
         Destroy(gameObject);
     }
 
