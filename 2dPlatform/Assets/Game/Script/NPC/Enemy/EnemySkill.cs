@@ -15,7 +15,7 @@ public class EnemySkill
 
     public float minDist;
     public float maxDist;
-
+    [HideInInspector]
     public float cdTimer;
 
 

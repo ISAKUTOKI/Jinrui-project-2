@@ -103,10 +103,43 @@ public class EnemySkillBehaviour : MonoBehaviour
                     new Vector3(_enemy.patrolBehaviour.facingRight ? 1 : -1, 1, 1);
                 StartCoroutine(DelayDamage(0.825f, meleeCenter));
                 break;
+
+            case "smash":
+                _enemy.animator.SetTrigger("jump");
+                _enemy.npcController.StopMove();
+                StartCoroutine(Smash());
+                break;
+
         }
 
         if (skl.launchEffect != null)
             skl.launchEffect.Play();
+    }
+
+    IEnumerator Smash()
+    {
+        var p1 = transform.position;
+        var p2 = PlayerBehaviour.instance.transform.position;
+        var p3 = (p1 + p2) * 0.5f;
+        p3.y += 3.4f;
+        yield return new WaitForSeconds(0.3f);
+
+        var turnTime = 0.35f;
+        transform.DOMoveX(p2.x, turnTime * 2);
+
+        transform.DOMoveY(p3.y, turnTime).SetEase(Ease.OutQuad);
+        yield return new WaitForSeconds(turnTime);
+        transform.DOMoveY(p2.y, turnTime).SetEase(Ease.InQuad);
+        yield return new WaitForSeconds(turnTime);
+
+        p1 = meleeCenter.position;
+        p2 = PlayerBehaviour.instance.transform.position;
+        Vector2 dist = p1 - p2;
+        if (dist.magnitude < 1)
+        {
+            PlayerBehaviour.instance.OnHit();
+        }
+        CombatSystem.instance.ShakeMid();
     }
 
     void SummonFireBall(Vector3 fireballPos, float xOffset, GameObject prefab, Vector3 playerPos)
