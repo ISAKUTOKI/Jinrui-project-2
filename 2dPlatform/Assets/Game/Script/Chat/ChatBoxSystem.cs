@@ -36,13 +36,17 @@ public class ChatBoxSystem : MonoBehaviour
     {
         AddStateAnim(clip_shock);
     }
+    public void IWantStop()
+    {
+        _uia.AbortPlayQueue();
+        AddBasicPostStateQueue();
+    }
 
     void AddBasicPostStateQueue()
     {
         for (int i = 0; i < idleLoopCount; i++)
-        {
             _uia.AddPlayQueue(clip_idle);
-        }
+
         _uia.AddPlayQueue(clip_out);
     }
 
