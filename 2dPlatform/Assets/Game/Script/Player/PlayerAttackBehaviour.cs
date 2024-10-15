@@ -7,22 +7,26 @@ public class PlayerAttackBehaviour : MonoBehaviour
 
     public Transform damageOrigin;
     public float damageRadius = 1.5f;
-    public int damage
+    public int GetDamage(bool isSecond)
     {
-        get
+        switch (currentAttackSwingPhase)
         {
-            switch (currentAttackSwingPhase)
-            {
-                case 1:
-                    return damage_swing1;
-                case 2:
-                    return damage_swing2;
-                case 3:
-                    return damage_swing3;
-            }
-            return 0;
+            case 1:
+                if (isSecond)
+                    return damage_swing1_2;
+                return damage_swing1;
+            case 2:
+                if (isSecond)
+                    return damage_swing2_2;
+                return damage_swing2;
+            case 3:
+                if (isSecond)
+                    return damage_swing3_2;
+                return damage_swing3;
         }
+        return 0;
     }
+
     private PlayerHealthBehaviour _health;
     public ParticleSystem ps;
 
@@ -30,8 +34,11 @@ public class PlayerAttackBehaviour : MonoBehaviour
     public AnimationClipData clip_swing2;
     public AnimationClipData clip_swing3;
     public int damage_swing1;
+    public int damage_swing1_2;
     public int damage_swing2;
+    public int damage_swing2_2;
     public int damage_swing3;
+    public int damage_swing3_2;
     public int currentAttackSwingPhase;//0 没有攻击 1~3 第1~3次斩击 
 
     public PlayerActionPerformDependency dependency;
@@ -186,7 +193,7 @@ public class PlayerAttackBehaviour : MonoBehaviour
 
     }
 
-    public void OnAttacked()
+    public void OnAttacked(bool isSecondDamage)
     {
         var targets = Physics2D.OverlapCircleAll(damageOrigin.position, damageRadius);
         foreach (var t in targets)
@@ -195,7 +202,7 @@ public class PlayerAttackBehaviour : MonoBehaviour
             if (ene != null)
             {
                 //ps.Play();
-                ene.TakeDamage(damage);
+                ene.TakeDamage(GetDamage(isSecondDamage));
             }
 
             var des = t.GetComponent<Destroyable>();

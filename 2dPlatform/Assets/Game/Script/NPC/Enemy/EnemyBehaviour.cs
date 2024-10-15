@@ -24,6 +24,9 @@ public class EnemyBehaviour : MonoBehaviour
     [HideInInspector]
     public Animator animator;
     public bool isBoss;
+
+    static int _spriteIndexOfEnemy;
+
     private void Awake()
     {
         npcController = GetComponent<NpcController>();
@@ -35,6 +38,8 @@ public class EnemyBehaviour : MonoBehaviour
 
     private void Start()
     {
+        animator.GetComponent<SpriteRenderer>().sortingOrder = _spriteIndexOfEnemy++;
+
         _hp = hpMax;
         if (hpbar != null)
         {

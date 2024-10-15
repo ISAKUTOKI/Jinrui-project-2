@@ -30,9 +30,6 @@ public class EnemySkillBehaviour : MonoBehaviour
 
         TickSkills();
 
-        if (!_enemy.playerChecker.FoundPlayer())
-            return;
-
         foreach (var skl in skills)
         {
             var canUse = CanUseSkill(skl);
@@ -54,72 +51,41 @@ public class EnemySkillBehaviour : MonoBehaviour
 
         switch (skl.id)
         {
-            case "sky fire":
-                _enemy.animator.SetTrigger("sky fire");
-
-                var fbPos = transform.position;
-                var playerPos = PlayerBehaviour.instance.transform.position;
-                fbPos.x = (fbPos.x + playerPos.x) * 0.5f;
-                fbPos.y += 10;
-
-                SummonFireBall(fbPos, 3, skl.prefab, playerPos);
-                SummonFireBall(fbPos, 2, skl.prefab, playerPos);
-                SummonFireBall(fbPos, 1, skl.prefab, playerPos);
-                SummonFireBall(fbPos, 0, skl.prefab, playerPos);
-                SummonFireBall(fbPos, -1, skl.prefab, playerPos);
-                SummonFireBall(fbPos, -2, skl.prefab, playerPos);
-                SummonFireBall(fbPos, -3, skl.prefab, playerPos);
-                break;
-
-            case "spike":
-                _enemy.animator.SetTrigger("spike");
-                var spikePos = skl.launchEffect.transform.position;
-                spikePos.x = PlayerBehaviour.instance.transform.position.x;
-                var spike = Instantiate(skl.prefab, spikePos, Quaternion.identity);
-                var spikeImg = spike.GetComponentInChildren<SpriteRenderer>();
-
-                spikeImg.color = new Color(0.4f, 0.2f, 0.7f, 0);
-                spikeImg.DOColor(new Color(0.6f, 0.0f, 0.0f, 1), 0.5f).OnComplete(
-                    () => { spikeImg.DOColor(new Color(0, 0, 0, 0), 0.4f).SetDelay(0.3f); });
-
-                spike.transform.position = spikePos + new Vector3(0, -2.8f, 0);
-                spike.transform.DOMoveY(spikePos.y + 0.7f, 0.8f).SetEase(Ease.OutBounce).SetDelay(0.45f);
-
-                StartCoroutine(DelayDamage(0.98f, spike.transform));
-                Destroy(spike.gameObject, 2.5f);
-                skl.launchEffect.transform.position = spikePos;
-                break;
-
-            case "melee":
-                _enemy.animator.SetTrigger("melee");
-                skl.launchEffect.transform.localScale =
-                    new Vector3(_enemy.patrolBehaviour.facingRight ? 1 : -1, 1, 1);
-                StartCoroutine(DelayDamage(0.95f, meleeCenter));
-                break;
-
-            case "melee minion":
-                _enemy.animator.SetTrigger("melee");
-                skl.launchEffect.transform.localScale =
-                    new Vector3(_enemy.patrolBehaviour.facingRight ? 1 : -1, 1, 1);
-                StartCoroutine(DelayDamage(0.825f, meleeCenter));
-                break;
-
             case "smash":
+                if (_enemy.playerChecker.FoundPlayer())
+                {
+                    _enemy.animator.SetTrigger("jump");
+                    _enemy.npcController.StopMove();
+                    StartCoroutine(Smash(true));
+                }
+                break;
+            case "smash_noTarget":
                 _enemy.animator.SetTrigger("jump");
                 _enemy.npcController.StopMove();
-                StartCoroutine(Smash());
+                StartCoroutine(Smash(false));
                 break;
-
+            case "idle_consume_cd":
+                foreach (var otherSkl in skills)
+                {
+                    if (otherSkl == crtSkill)
+                        continue;
+                    otherSkl.cdTimer = Random.Range(1f, 4f);
+                }
+                break;
         }
 
         if (skl.launchEffect != null)
             skl.launchEffect.Play();
     }
 
-    IEnumerator Smash()
+    IEnumerator Smash(bool targetPlayer)
     {
         var p1 = transform.position;
         var p2 = PlayerBehaviour.instance.transform.position;
+        if (!targetPlayer)
+        {
+            p2 = p1 + new Vector3(_enemy.patrolBehaviour.facingRight ? 3 : -3, 0, 0);
+        }
         var p3 = (p1 + p2) * 0.5f;
         p3.y += 3.4f;
         yield return new WaitForSeconds(0.3f);

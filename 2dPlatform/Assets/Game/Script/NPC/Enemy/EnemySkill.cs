@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemySkill
 {
     public string id;
+    public bool canUseWhenNotAlerted;
     public int damage;
     [Multiline]
     public string desc;
