@@ -17,6 +17,7 @@ public class PlayerMovePosition : MonoBehaviour
 
     public void AddXMovement(Vector3 mm)
     {
+        Debug.Log("AddXMovement");
         var v = rb.velocity;
         v.x = mm.x;
         rb.velocity = v;
@@ -24,6 +25,7 @@ public class PlayerMovePosition : MonoBehaviour
 
     public void StopXMovement()
     {
+        Debug.Log("StopXMovement");
         var v = rb.velocity;
         v.x = 0;
         rb.velocity = v;

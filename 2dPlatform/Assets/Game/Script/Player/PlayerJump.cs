@@ -29,6 +29,8 @@ public class PlayerJump : MonoBehaviour
             return;
         if (PlayerBehaviour.instance.health.isDead)
             return;
+        if (PlayerBehaviour.instance.health.isWounding)
+            return;
         if (Input.GetKeyDown(KeyCode.W))
             TryJump();
     }

@@ -105,7 +105,7 @@ public class EnemySkillBehaviour : MonoBehaviour
         {
             PlayerBehaviour.instance.OnHit();
         }
-        CombatSystem.instance.ShakeMid();
+        CombatSystem.instance.ShakeWeak();
     }
 
     void SummonFireBall(Vector3 fireballPos, float xOffset, GameObject prefab, Vector3 playerPos)

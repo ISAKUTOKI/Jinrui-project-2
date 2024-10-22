@@ -101,6 +101,11 @@ public class PlayerAttackBehaviour : MonoBehaviour
     {
         if (currentAttackSwingPhase == 0)
             return;
+        if (_health.isDead || PlayerBehaviour.instance.health.isWounding)
+        {
+            InterruptAttack();
+            return;
+        }
 
         var clipInfo = PlayerBehaviour.instance.animator.GetCurrentAnimatorClipInfo(0)[0];
         var clip = clipInfo.clip;
@@ -142,6 +147,8 @@ public class PlayerAttackBehaviour : MonoBehaviour
     void CheckAttack()
     {
         if (_health.isDead)
+            return;
+        if (PlayerBehaviour.instance.health.isWounding)
             return;
         if (Input.GetKeyDown(KeyCode.J))
         {

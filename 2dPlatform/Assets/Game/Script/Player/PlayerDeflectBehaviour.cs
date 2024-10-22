@@ -47,13 +47,12 @@ UI
 
     private void Awake()
     {
-        currentAttackSwingPhase = 0;
+   
     }
 
     private void Update()
     {
-        CheckStopAttack();
-        CheckAttack();
+    
     }
 
     public void OnCheckDeflect(Transform damageSource)
@@ -61,15 +60,7 @@ UI
         //Debug.LogWarning("OnCheckCombo " + _comboOn);
         //PlayerBehaviour.instance.animator.ResetTrigger("combo");
 
-
-    }
-
-
-
-    void InterruptAttack()
-    {
-        currentAttackSwingPhase = 0;
-        PlayerBehaviour.instance.weaponView.SetState(PlayerWeaponView.State.idle);
+        //PlayerBehaviour.instance.weaponView.SetState(PlayerWeaponView.State.idle);
     }
 
     public bool isDeflectingOrDefending

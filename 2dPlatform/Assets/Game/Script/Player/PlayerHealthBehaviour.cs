@@ -37,7 +37,7 @@ public class PlayerHealthBehaviour : MonoBehaviour
         if (_dead) return;
 
         //Debug.Log(this.name + "TakeDamage " + dmg);
-        _hp -= dmg;
+        // _hp -= dmg;
         if (_hp < 0)
             _hp = 0;
 
@@ -50,10 +50,23 @@ public class PlayerHealthBehaviour : MonoBehaviour
         }
         else
         {
+            PlayerBehaviour.instance.animator.SetTrigger("wound");
+            PlayerBehaviour.instance.movePosition.StopXMovement();
+            PlayerBehaviour.instance.weaponView.SetState(PlayerWeaponView.State.hide);
             CombatSystem.instance.BloodWeak();
             ChatBoxSystem.instance.IWantHurt();
         }
+    }
 
+    public AnimationClip woundClip;
+    public bool isWounding
+    {
+        get
+        {
+            var clipInfo = PlayerBehaviour.instance.animator.GetCurrentAnimatorClipInfo(0)[0];
+            var clip = clipInfo.clip;
+            return clip == woundClip;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -75,6 +88,7 @@ public class PlayerHealthBehaviour : MonoBehaviour
         if (!fromFall)
             PlayerBehaviour.instance.animator.SetTrigger("die");
 
+        PlayerBehaviour.instance.movePosition.StopXMovement();
         SpriteRenderer[] srs = GetComponentsInChildren<SpriteRenderer>();
         foreach (var sr in srs)
         {

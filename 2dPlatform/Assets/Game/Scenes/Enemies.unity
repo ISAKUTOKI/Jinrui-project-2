@@ -7125,6 +7125,7 @@ MonoBehaviour:
   hpMax: 6
   dieSound: 
   deathFadeDelay: 0
+  woundClip: {fileID: 7400000, guid: 634bfe08c1f491c4b9ad1fa3de491217, type: 2}
 --- !u!114 &909911389
 MonoBehaviour:
   m_ObjectHideFlags: 0
