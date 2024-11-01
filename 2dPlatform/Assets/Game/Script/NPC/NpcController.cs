@@ -34,7 +34,8 @@ public class NpcController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Move();
+        if (_movePosition != null)
+            Move();
     }
 
     /// <summary>
