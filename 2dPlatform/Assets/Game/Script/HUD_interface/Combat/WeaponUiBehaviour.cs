@@ -1,5 +1,6 @@
 ﻿using Assets.Game.Script.HUD_interface.Combat;
 using com;
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,9 +14,11 @@ public class WeaponUiBehaviour : MonoBehaviour
     public WeaponUiPart p2;
     public WeaponUiPart p3;
 
+    [Serializable]
     public class WeaponUiPart
     {
         public Image img;
+        public Image bg;
         public void SetEmpty()
         {
             img.fillAmount = 0;
@@ -33,8 +36,21 @@ public class WeaponUiBehaviour : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        uia.Stop();
+    }
     public void SyncPowerValue(float v)
     {
+        uia.Stop();
+        uia.SetPlayEndCallback(null);
+        p1.bg.enabled = true;
+        p1.img.enabled = true;
+        p2.bg.enabled = true;
+        p2.img.enabled = true;
+        p3.bg.enabled = true;
+        p3.img.enabled = true;
+        p3.img.enabled = true;
         if (v == 3)
         {
             p1.SetFull();
@@ -95,26 +111,67 @@ public class WeaponUiBehaviour : MonoBehaviour
 
     public void PlayP0_P1Anim()
     {
+        p1.bg.enabled = false;
+        p1.img.enabled = false;
         uia.Play(1);
+        uia.SetPlayEndCallback(
+       () =>
+       {
+           p1.bg.enabled = true;
+           p1.img.enabled = true;
+       }
+       );
     }
 
     public void PlayP1_P2Anim()
     {
+        p2.bg.enabled = false;
+        p2.img.enabled = false;
         uia.Play(2);
+        uia.SetPlayEndCallback(
+          () =>
+          {
+              p2.bg.enabled = true;
+              p2.img.enabled = true;
+          }
+          );
     }
 
     public void PlayP2_P3Anim()
     {
+        p3.bg.enabled = false;
+        p3.img.enabled = false;
         uia.Play(3);
+        uia.SetPlayEndCallback(
+           () =>
+           {
+               TogglePowerFullAnim(true);
+               p3.bg.enabled = true;
+               p3.img.enabled = true;
+           }
+           );
     }
 
     public void PlayPMaxAnim()
     {
         uia.Play(0);
+        p1.bg.enabled = false;
+        p1.img.enabled = false;
+        p2.bg.enabled = false;
+        p2.img.enabled = false;
+        p3.bg.enabled = false;
+        p3.img.enabled = false;
         uia.SetPlayEndCallback(
             () =>
             {
                 TogglePowerFullAnim(true);
+                p1.bg.enabled = true;
+                p1.img.enabled = true;
+                p2.bg.enabled = true;
+                p2.img.enabled = true;
+                p3.bg.enabled = true;
+                p3.img.enabled = true;
+                p3.img.enabled = true;
             }
             );
     }

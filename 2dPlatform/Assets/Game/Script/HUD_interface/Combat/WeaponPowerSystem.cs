@@ -16,6 +16,12 @@ namespace Assets.Game.Script.HUD_interface.Combat
             instance = this;
         }
 
+        private void Start()
+        {
+            power = 0;
+            weaponUiBehaviour.SyncPowerValue(power);
+        }
+
         /// <summary>
         /// 当玩家使出攻击时，如果有能量，就消耗能量并使出更强的攻击
         /// </summary>
@@ -98,27 +104,28 @@ namespace Assets.Game.Script.HUD_interface.Combat
             if (power < 1)
             {
                 power = 1;
+                weaponUiBehaviour.SyncPowerValue(power);
                 weaponUiBehaviour.PlayP0_P1Anim();
             }
             else if (power < 2)
             {
                 power = 2;
+                weaponUiBehaviour.SyncPowerValue(power);
                 weaponUiBehaviour.PlayP1_P2Anim();
             }
             else
             {
                 power = 3;
+                weaponUiBehaviour.SyncPowerValue(power);
                 weaponUiBehaviour.PlayP2_P3Anim();
             }
-
-            weaponUiBehaviour.SyncPowerValue(power);
         }
 
         public void GainFullPower()
         {
             power = 3;
-            weaponUiBehaviour.PlayPMaxAnim();
             weaponUiBehaviour.SyncPowerValue(power);
+            weaponUiBehaviour.PlayPMaxAnim();
         }
 
         public void 测试_开始防御()

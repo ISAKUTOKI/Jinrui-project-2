@@ -67,10 +67,12 @@ namespace com
         {
             _playing = false;
             _clip = null;
+            _img.enabled = false;
         }
 
         public void Play(UiImageAnimationClip c)
         {
+            _img.enabled = true;
             _clip = c;
             _index = 0;
             _playing = true;
