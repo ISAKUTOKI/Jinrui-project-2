@@ -57,9 +57,5 @@ public class PlayerBougyo : MonoBehaviour
 
     }
 
-    public void BougyoEnd()
-    {
-
-    }
 
 }
