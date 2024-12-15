@@ -14,33 +14,36 @@ public class PlayerBougyo : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("canDebugLog");
-        Debug.Log(WPS.power);
+        //Debug.Log(WPS.power);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F12))
-        Debug.Log(WPS.power);
+        //判断能否防御
+        CanBougyo();
 
+        //防御输入
+        BougyoCheck();
+    }
+
+    void CanBougyo()
+    {
         if (WPS.power > canBougyoValue)
         {
             canBougyo = true;
-            //Debug.Log("canbougyo");
         }
         else
         {
             canBougyo = false;
-            //Debug.Log("canNotBougyo");
         }
+    }
 
-
-
+    void BougyoCheck()
+    {
         //按下K并且可以防御并且不在防御那就进入防御
         if (Input.GetKeyDown(KeyCode.K) && canBougyo && inBougyo == false)
         {
-            //防御动画
             PlayerBehaviour.instance.animator.SetTrigger("bougyo_start");
             //debug开始防御
             //Debug.Log("bougyo start");
@@ -48,14 +51,13 @@ public class PlayerBougyo : MonoBehaviour
             inBougyo = true;
         }
 
-        //在防御中
+        //在防御中并且松开了k键就停止防御
         if (inBougyo == true && Input.GetKeyDown(KeyCode.K) == false)
         {
             PlayerBehaviour.instance.animator.SetTrigger("bougyo_out");
             //Debug.Log("检测");
+            inBougyo = false;
         }
 
     }
-
-
 }

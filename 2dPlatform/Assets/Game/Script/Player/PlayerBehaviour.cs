@@ -11,6 +11,8 @@ public class PlayerBehaviour : MonoBehaviour
 
     public PlayerJump jump { get; private set; }
 
+    public PlayerBougyo bougyo { get; private set; }
+
     public Animator animator { get; private set; }
 
     public PlayerMovePosition movePosition { get; private set; }
@@ -29,6 +31,7 @@ public class PlayerBehaviour : MonoBehaviour
         move = GetComponent<PlayerMove>();
         health = GetComponent<PlayerHealthBehaviour>();
         weaponView = GetComponent<PlayerWeaponView>();
+        bougyo = GetComponent<PlayerBougyo>();
     }
 
     public void Init()
