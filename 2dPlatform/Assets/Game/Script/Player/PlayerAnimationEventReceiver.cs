@@ -6,7 +6,7 @@ public class PlayerAnimationEventReceiver : MonoBehaviour
 
     public void OnCheckCombo()
     {
-          PlayerBehaviour.instance.attack.OnCheckCombo();
+        PlayerBehaviour.instance.attack.OnCheckCombo();
     }
     public void OnAttacked()
     {

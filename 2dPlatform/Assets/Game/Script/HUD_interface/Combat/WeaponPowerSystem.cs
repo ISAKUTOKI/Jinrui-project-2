@@ -9,7 +9,7 @@ namespace Assets.Game.Script.HUD_interface.Combat
 
         public WeaponUiBehaviour weaponUiBehaviour;
 
-        public float power { get; private set; }
+        public float power;//{ get; private set; }
 
         private void Awake()
         {
