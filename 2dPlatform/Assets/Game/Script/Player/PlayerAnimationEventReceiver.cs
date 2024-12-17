@@ -13,7 +13,7 @@ public class PlayerAnimationEventReceiver : MonoBehaviour
         //Debug.Log("PlayerAnimationEventReceiver OnAttacked");
         PlayerBehaviour.instance.attack.OnAttacked(false);
     }
-     public void OnAttacked_2()
+    public void OnAttacked_2()
     {
         //Debug.Log("PlayerAnimationEventReceiver OnAttacked");
         PlayerBehaviour.instance.attack.OnAttacked(true);
@@ -26,5 +26,26 @@ public class PlayerAnimationEventReceiver : MonoBehaviour
     public void StartRunAnime()
     {
         PlayerBehaviour.instance.weaponView.SetState(PlayerWeaponView.State.run);
+    }
+
+    public void Attack1Hit1()
+    {
+
+    }
+    public void Attack1Hit2()
+    {
+
+    }
+    public void Attack2Hit1()
+    {
+
+    }
+    public void Attack3Hit1()
+    {
+
+    }
+    public void Attack3Hit2()
+    {
+
     }
 }
