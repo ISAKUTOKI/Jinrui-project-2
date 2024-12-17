@@ -22,6 +22,7 @@ public class PlayerHealthBehaviour : MonoBehaviour
     }
     public void FullFill()
     {
+        _dead = false;
         _hpMax = hpMax;
         hpView.FullFillAll();
         _hp = _hpMax;
@@ -36,12 +37,12 @@ public class PlayerHealthBehaviour : MonoBehaviour
     {
         if (_dead) return;
 
-        //Debug.Log(this.name + "TakeDamage " + dmg);
-        // _hp -= dmg;
+        Debug.Log(this.name + "TakeDamage " + dmg);
+        _hp -= dmg;
         if (_hp < 0)
             _hp = 0;
 
-        //float ratio = (float)_hp / _hpMax;
+        float ratio = (float)_hp / _hpMax;
         hpView.SetHp(_hp, true);
         if (_hp <= 0)
         {
