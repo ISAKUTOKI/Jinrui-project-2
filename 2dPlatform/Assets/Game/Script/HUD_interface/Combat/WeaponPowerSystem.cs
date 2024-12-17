@@ -9,7 +9,7 @@ namespace Assets.Game.Script.HUD_interface.Combat
 
         public WeaponUiBehaviour weaponUiBehaviour;
 
-        public float power { get; private set; }
+        public float power;//{ get; private set; }
 
         private void Awake()
         {
@@ -33,6 +33,7 @@ namespace Assets.Game.Script.HUD_interface.Combat
                 if (consumeThePower)
                 {
                     ConsumePower_cell(1);
+                    //Debug.Log(power);
                 }
                 return true;
             }
@@ -46,6 +47,7 @@ namespace Assets.Game.Script.HUD_interface.Combat
                 if (consumeThePower)
                 {
                     ConsumePower_cell(1);
+                    //Debug.Log(power);
                 }
                 return true;
             }
@@ -74,26 +76,32 @@ namespace Assets.Game.Script.HUD_interface.Combat
             if (power == 3)
             {
                 power -= 1;//2
+                //Debug.Log(power);
             }
             else if (power > 2 && power < 3)
             {
                 power = 2;
+                // Debug.Log(power);
             }
             else if (power == 2)
             {
                 power = 1;
+                //Debug.Log(power);
             }
             else if (power > 1 && power < 2)
             {
                 power = 1;
+                // Debug.Log(power);
             }
             else if (power == 1)
             {
                 power = 0;
+                // Debug.Log(power);
             }
             else if (power > 0.1f && power < 1)
             {
                 power = 0;
+                // Debug.Log(power);
             }
 
             weaponUiBehaviour.SyncPowerValue(power);
@@ -106,18 +114,21 @@ namespace Assets.Game.Script.HUD_interface.Combat
                 power = 1;
                 weaponUiBehaviour.SyncPowerValue(power);
                 weaponUiBehaviour.PlayP0_P1Anim();
+                //  Debug.Log(power);
             }
             else if (power < 2)
             {
                 power = 2;
                 weaponUiBehaviour.SyncPowerValue(power);
                 weaponUiBehaviour.PlayP1_P2Anim();
+                // Debug.Log(power);
             }
             else
             {
                 power = 3;
                 weaponUiBehaviour.SyncPowerValue(power);
                 weaponUiBehaviour.PlayP2_P3Anim();
+                //  Debug.Log(power);
             }
         }
 
@@ -126,6 +137,7 @@ namespace Assets.Game.Script.HUD_interface.Combat
             power = 3;
             weaponUiBehaviour.SyncPowerValue(power);
             weaponUiBehaviour.PlayPMaxAnim();
+            // Debug.Log(power);
         }
 
         public void 测试_开始防御()
