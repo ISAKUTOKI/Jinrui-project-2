@@ -18,7 +18,7 @@ namespace Assets.Game.Script.HUD_interface.Combat
 
         private void Start()
         {
-            power = 0;
+            power = 3;
             weaponUiBehaviour.SyncPowerValue(power);
         }
 
