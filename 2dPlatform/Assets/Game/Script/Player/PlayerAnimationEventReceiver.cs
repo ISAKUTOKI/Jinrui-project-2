@@ -57,10 +57,10 @@ public class PlayerAnimationEventReceiver : MonoBehaviour
 
     public void DeflectCheckStart()
     {
-
+        PlayerBehaviour.instance.bougyo.DeflectCheckStart();
     }
     public void DeflectCheckEnd()
     {
-
+        PlayerBehaviour.instance.bougyo.DeflectCheckEnd();
     }
 }
