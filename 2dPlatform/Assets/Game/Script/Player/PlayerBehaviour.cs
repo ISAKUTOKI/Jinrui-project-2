@@ -41,6 +41,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void OnHit()
     {
+        //Debug.Log("OnHit");
         health.TakeDamage(1);
     }
 }

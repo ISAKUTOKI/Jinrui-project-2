@@ -29,7 +29,7 @@ public class HpHalfHeartsBehaviour : MonoBehaviour
     public void SetHp(int newHp, bool withAnimeOnReducing)
     {
         int currentContainHp = 0;
-
+        Debug.Log("SetHp " + newHp);
         foreach (var h in _hearts)
         {
             var crtContainHp = h.containHp;
