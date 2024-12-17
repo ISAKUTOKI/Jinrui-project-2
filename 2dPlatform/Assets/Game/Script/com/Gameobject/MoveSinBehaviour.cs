@@ -8,6 +8,7 @@ namespace com
         public float freq;
         public float offset;
         public float amplitude;
+        public float someLerpSpeed;
         public bool xAxis;
         public bool yAxis;
         public bool zAxis;
@@ -49,6 +50,34 @@ namespace com
 
         void Update()
         {
+            //if (_stopped)
+            //{
+            //    return;
+            //}
+
+            //var newPos = _startPos;
+            //if (xAxis)
+            //{
+            //    newPos += Vector3.right * Mathf.Sin(com.GameTime.time * freq + offset) * amplitude;
+            //}
+            //if (yAxis)
+            //{
+            //    newPos += Vector3.up * Mathf.Sin(com.GameTime.time * freq + offset) * amplitude;
+            //}
+            //if (zAxis)
+            //{
+            //    newPos += Vector3.forward * Mathf.Sin(com.GameTime.time * freq + offset) * amplitude;
+            //}
+
+            //if (localPos)
+            //{
+            //    transform.localPosition = newPos;
+            //}
+            //else
+            //{
+            //    transform.position = newPos;
+            //}
+
             if (_stopped)
             {
                 return;
@@ -57,25 +86,26 @@ namespace com
             var newPos = _startPos;
             if (xAxis)
             {
-                newPos += Vector3.right * Mathf.Sin(com.GameTime.time * freq + offset) * amplitude;
+                newPos += Vector3.right * Mathf.Sin(GameTime.time * freq + offset) * amplitude;
             }
             if (yAxis)
             {
-                newPos += Vector3.up * Mathf.Sin(com.GameTime.time * freq + offset) * amplitude;
+                newPos += Vector3.up * Mathf.Sin(GameTime.time * freq + offset) * amplitude;
             }
             if (zAxis)
             {
-                newPos += Vector3.forward * Mathf.Sin(com.GameTime.time * freq + offset) * amplitude;
+                newPos += Vector3.forward * Mathf.Sin(GameTime.time * freq + offset) * amplitude;
             }
 
             if (localPos)
             {
-                transform.localPosition = newPos;
+                transform.localPosition = Vector3.Lerp(transform.localPosition, newPos, Time.deltaTime * someLerpSpeed);
             }
             else
             {
-                transform.position = newPos;
+                transform.position = Vector3.Lerp(transform.position, newPos, Time.deltaTime * someLerpSpeed);
             }
         }
+
     }
 }
