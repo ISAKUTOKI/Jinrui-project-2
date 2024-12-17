@@ -67,7 +67,7 @@ public class PlayerBougyo : MonoBehaviour
     }
 
     ///弹反系统
-    //在bougyo_start阶段，如果防御到了canDflect的攻击，就弹反
+    //在bougyo_start阶段，如果防御到了canDeflect的攻击，就弹反
     //弹反是立即在当前帧停顿，并且播放弹反到了的特效
     //如果没反应就继续进行防御动作
     //如果有按下攻击键就直接进入攻击动画

@@ -40,11 +40,26 @@ public class PlayerAnimationEventReceiver : MonoBehaviour
     {
 
     }
+    public void Attack2Hit2()
+    {
+
+    }
     public void Attack3Hit1()
     {
 
     }
     public void Attack3Hit2()
+    {
+
+    }
+
+
+
+    public void DeflectCheckStart()
+    {
+
+    }
+    public void DeflectCheckEnd()
     {
 
     }
