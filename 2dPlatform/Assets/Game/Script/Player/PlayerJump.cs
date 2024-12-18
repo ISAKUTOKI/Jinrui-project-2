@@ -3,8 +3,11 @@ using System.Collections;
 
 public class PlayerJump : MonoBehaviour
 {
-    public float jumpPower = 10;
+    public float jumpPower = 1000;
     public PlayerGroundDetecter groundDetecter;
+    public float timeToDrop;
+    private float jumpUpTime;
+    private bool canDrop = false;
     bool _isFloating { get { return !groundDetecter.isGrounded; } }
 
     void Awake()
@@ -14,6 +17,23 @@ public class PlayerJump : MonoBehaviour
     void Update()
     {
         ReadInput();
+
+        //if (Input.GetKeyDown(KeyCode.F12))
+        //{
+        //    Debug.Log("");
+        //    Debug.Log("起跳时间是 " + jumpUpTime);
+        //    Debug.Log("当前时间是 " + Time.time);
+        //    Debug.Log("时间差为 " + (Time.time - jumpUpTime));
+        //    if (Time.time - jumpUpTime >= timeToDrop)
+        //        Debug.Log("准备下落");
+        //    else
+        //        Debug.Log("还不能下落");
+        //}
+        if (Time.time - jumpUpTime >= timeToDrop && canDrop)
+        {
+            Drop();
+            //Debug.Log("准备下落");
+        }
     }
 
     public bool IsJumping { get { return _isFloating; } }
@@ -40,6 +60,7 @@ public class PlayerJump : MonoBehaviour
         if (canNotJump)
             return;
 
+        jumpUpTime = Time.time;
         DoJump();
     }
 
@@ -50,19 +71,37 @@ public class PlayerJump : MonoBehaviour
         //_speedY = jumpPower;
         PlayerBehaviour.instance.animator.SetBool("walk", false);
         PlayerBehaviour.instance.weaponView.SetState(PlayerWeaponView.State.idle);
-        //PlayerBehaviour.instance.animator.SetTrigger("jump");
         PlayerBehaviour.instance.movePosition.rb.AddForce(new Vector2(0, jumpPower));
+        PlayerBehaviour.instance.animator.SetBool("jump", true);
+        canDrop = true;
     }
-
+    public void Drop()
+    {
+        PlayerBehaviour.instance.animator.SetTrigger("drop");
+    }
     public void OnGrounded()
     {
         var v = PlayerBehaviour.instance.movePosition.rb.velocity;
         if (v.y > 0)
             return;
         v.y = 0;
+        //jumpUpTime = 0f;
+        canDrop = false;
         PlayerBehaviour.instance.movePosition.rb.velocity = v;
         PlayerBehaviour.instance.movePosition.StopXMovement();
         PlayerBehaviour.instance.animator.SetBool("walk", false);
+        PlayerBehaviour.instance.animator.SetBool("jump", false);
         PlayerBehaviour.instance.weaponView.SetState(PlayerWeaponView.State.idle);
+        //Debug.Log("jumpUpTime清零");
     }
+
+    //void JumpDropSwitch()
+    //{
+    //    PlayerBehaviour.instance.animator.SetBool("jump", true);
+    //    PlayerBehaviour.instance.animator.SetBool("jump", false);
+
+    //    PlayerBehaviour.instance.animator.SetBool("drop", true);
+    //    PlayerBehaviour.instance.animator.SetBool("drop", false);
+    //}
+
 }

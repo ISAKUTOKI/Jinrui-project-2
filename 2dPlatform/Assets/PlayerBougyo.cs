@@ -28,8 +28,6 @@ public class PlayerBougyo : MonoBehaviour
         //防御输入
         BougyoCheck();
 
-        if (Input.GetKeyDown(KeyCode.F12))
-            Debug.Log(WPS.power);
     }
 
     void CanBougyoSwitch()
@@ -46,35 +44,41 @@ public class PlayerBougyo : MonoBehaviour
 
     void BougyoCheck()
     {
-        //按下K并且可以防御并且不在防御那就进入防御
-        if (Input.GetKeyDown(KeyCode.K) && canBougyo && inBougyo == false)
+
+        //按下k就进入防御开始动作
+        if (Input.GetKeyDown(KeyCode.K))
         {
             PlayerBehaviour.instance.animator.SetTrigger("bougyo_start");
-            PlayerBehaviour.instance.animator.SetBool("bougyo_cyuu", true);
-            //debug开始防御
-            Debug.Log("bougyo start");
-            //防御中
-            inBougyo = true;
+            //有能量就进入防御持续
+            if (canBougyo && !inBougyo)
+            {
+                PlayerBehaviour.instance.animator.SetTrigger("bougyo_start");
+                PlayerBehaviour.instance.animator.SetBool("bougyo_cyuu", true);
+                //Debug.Log("bougyo start");
+                inBougyo = true;
+            }
+            //没能量就进入防御退出
+            else if (!canBougyo)
+            {
+                PlayerBehaviour.instance.animator.SetTrigger("no_power_bougyo");
+            }
         }
-
-        //在防御中并且松开了k键就停止防御
-        if (Input.GetKeyUp(KeyCode.K) && canBougyo && inBougyo == true || canBougyo == false)
+        if (Input.GetKeyUp(KeyCode.K) && canBougyo && inBougyo || inBougyo && !canBougyo)
         {
             PlayerBehaviour.instance.animator.SetTrigger("bougyo_out");
             PlayerBehaviour.instance.animator.SetBool("bougyo_cyuu", false);
             Debug.Log("bougyo out");
             inBougyo = false;
         }
-
     }
 
     ///弹反系统
-    //在bougyo_start动画的动画事件DeflectCheckStart和DeflectCheckEnd的中间
-    //如果防御到了canBeDeflected的攻击，就弹反
-    //否则就pass
-    //弹反是立即在当前帧停顿，并且插入弹反到了的特效
-    //如果没反应就继续进行防御动作
-    //如果有按下攻击键就直接用deflect_to_attack的Trigger进入攻击动画
+        //在bougyo_start动画的动画事件DeflectCheckStart和DeflectCheckEnd的中间
+        //如果防御到了canBeDeflected的攻击，就弹反
+        //否则就pass
+        //弹反是立即在当前帧停顿，并且插入弹反到了的特效
+        //如果没反应就继续进行防御动作
+        //如果有按下攻击键就直接用deflect_to_attack的Trigger进入攻击动画
 
     public void DeflectCheckStart()
     {

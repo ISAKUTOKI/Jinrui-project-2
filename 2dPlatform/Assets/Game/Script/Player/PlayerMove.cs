@@ -63,12 +63,17 @@ public class PlayerMove : MonoBehaviour
         if (_speedX > 0)
         {
             isMoving = true;
+            FlipRight();
             if (!PlayerBehaviour.instance.jump.IsJumping)
             {
                 PlayerBehaviour.instance.animator.SetBool("walk", true);
                 PlayerBehaviour.instance.weaponView.SetState(PlayerWeaponView.State.run);
             }
-            FlipRight();
+            else if (PlayerBehaviour.instance.jump.IsJumping)
+            {
+                PlayerBehaviour.instance.animator.SetBool("walk", false);
+                PlayerBehaviour.instance.weaponView.SetState(PlayerWeaponView.State.run);
+            }
         }
         else if (_speedX < 0)
         {
@@ -77,6 +82,11 @@ public class PlayerMove : MonoBehaviour
             if (!PlayerBehaviour.instance.jump.IsJumping)
             {
                 PlayerBehaviour.instance.animator.SetBool("walk", true);
+                PlayerBehaviour.instance.weaponView.SetState(PlayerWeaponView.State.run);
+            }
+            else if (PlayerBehaviour.instance.jump.IsJumping)
+            {
+                PlayerBehaviour.instance.animator.SetBool("walk", false);
                 PlayerBehaviour.instance.weaponView.SetState(PlayerWeaponView.State.run);
             }
         }
