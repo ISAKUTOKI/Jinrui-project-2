@@ -15,11 +15,13 @@ public class HpHalfHeartBehaviour : MonoBehaviour
     [SerializeField] Image view_half;
     [SerializeField] Image view_whole;
     [SerializeField] UiImageAnimation anime;
+
     public int containHp { get; private set; }
 
     private void Start()
     {
-        anime.SetPlayEndCallback(() => { anime.ToggleDisplay(false); });
+        if (anime != null)
+            anime.SetPlayEndCallback(() => { anime.ToggleDisplay(false); });
         HideBlinkers();
     }
 
@@ -28,7 +30,8 @@ public class HpHalfHeartBehaviour : MonoBehaviour
         containHp = 2;
         view_half.enabled = false;
         view_whole.enabled = true;
-        anime.ToggleDisplay(false);
+        if (anime != null)
+            anime.ToggleDisplay(false);
     }
 
     public void SetHalf(bool hasAnime)
@@ -38,12 +41,17 @@ public class HpHalfHeartBehaviour : MonoBehaviour
         {
             view_half.enabled = true;
             view_whole.enabled = false;
-            anime.ToggleDisplay(false);
+            if (anime != null)
+                anime.ToggleDisplay(false);
             return;
         }
 
-        anime.ToggleDisplay(true);
-        anime.Play(0);
+        if (anime != null)
+        {
+            anime.ToggleDisplay(true);
+            anime.Play(0);
+        }
+
         HideBlinkers();
         StartCoroutine(Blink(blinker_whole,
             () =>
@@ -60,12 +68,16 @@ public class HpHalfHeartBehaviour : MonoBehaviour
         {
             view_half.enabled = false;
             view_whole.enabled = false;
-            anime.ToggleDisplay(false);
+            if (anime != null)
+                anime.ToggleDisplay(false);
             return;
         }
 
-        anime.ToggleDisplay(true);
-        anime.Play(0);
+        if (anime != null)
+        {
+            anime.ToggleDisplay(true);
+            anime.Play(0);
+        }
         HideBlinkers();
         StartCoroutine(Blink(blinker_half,
             () =>
