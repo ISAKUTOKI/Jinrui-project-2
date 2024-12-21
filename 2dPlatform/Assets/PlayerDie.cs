@@ -11,6 +11,8 @@ public class PlayerDie : MonoBehaviour
     // 当前时间缩放的值
     private float currentScale = 1.0f;
 
+    bool readyToTimeScale = false;
+
     void Start()
     {
         
@@ -19,18 +21,19 @@ public class PlayerDie : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.F12))
+        if (Input.GetKeyDown(KeyCode.F12))
+        {
+
+        }
+
+        if (readyToTimeScale)
         {
             EngineTimeScale();
-            Debug.Log("slowing");
         }
+
+ 
     }
 
-    void Die()
-    {
-
-        PlayerBehaviour.instance.animator.SetTrigger("die");
-    }
 
     void EngineTimeScale()
     {

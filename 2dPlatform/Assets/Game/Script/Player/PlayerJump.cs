@@ -5,9 +5,6 @@ public class PlayerJump : MonoBehaviour
 {
     public float jumpPower = 1000;
     public PlayerGroundDetecter groundDetecter;
-    public float timeToDrop;
-    private float jumpUpTime;
-    private bool canDrop = false;
     bool _isFloating { get { return !groundDetecter.isGrounded; } }
 
     void Awake()
@@ -29,11 +26,11 @@ public class PlayerJump : MonoBehaviour
         //    else
         //        Debug.Log("还不能下落");
         //}
-        if (Time.time - jumpUpTime >= timeToDrop && canDrop)
-        {
-            Drop();
-            //Debug.Log("准备下落");
-        }
+        //if (Time.time - jumpUpTime >= timeToDrop && canDrop)
+        //{
+        //    Drop();
+        //    //Debug.Log("准备下落");
+        //}
     }
 
     public bool IsJumping { get { return _isFloating; } }
@@ -52,7 +49,9 @@ public class PlayerJump : MonoBehaviour
         if (PlayerBehaviour.instance.health.isWounding)
             return;
         if (Input.GetKeyDown(KeyCode.W))
+        {
             TryJump();
+        }
     }
 
     void TryJump()
@@ -60,9 +59,9 @@ public class PlayerJump : MonoBehaviour
         if (canNotJump)
             return;
 
-        jumpUpTime = Time.time;
         DoJump();
     }
+
 
     bool canNotJump { get { return _isFloating || PlayerBehaviour.instance.attack.isAttacking || PlayerBehaviour.instance.health.isDead; } }
 
@@ -73,20 +72,14 @@ public class PlayerJump : MonoBehaviour
         PlayerBehaviour.instance.weaponView.SetState(PlayerWeaponView.State.idle);
         PlayerBehaviour.instance.movePosition.rb.AddForce(new Vector2(0, jumpPower));
         PlayerBehaviour.instance.animator.SetBool("jump", true);
-        canDrop = true;
     }
-    public void Drop()
-    {
-        PlayerBehaviour.instance.animator.SetTrigger("drop");
-    }
+
     public void OnGrounded()
     {
         var v = PlayerBehaviour.instance.movePosition.rb.velocity;
         if (v.y > 0)
             return;
         v.y = 0;
-        //jumpUpTime = 0f;
-        canDrop = false;
         PlayerBehaviour.instance.movePosition.rb.velocity = v;
         PlayerBehaviour.instance.movePosition.StopXMovement();
         PlayerBehaviour.instance.animator.SetBool("walk", false);

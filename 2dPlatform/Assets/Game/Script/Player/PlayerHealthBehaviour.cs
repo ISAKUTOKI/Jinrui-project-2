@@ -3,6 +3,9 @@ using com;
 using DG.Tweening;
 using System.Security.Cryptography;
 using UnityEngine;
+using System.Collections;
+using UnityEngine.SceneManagement;
+using UnityEditor;
 
 public class PlayerHealthBehaviour : MonoBehaviour
 {
@@ -16,9 +19,14 @@ public class PlayerHealthBehaviour : MonoBehaviour
     public string dieSound;
     public float deathFadeDelay;
 
+    public string weaponParent1; // 要禁用的GameObject的名称
+
+    public float slowMoDuration; // 慢动作持续时间
+
     private void Start()
     {
         FullFill();
+        Time.timeScale = 1f; // 确保开始时Time.timeScale为1
     }
     public void FullFill()
     {
@@ -31,6 +39,10 @@ public class PlayerHealthBehaviour : MonoBehaviour
     private void Update()
     {
         DoRoutineMove();
+
+        if (Input.GetKeyDown(KeyCode.F12))
+            Die();
+
     }
 
     public void TakeDamage(int dmg)
@@ -84,28 +96,60 @@ public class PlayerHealthBehaviour : MonoBehaviour
 
         _dead = true;
         //ReviveSystem.instance.QueueDie(fromFall);
-        SoundSystem.instance.Play(dieSound);
-
-        if (!fromFall)
-            PlayerBehaviour.instance.animator.SetTrigger("die");
-
+        //SoundSystem.instance.Play(dieSound);
+        //ObjDisable();
+        Destroy(GetComponent("Rigidbody2D"));
+        PlayerBehaviour.instance.weaponView.SetState(PlayerWeaponView.State.hide);
+        PlayerBehaviour.instance.animator.SetTrigger("die");
         PlayerBehaviour.instance.movePosition.StopXMovement();
-        SpriteRenderer[] srs = GetComponentsInChildren<SpriteRenderer>();
-        foreach (var sr in srs)
-        {
-            sr.DOFade(0, 3).SetDelay(deathFadeDelay + Random.Range(1, 3f));
-        }
+        //SpriteRenderer[] srs = GetComponentsInChildren<SpriteRenderer>();
+        //foreach (var sr in srs)
+        //{
+        //    sr.DOFade(0, 3).SetDelay(deathFadeDelay + Random.Range(1, 3f));
+        //}
     }
 
     void DoRoutineMove()
     {
         if (_dead) return;
-
-
     }
 
     public bool isDead
     {
         get { return _dead; }
     }
+
+    public IEnumerator SlowMoAndReload()
+    {
+        float timer = 0f;
+        while (timer < slowMoDuration)
+        {
+            Time.timeScale = Mathf.Lerp(1f, 0f, timer / slowMoDuration); // 平滑减少Time.timeScale
+            timer += Time.unscaledDeltaTime; // 使用unscaledDeltaTime以确保不受Time.timeScale影响
+            yield return null;
+        }
+
+        // 确保Time.timeScale为0
+        Time.timeScale = 0f;
+
+        // 等待一帧时间，确保所有基于时间的操作都已停止
+        yield return new WaitForEndOfFrame();
+
+        // 重启当前场景
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    //void ObjDisable()
+    //{
+    //    GameObject targetObject = GameObject.Find(weaponParent1);
+    //    if (targetObject != null)
+    //    {
+    //        targetObject.SetActive(false);
+    //        Debug.LogError("GameObject found: " + weaponParent1);
+    //    }
+    //    else
+    //    {
+    //        Debug.LogError("GameObject not found: " + weaponParent1);
+    //    }
+    //}
 }

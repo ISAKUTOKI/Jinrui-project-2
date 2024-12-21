@@ -13,6 +13,8 @@ public class PlayerBehaviour : MonoBehaviour
 
     public PlayerBougyo bougyo { get; private set; }
 
+    public PlayerDie die { get; private set; }
+
     public Animator animator { get; private set; }
 
     public PlayerMovePosition movePosition { get; private set; }

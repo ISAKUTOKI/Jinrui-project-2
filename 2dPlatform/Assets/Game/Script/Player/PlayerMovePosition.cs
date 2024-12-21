@@ -25,6 +25,8 @@ public class PlayerMovePosition : MonoBehaviour
 
     public void StopXMovement()
     {
+        if (PlayerBehaviour.instance.health.isDead)
+            return;
         //Debug.Log("StopXMovement");
         var v = rb.velocity;
         v.x = 0;

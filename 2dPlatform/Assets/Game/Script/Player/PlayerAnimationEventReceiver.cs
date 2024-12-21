@@ -63,4 +63,9 @@ public class PlayerAnimationEventReceiver : MonoBehaviour
     {
         PlayerBehaviour.instance.bougyo.DeflectCheckEnd();
     }
+
+    public void ResetScene()
+    {
+        StartCoroutine(PlayerBehaviour.instance.health.SlowMoAndReload());
+    }
 }

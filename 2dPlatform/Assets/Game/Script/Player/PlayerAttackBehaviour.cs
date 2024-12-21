@@ -4,9 +4,16 @@ using UnityEngine;
 public class PlayerAttackBehaviour : MonoBehaviour
 {
     private PlayerJump _jump;
+    private Rigidbody2D rb;
 
     public Transform damageOrigin;
     public float damageRadius = 1.5f;
+
+    public void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
+
     public int GetDamage(bool isSecond)
     {
         switch (currentAttackSwingPhase)
