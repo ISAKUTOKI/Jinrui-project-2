@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerAnimationEventReceiver : MonoBehaviour
 {
-    public WeaponPowerSystem WPS;
     public void OnCheckCombo()
     {
         PlayerBehaviour.instance.attack.OnCheckCombo();
@@ -67,12 +66,12 @@ public class PlayerAnimationEventReceiver : MonoBehaviour
 
     public void DefendStart()
     {
-        WPS.defending = true;
+        WeaponPowerSystem.instance.defending = true;
     }
 
     public void DefendEnd()
     {
-        WPS.defending = false;
+        WeaponPowerSystem.instance.defending = false;
     }
 
     public void ResetScene()
