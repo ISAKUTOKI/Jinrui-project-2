@@ -1718,7 +1718,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1177876046}
         m_TargetAssemblyTypeName: Assets.Game.Script.HUD_interface.Combat.WeaponPowerSystem,
           Assembly-CSharp
         m_MethodName: "\u6D4B\u8BD5_\u683C\u6321\u6216\u653B\u51FB\u89E6\u53D1"
@@ -3387,7 +3387,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1177876046}
         m_TargetAssemblyTypeName: Assets.Game.Script.HUD_interface.Combat.WeaponPowerSystem,
           Assembly-CSharp
         m_MethodName: "\u6D4B\u8BD5_\u5F39\u53CD\u89E6\u53D1"
@@ -4870,6 +4870,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 467067363}
   m_CullTransparentMesh: 1
+--- !u!114 &474249840 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 660876881686851841, guid: 49884f94408456446a76214852f54af5, type: 3}
+  m_PrefabInstance: {fileID: 8867848930904794309}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9002c08451d36e543875ab3a376ab2ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &486222396
 GameObject:
   m_ObjectHideFlags: 0
@@ -10111,7 +10122,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1177876046}
         m_TargetAssemblyTypeName: Assets.Game.Script.HUD_interface.Combat.WeaponPowerSystem,
           Assembly-CSharp
         m_MethodName: "\u6D4B\u8BD5_\u5F00\u59CB\u9632\u5FA1"
@@ -10599,7 +10610,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1177876046}
         m_TargetAssemblyTypeName: Assets.Game.Script.HUD_interface.Combat.WeaponPowerSystem,
           Assembly-CSharp
         m_MethodName: "\u6D4B\u8BD5_\u7ED3\u675F\u9632\u5FA1"
@@ -11360,7 +11371,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1177876046}
         m_TargetAssemblyTypeName: Assets.Game.Script.HUD_interface.Combat.WeaponPowerSystem,
           Assembly-CSharp
         m_MethodName: "\u6D4B\u8BD5_\u8D85\u7EA7\u5F39\u53CD\u89E6\u53D1"
@@ -11457,6 +11468,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponUiBehaviour: {fileID: 1899156012}
   power: 0
+  defending: 0
 --- !u!1 &1244049794
 GameObject:
   m_ObjectHideFlags: 0
@@ -17918,6 +17930,10 @@ PrefabInstance:
       propertyPath: WPS
       value: 
       objectReference: {fileID: 1177876046}
+    - target: {fileID: 5201302159723575747, guid: 49884f94408456446a76214852f54af5, type: 3}
+      propertyPath: deflectArea
+      value: 
+      objectReference: {fileID: 474249840}
     - target: {fileID: 5630684783676833463, guid: 49884f94408456446a76214852f54af5, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.002
@@ -17974,6 +17990,10 @@ PrefabInstance:
       propertyPath: weaponFollow
       value: 
       objectReference: {fileID: 1940244165}
+    - target: {fileID: 8788773464257430418, guid: 49884f94408456446a76214852f54af5, type: 3}
+      propertyPath: WPS
+      value: 
+      objectReference: {fileID: 1177876046}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

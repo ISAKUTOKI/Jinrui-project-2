@@ -18,7 +18,7 @@ namespace Assets.Game.Script.HUD_interface.Combat
 
         private void Start()
         {
-            power = 0;
+            power = 3;
             weaponUiBehaviour.SyncPowerValue(power);
         }
 
@@ -142,25 +142,25 @@ namespace Assets.Game.Script.HUD_interface.Combat
 
         public void 测试_开始防御()
         {
-            _test_defending = true;
+            defending = true;
         }
 
         public void 测试_结束防御()
         {
-            _test_defending = false;
+            defending = false;
         }
 
-        bool _test_defending;
+        public bool defending;
 
         private void Update()
         {
-            if (_test_defending)
+            if (defending)
             {
                 float v = Time.deltaTime * 0.5f;
                 var res = OnPlayerDefending(v);
                 if (!res)
                 {
-                    _test_defending = false;
+                    defending = false;
                     Debug.Log("能量耗尽，自动结束防御");
                 }
             }

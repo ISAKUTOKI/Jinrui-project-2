@@ -6,31 +6,31 @@ using UnityEngine;
 public class PlayerBougyo : MonoBehaviour
 {
     // Start is called before the first frame update
-
+    public Animator animator;
     public WeaponPowerSystem WPS;
     public deflectArea deflectArea;
-    public float canBougyoValue = 0.1f;
+    public float canBougyoValue = 0.15f;
     private bool canBougyo = false;
-    private bool inBougyo = false;
+    public bool inBougyo = false;
     private bool canDeflect = false;
 
     void Start()
     {
-        //Debug.Log(WPS.power);
+       
     }
 
     // Update is called once per frame
     void Update()
     {
         //更新能否防御的状态
-        CanBougyoSwitch();
+        CanBougyoCheck();
 
         //防御输入
         BougyoCheck();
 
     }
 
-    void CanBougyoSwitch()
+    void CanBougyoCheck()
     {
         if (WPS.power >= canBougyoValue)
         {
@@ -50,7 +50,7 @@ public class PlayerBougyo : MonoBehaviour
         {
             PlayerBehaviour.instance.animator.SetTrigger("bougyo_start");
             //有能量就进入防御持续
-            if (canBougyo && !inBougyo)
+            if (Input.GetKey(KeyCode.K)&& canBougyo && !inBougyo)
             {
                 PlayerBehaviour.instance.animator.SetTrigger("bougyo_start");
                 PlayerBehaviour.instance.animator.SetBool("bougyo_cyuu", true);
@@ -58,16 +58,17 @@ public class PlayerBougyo : MonoBehaviour
                 inBougyo = true;
             }
             //没能量就进入防御退出
-            else if (!canBougyo)
+            else
             {
-                PlayerBehaviour.instance.animator.SetTrigger("no_power_bougyo");
+                PlayerBehaviour.instance.animator.SetTrigger("bougyo_out");
+                Debug.Log("bougyo out");
             }
         }
+
         if (Input.GetKeyUp(KeyCode.K) && canBougyo && inBougyo || inBougyo && !canBougyo)
         {
-            PlayerBehaviour.instance.animator.SetTrigger("bougyo_out");
             PlayerBehaviour.instance.animator.SetBool("bougyo_cyuu", false);
-            Debug.Log("bougyo out");
+
             inBougyo = false;
         }
     }
@@ -83,7 +84,7 @@ public class PlayerBougyo : MonoBehaviour
     public void DeflectCheckStart()
     {
         // 检查是否可以弹反
-        CheckForDeflection();
+        CheckForDeflect();
     }
 
     // 动画事件：结束检查弹反
@@ -105,7 +106,7 @@ public class PlayerBougyo : MonoBehaviour
     }
 
     // 检查是否可以弹反
-    private void CheckForDeflection()
+    private void CheckForDeflect()
     {
         // 这里添加检查弹反的逻辑
         // 例如：检测是否有敌人攻击并与防御时间匹配

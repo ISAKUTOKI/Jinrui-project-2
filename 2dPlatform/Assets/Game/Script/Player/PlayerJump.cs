@@ -15,22 +15,6 @@ public class PlayerJump : MonoBehaviour
     {
         ReadInput();
 
-        //if (Input.GetKeyDown(KeyCode.F12))
-        //{
-        //    Debug.Log("");
-        //    Debug.Log("起跳时间是 " + jumpUpTime);
-        //    Debug.Log("当前时间是 " + Time.time);
-        //    Debug.Log("时间差为 " + (Time.time - jumpUpTime));
-        //    if (Time.time - jumpUpTime >= timeToDrop)
-        //        Debug.Log("准备下落");
-        //    else
-        //        Debug.Log("还不能下落");
-        //}
-        //if (Time.time - jumpUpTime >= timeToDrop && canDrop)
-        //{
-        //    Drop();
-        //    //Debug.Log("准备下落");
-        //}
     }
 
     public bool IsJumping { get { return _isFloating; } }

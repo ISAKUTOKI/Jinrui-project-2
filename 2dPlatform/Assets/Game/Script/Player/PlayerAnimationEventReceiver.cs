@@ -1,9 +1,10 @@
-﻿using System.Collections;
+﻿using Assets.Game.Script.HUD_interface.Combat;
+using System.Collections;
 using UnityEngine;
 
 public class PlayerAnimationEventReceiver : MonoBehaviour
 {
-
+    public WeaponPowerSystem WPS;
     public void OnCheckCombo()
     {
         PlayerBehaviour.instance.attack.OnCheckCombo();
@@ -62,6 +63,16 @@ public class PlayerAnimationEventReceiver : MonoBehaviour
     public void DeflectCheckEnd()
     {
         PlayerBehaviour.instance.bougyo.DeflectCheckEnd();
+    }
+
+    public void DefendStart()
+    {
+        WPS.defending = true;
+    }
+
+    public void DefendEnd()
+    {
+        WPS.defending = false;
     }
 
     public void ResetScene()
