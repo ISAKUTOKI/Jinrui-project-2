@@ -40,8 +40,8 @@ public class PlayerHealthBehaviour : MonoBehaviour
     {
         DoRoutineMove();
 
-        if (Input.GetKeyDown(KeyCode.F12))
-            Die();
+        //if (Input.GetKeyDown(KeyCode.F12))
+        //    Die();
 
     }
 
