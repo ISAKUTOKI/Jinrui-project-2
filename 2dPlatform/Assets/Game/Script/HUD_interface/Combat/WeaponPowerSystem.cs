@@ -142,27 +142,23 @@ namespace Assets.Game.Script.HUD_interface.Combat
 
         public void 测试_开始防御()
         {
-            defending = true;
+            //defending = true;
         }
 
         public void 测试_结束防御()
         {
-            defending = false;
+            //defending = false;
         }
 
-        public bool defending;
 
-        private void Update()
+        public void OnDefending()
         {
-            if (defending)
+            float v = Time.deltaTime * 0.5f;
+            var res = OnPlayerDefending(v);
+            if (!res)
             {
-                float v = Time.deltaTime * 0.5f;
-                var res = OnPlayerDefending(v);
-                if (!res)
-                {
-                    defending = false;
-                    Debug.Log("能量耗尽，自动结束防御");
-                }
+                Debug.Log("能量耗尽，自动结束防御");
+                PlayerBehaviour.instance.defend.ExitDefend();
             }
         }
 

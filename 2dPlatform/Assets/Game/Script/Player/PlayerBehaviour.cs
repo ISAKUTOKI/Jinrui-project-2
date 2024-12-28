@@ -11,7 +11,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     public PlayerJump jump { get; private set; }
 
-    public PlayerBougyo bougyo { get; private set; }
+    public PlayerDeflectBehaviour defend { get; private set; }
 
     public PlayerDie die { get; private set; }
 
@@ -34,7 +34,7 @@ public class PlayerBehaviour : MonoBehaviour
         move = GetComponent<PlayerMove>();
         health = GetComponent<PlayerHealthBehaviour>();
         weaponView = GetComponent<PlayerWeaponView>();
-        bougyo = GetComponent<PlayerBougyo>();
+        defend = GetComponent<PlayerDeflectBehaviour>();
     }
 
     public void Init()
@@ -45,6 +45,18 @@ public class PlayerBehaviour : MonoBehaviour
     public void OnHit()
     {
         //Debug.Log("OnHit");
+        if (defend.isDefending)
+        {
+            if (defend.isDeflecting)
+            {
+                defend.TriggerDeflect();
+                return;
+            }
+
+            defend.TriggerDefend();
+            return;
+        }
+
         health.TakeDamage(1);
     }
 }

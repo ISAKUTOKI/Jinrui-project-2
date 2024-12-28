@@ -68,7 +68,7 @@ public class PlayerHealthBehaviour : MonoBehaviour
             PlayerBehaviour.instance.weaponView.SetState(PlayerWeaponView.State.hide);
             CombatSystem.instance.BloodWeak();
             ChatBoxSystem.instance.IWantHurt();
-            PlayerBehaviour.instance.bougyo.inBougyo = false;
+            PlayerBehaviour.instance.defend.OnWound();
         }
     }
 
