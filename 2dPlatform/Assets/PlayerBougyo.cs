@@ -5,9 +5,6 @@ using UnityEngine;
 
 public class PlayerBougyo : MonoBehaviour
 {
-    // Start is called before the first frame update
-    public Animator animator;
-    public WeaponPowerSystem WPS;
     public deflectArea deflectArea;
     public float canBougyoValue = 0.15f;
     private bool canBougyo = false;
@@ -32,7 +29,7 @@ public class PlayerBougyo : MonoBehaviour
 
     void CanBougyoCheck()
     {
-        if (WPS.power >= canBougyoValue)
+        if (WeaponPowerSystem.instance.power >= canBougyoValue)
         {
             canBougyo = true;
         }
