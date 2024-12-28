@@ -58,10 +58,6 @@ public class Musouloom_Behaviour : MonoBehaviour
         Vector2 moveDirection = new Vector2(directionToPlayerX * moveSpeed * Time.deltaTime, 0);
         transform.position = (Vector2)transform.position + moveDirection;
 
-        if(jumpSpotL!=null)
-            jumpSpotL.SetActive(false);
-        if(jumpSpotR!=null)
-            jumpSpotR.SetActive(false); 
     }
     public void Die()
     {
@@ -71,19 +67,20 @@ public class Musouloom_Behaviour : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject == alarmSpotL || collision.gameObject == alarmSpotR)
+        bool canAlarm = true;
+        bool canJump = true;
+
+        if (canAlarm && collision.gameObject == alarmSpotL || canAlarm && collision.gameObject == alarmSpotR)
         {
             Debug.Log("alarm enter");
             idle();
         }
-        else if (collision.gameObject == jumpSpotL || collision.gameObject == jumpSpotR)
+
+        if (canJump && collision.gameObject == jumpSpotL || canJump && collision.gameObject == jumpSpotR)
         {
             Debug.Log("jump");
             JumpOutFromEarth();
-            if (alarmSpotL != null)
-                alarmSpotL.SetActive(false);
-            if (alarmSpotR != null)
-                alarmSpotR.SetActive(false);
+            canAlarm = false;
         }
     }
     void OnTriggerExit2D(Collider2D collision)
