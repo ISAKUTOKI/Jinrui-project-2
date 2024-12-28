@@ -5,50 +5,93 @@ using UnityEngine;
 public class Musouloom_Behaviour : MonoBehaviour
 {
     Animator animator;
-    Collider2D col;
-    [SerializeField] float jumpForce = 3.0f;
-    [SerializeField]
+    Object musouloomObject;
+    //[SerializeField]
 
+    public GameObject alarmSpotL;
+    public GameObject alarmSpotR;
+    public GameObject jumpSpotL;
+    public GameObject jumpSpotR;
+    public GameObject Neko;
+    public Collider2D NekoCollider;
+
+
+    float moveSpeed = 2.0f;
+    public bool readyToSearch = false;
 
     void Start()
     {
-        animator=GetComponentInChildren<Animator>();
-        col= col.GetComponent<Collider2D>();
+        animator = GetComponentInChildren<Animator>();
     }
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.F12))
         {
-            //JumpOutFromEarth();
-            Debug.Log("OK");
+            animator.SetBool("idle", true);
+            animator.SetTrigger("jumpOut");
         }
-
     }
 
     void idle()
     {
         animator.SetBool("idle", true);
     }
-
     void hide()
     {
         animator.SetBool("idle", false);
     }
-
     void JumpOutFromEarth()
     {
         animator.SetBool("idle", false);
         animator.SetTrigger("jumpOut");
 
     }
-
-    void Move()
-    {
-        animator.SetTrigger("run");
-    }
-
-    void Explosion()
+    public void Explosion()
     {
         animator.SetTrigger("explosion");
+    }
+    public void Search()
+    {
+        Debug.Log("Ready To Search");
+        Vector2 playerPosition = Neko.transform.position;
+        float directionToPlayerX = playerPosition.x - transform.position.x;
+        Vector2 moveDirection = new Vector2(directionToPlayerX * moveSpeed * Time.deltaTime, 0);
+        transform.position = (Vector2)transform.position + moveDirection;
+
+        if(jumpSpotL!=null)
+            jumpSpotL.SetActive(false);
+        if(jumpSpotR!=null)
+            jumpSpotR.SetActive(false); 
+    }
+    public void Die()
+    {
+        Debug.Log("Die");
+        //Destroy(gameObject);
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject == alarmSpotL || collision.gameObject == alarmSpotR)
+        {
+            Debug.Log("alarm enter");
+            idle();
+        }
+        else if (collision.gameObject == jumpSpotL || collision.gameObject == jumpSpotR)
+        {
+            Debug.Log("jump");
+            JumpOutFromEarth();
+            if (alarmSpotL != null)
+                alarmSpotL.SetActive(false);
+            if (alarmSpotR != null)
+                alarmSpotR.SetActive(false);
+        }
+    }
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject == alarmSpotL || collision.gameObject == alarmSpotR)
+        {
+            Debug.Log("alarm exit");
+            hide();
+        }
     }
 }
