@@ -13,13 +13,16 @@ public class Musouloom_AnimeEvents : MonoBehaviour
 
     public void SearchBegin()
     {
-        musouloom.Search();
-        musouloom.readyToSearch = true;
+        musouloom.canSearch = true;
     }
 
     public void SearchEnd()
     {
-        musouloom.Explosion();
-        musouloom.readyToSearch = false;
+        musouloom.canSearch = false;
+    }
+
+    public void ExplosionDamage()
+    {
+        musouloom.ExplosionHurtPlayer();
     }
 }

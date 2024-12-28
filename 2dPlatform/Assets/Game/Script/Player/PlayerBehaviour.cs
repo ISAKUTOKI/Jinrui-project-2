@@ -20,6 +20,7 @@ public class PlayerBehaviour : MonoBehaviour
     public PlayerMovePosition movePosition { get; private set; }
 
     public PlayerWeaponView weaponView { get; private set; }
+
     public Transform flip;
 
     private void Awake()
