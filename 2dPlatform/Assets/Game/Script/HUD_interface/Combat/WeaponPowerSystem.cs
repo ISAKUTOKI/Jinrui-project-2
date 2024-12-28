@@ -150,19 +150,15 @@ namespace Assets.Game.Script.HUD_interface.Combat
             //defending = false;
         }
 
-        //   public bool defending;
 
-        private void Update()
+        public void OnDefending()
         {
-            if (PlayerBehaviour.instance.defend.isDefending)
+            float v = Time.deltaTime * 0.5f;
+            var res = OnPlayerDefending(v);
+            if (!res)
             {
-                float v = Time.deltaTime * 0.5f;
-                var res = OnPlayerDefending(v);
-                if (!res)
-                {
-                    Debug.Log("能量耗尽，自动结束防御");
-                    PlayerBehaviour.instance.defend.ExitDefend();
-                }
+                Debug.Log("能量耗尽，自动结束防御");
+                PlayerBehaviour.instance.defend.ExitDefend();
             }
         }
 

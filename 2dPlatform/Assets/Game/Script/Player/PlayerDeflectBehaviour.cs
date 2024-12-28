@@ -21,12 +21,21 @@ public class PlayerDeflectBehaviour : MonoBehaviour
 操作
 	按下某个键（比如k），如果玩家处于idle run状态就可以弹反，攻击的最后几帧也可以
     松开按键可以主动结束防御
-流程
-	开始弹反，先播放【弹反开始】动画，然后播放【防御】动画
+动画
+    开始弹反，先播放【弹反开始】动画，然后播放【防御】动画
 	【弹反开始】动画期间，松开按键，依旧会播放完【弹反开始】动画
 	【防御】动画期间，松开按键，结束播放回到idle动画
-	弹反成功时，会播放【弹反成功】动画，结束播放回到idle动画
-
+弹反流程
+	伤害来源在判定框内时，如果处于弹反状态，
+	弹反成功时，会播放【弹反成功】特效，
+    抵消本次攻击，加1/3点能量
+    此时按下攻击按键可以进入加强版攻击动画
+    否则继续结算防御
+防御流程
+    伤害来源在判定框内时，如果处于防御非弹反状态，
+    则消耗1点能量
+    抵消本次攻击，
+    被击退
 判定
 	时机：【弹反开始】动画期间以及【防御】动画期间的前几帧，可以进行弹反
 	位置：远程攻击的伤害本体在玩家面前，近战攻击的发起者在玩家面前
@@ -62,6 +71,15 @@ UI
         {
             TryStopDefend();
         }
+
+        if (isDefending)
+        {
+            var animator = PlayerBehaviour.instance.animator;
+            if (animator.GetCurrentAnimatorClipInfo(0)[0].clip.name == "bougyo")
+            {
+                WeaponPowerSystem.instance.OnDefending();
+            }
+        }
     }
 
     public bool currentCharacterStateAllowDeflect
@@ -83,16 +101,12 @@ UI
     }
     void TryDefend()
     {
-        //Debug.LogWarning("OnCheckCombo " + _comboOn);
-        //PlayerBehaviour.instance.animator.ResetTrigger("combo");
         if (!currentCharacterStateAllowDeflect)
             return;
         if (isDefending)
             return;
-        if (!DefendEnergyCheck())
-            return;
 
-        PerformDefend();
+        EnterDefend();
     }
 
     void TryStopDefend()
@@ -103,7 +117,7 @@ UI
         ExitDefend();
     }
 
-    void PerformDefend()
+    void EnterDefend()
     {
         //perform deflect
         //stop walking
@@ -134,10 +148,6 @@ UI
     }
 
 
-    bool DefendEnergyCheck()
-    {
-        return WeaponPowerSystem.instance.power >= defendMinEnergyRequirement;
-    }
 
     public bool isDefending { get; private set; }
 
@@ -157,12 +167,16 @@ UI
     }
 
 
-    public void OnDeflected(bool isSecondDamage)
+    public void TriggerDeflect()
     {
         // 立即在当前帧停顿，并插入弹反特效
         PlayerBehaviour.instance.animator.SetTrigger("deflect");
         // 播放弹反特效
         // 例如：Instantiate(deflectEffectPrefab, deflectEffectPosition, Quaternion.identity);
+    }
+    public void TriggerDefend()
+    {
+        //击退
     }
 
     // 弹反后进入攻击动画

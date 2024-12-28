@@ -44,6 +44,18 @@ public class PlayerBehaviour : MonoBehaviour
     public void OnHit()
     {
         //Debug.Log("OnHit");
+        if (defend.isDefending)
+        {
+            if (defend.isDeflecting)
+            {
+                defend.TriggerDeflect();
+                return;
+            }
+
+            defend.TriggerDefend();
+            return;
+        }
+
         health.TakeDamage(1);
     }
 }
