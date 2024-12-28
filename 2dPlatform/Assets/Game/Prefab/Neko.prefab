@@ -792,7 +792,6 @@ GameObject:
   - component: {fileID: 4210580326058954196}
   - component: {fileID: 8572001225920632473}
   - component: {fileID: 1762813202433768243}
-  - component: {fileID: 5201302159723575747}
   - component: {fileID: 88125427040240108}
   - component: {fileID: 6565299741799419477}
   - component: {fileID: 6969112885309573221}
@@ -935,21 +934,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpPower: 1000
   groundDetecter: {fileID: 6137536250891752303}
---- !u!114 &5201302159723575747
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7163741572073542205}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 388b7aad1d604f94191696ae475a8261, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  WPS: {fileID: 0}
-  deflectArea: {fileID: 0}
-  canBougyoValue: 0.2
 --- !u!114 &88125427040240108
 MonoBehaviour:
   m_ObjectHideFlags: 0

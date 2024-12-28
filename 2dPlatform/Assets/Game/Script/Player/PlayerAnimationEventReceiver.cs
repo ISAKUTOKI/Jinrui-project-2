@@ -53,27 +53,6 @@ public class PlayerAnimationEventReceiver : MonoBehaviour
 
     }
 
-
-
-    public void DeflectCheckStart()
-    {
-        PlayerBehaviour.instance.bougyo.DeflectCheckStart();
-    }
-    public void DeflectCheckEnd()
-    {
-        PlayerBehaviour.instance.bougyo.DeflectCheckEnd();
-    }
-
-    public void DefendStart()
-    {
-        WeaponPowerSystem.instance.defending = true;
-    }
-
-    public void DefendEnd()
-    {
-        WeaponPowerSystem.instance.defending = false;
-    }
-
     public void ResetScene()
     {
         StartCoroutine(PlayerBehaviour.instance.health.SlowMoAndReload());

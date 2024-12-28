@@ -11,7 +11,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     public PlayerJump jump { get; private set; }
 
-    public PlayerBougyo bougyo { get; private set; }
+    public PlayerDeflectBehaviour defend { get; private set; }
 
     public PlayerDie die { get; private set; }
 
@@ -33,7 +33,7 @@ public class PlayerBehaviour : MonoBehaviour
         move = GetComponent<PlayerMove>();
         health = GetComponent<PlayerHealthBehaviour>();
         weaponView = GetComponent<PlayerWeaponView>();
-        bougyo = GetComponent<PlayerBougyo>();
+        defend = GetComponent<PlayerDeflectBehaviour>();
     }
 
     public void Init()
