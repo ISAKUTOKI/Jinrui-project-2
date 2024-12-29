@@ -51,9 +51,6 @@ UI
 */
 
     public DeflectAreaBehaviour deflectArea;
-    public float defendMinEnergyRequirement = 0.15f;
-
-
     private void Awake()
     {
 
@@ -167,16 +164,27 @@ UI
     }
 
 
-    public void TriggerDeflect()
+    public void TriggerDeflect(bool isSuperToGainFullPower = false)
     {
-        // 立即在当前帧停顿，并插入弹反特效
-        PlayerBehaviour.instance.animator.SetTrigger("deflect");
-        // 播放弹反特效
-        // 例如：Instantiate(deflectEffectPrefab, deflectEffectPosition, Quaternion.identity);
+        if (isSuperToGainFullPower)
+        {
+            // 立即在当前帧停顿，并插入超大弹反特效
+            WeaponPowerSystem.instance.GainFullPower();
+            //Instantiate(deflectEffectPrefab, deflectEffectPosition, Quaternion.identity);
+        }
+        else
+        {
+            // 立即在当前帧停顿，并插入弹反特效
+            WeaponPowerSystem.instance.GainOnePower();
+            //Instantiate(deflectEffectPrefab, deflectEffectPosition, Quaternion.identity);
+        }
+        //
     }
+
     public void TriggerDefend()
     {
         //击退
+        WeaponPowerSystem.instance.ConsumePower_cell(1);
     }
 
     // 弹反后进入攻击动画

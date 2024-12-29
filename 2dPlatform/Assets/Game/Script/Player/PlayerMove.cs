@@ -9,10 +9,11 @@ public class PlayerMove : MonoBehaviour
     public bool isMoving { get; private set; }
     private Vector3 _defaultFilpScale;
     public PlayerActionPerformDependency dependency;
-
+    public PlayerKnockbackBehaviour knockback { get; private set; }
     void Start()
     {
         _defaultFilpScale = PlayerBehaviour.instance.flip.localScale;
+        knockback = GetComponent<PlayerKnockbackBehaviour>();
     }
 
     void Update()

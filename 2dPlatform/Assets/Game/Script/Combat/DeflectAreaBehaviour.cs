@@ -4,30 +4,39 @@ using UnityEngine;
 
 public class DeflectAreaBehaviour : MonoBehaviour
 {
-    private List<EnemyBehaviour> enes;
+    private List<Transform> hitSources;
 
     private void OnEnable()
     {
-        enes = new List<EnemyBehaviour>();
+        hitSources = new List<Transform>();
     }
 
     private void OnDisable()
     {
-        enes = new List<EnemyBehaviour>();
+        hitSources = new List<Transform>();
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         var ene = collision.GetComponent<EnemyBehaviour>();
-        if (enes.Contains(ene))
+        if (ene != null)
         {
-            return;
+            if (!hitSources.Contains(ene.transform))
+            {
+                hitSources.Add(ene.transform);
+            }
         }
-
-        enes.Add(ene);
     }
 
-    public bool CheckDelfect(EnemyBehaviour e)
+    /// <summary>
+    /// 最终的受到伤害的处理函数，接受的参数是伤害来源，可能的情况有
+    /// 1 敌人身体，比如史莱姆的近战攻击，用的是整个敌人的transform判断弹反
+    /// 2 飞射性物体projectile，也就是远程攻击，用的是敌人的子弹的transform判断弹反
+    /// 3 敌人的身体部分，比如大型猫敌人的尾巴攻击，用的是这个攻击特定的攻击判定框的transform判断弹反
+    /// </summary>
+    /// <param name="hitSource"></param>
+    public bool InAreaCheck(Transform hitSource)
     {
-        return enes.Contains(e);
+        return hitSources.Contains(hitSource);
     }
 }
