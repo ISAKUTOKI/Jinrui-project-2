@@ -10,7 +10,7 @@ public class Musouloom_AlarmSpot : MonoBehaviour
     {
         if (musouloom.canAlarm && other.gameObject == Neko)
         {
-            Debug.Log("alarm enter");
+            //Debug.Log("alarm enter");
             musouloom.idle();
         }
     }
@@ -19,7 +19,7 @@ public class Musouloom_AlarmSpot : MonoBehaviour
     {
         if (musouloom.canAlarm && other.gameObject == Neko)
         {
-            Debug.Log("alarm exit");
+            //Debug.Log("alarm exit");
             musouloom.hide();
         }
     }

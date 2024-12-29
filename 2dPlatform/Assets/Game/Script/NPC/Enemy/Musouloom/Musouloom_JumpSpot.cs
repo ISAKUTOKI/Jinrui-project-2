@@ -10,7 +10,7 @@ public class Musouloom_JumpSpot : MonoBehaviour
     {
         if (musouloom.canJumpOutFromEarth && other.gameObject==Neko)
         {
-            Debug.Log("jump");
+            //Debug.Log("jump");
             musouloom.JumpOutFromEarth();
             musouloom.canAlarm = false;
         }
