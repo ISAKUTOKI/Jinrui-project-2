@@ -18,6 +18,7 @@ public class DeflectAreaBehaviour : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.LogWarning("DeflectAreaBehaviour OnTriggerEnter2D " + collision.gameObject);
         var ene = collision.GetComponent<EnemyBehaviour>();
         if (ene != null)
         {

@@ -43,7 +43,7 @@ public class EnemySkillBehaviour : MonoBehaviour
 
     void UseSkill(EnemySkill skl)
     {
-        Debug.Log("UseSkill " + skl.id);
+        //Debug.Log("UseSkill " + skl.id);
         crtSkill = skl;
         skl.cdTimer = skl.cd;
         _durationTimer = skl.duration;

@@ -144,8 +144,6 @@ UI
         Debug.Log("ExitDefend！ withAnim " + withAnim);
     }
 
-
-
     public bool isDefending { get; private set; }
 
     public bool isDeflecting

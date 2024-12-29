@@ -52,9 +52,11 @@ public class PlayerBehaviour : MonoBehaviour
     public void OnHit(Transform hitSource = null)
     {
         Debug.Log("neko OnHit");
-        if (hitSource != null && defend.deflectArea.InAreaCheck(hitSource))
+        var inDeflectArea = defend.deflectArea.InAreaCheck(hitSource);
+        Debug.Log("inDeflectArea " + inDeflectArea);
+        if (hitSource != null && inDeflectArea)
         {
-            Debug.Log("in deflectArea");
+            Debug.Log("inDeflectArea");
             if (defend.isDefending)
             {
                 if (defend.isDeflecting)
@@ -66,7 +68,7 @@ public class PlayerBehaviour : MonoBehaviour
 
                 var dx = hitSource.position.x - transform.position.x;
                 bool isToRight = dx < 0;
-                Debug.Log("TriggerDefend");
+                Debug.Log("TriggerDefend isToRight " + isToRight);
                 defend.TriggerDefend();
                 if (isToRight)
                     move.knockback.KnockBackToRight(10);
