@@ -18,12 +18,12 @@ public class PlayerKnockbackBehaviour : MonoBehaviour
 
     public void KnockBackToRight(float speed)
     {
-        KnockBack(new Vector3(1, 0.5f, 0), speed);
+        KnockBack(new Vector3(1, 0.1f, 0), speed);
     }
 
     public void KnockBackToLeft(float speed)
     {
-        KnockBack(new Vector3(-1, 0.5f, 0), speed);
+        KnockBack(new Vector3(-1, 0.1f, 0), speed);
     }
 
     public void KnockBack(Vector3 dir, float speed)

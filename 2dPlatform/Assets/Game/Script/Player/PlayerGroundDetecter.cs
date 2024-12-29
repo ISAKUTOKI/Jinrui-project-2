@@ -31,6 +31,7 @@ public class PlayerGroundDetecter : MonoBehaviour
                 _cols.Add(col);
             }
         }
+
         for (var i = _cols.Count - 1; i >= 0; i--)
         {
             var col = _cols[i];
