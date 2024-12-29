@@ -87,7 +87,7 @@ public class Musouloom_Behaviour : MonoBehaviour
     {
         animator.SetTrigger("explosion");
         StartCoroutine(ExplosionMoveUp(0.6f, 0.1f));
-        Debug.Log("OK");
+        //Debug.Log("OK");
     }
     IEnumerator ExplosionMoveUp(float distance, float time)
     {

@@ -11732,7 +11732,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponUiBehaviour: {fileID: 1899156012}
   power: 0
-  defending: 0
 --- !u!1 &1244049794
 GameObject:
   m_ObjectHideFlags: 0
@@ -19720,12 +19719,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 8867848930904794310}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 388b7aad1d604f94191696ae475a8261, type: 3}
+  m_Script: {fileID: 11500000, guid: 757df30de8e71fa4cb9280e62a80affb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deflectArea: {fileID: 474249840}
-  canBougyoValue: 0.2
-  inBougyo: 0
+  ps: {fileID: 0}
+  dependency:
+    notCrouching: 0
+    notPerformingCrouching: 0
+    noGunDrawn: 0
+    notPerformingDrawGun: 0
+    notTurnedBack: 0
+    notTurning: 0
+    notShooting: 0
+    notWalking: 0
+    notHiting: 0
+  deflectArea: {fileID: 0}
+  defendMinEnergyRequirement: 0.15
 --- !u!114 &8867848930904794318
 MonoBehaviour:
   m_ObjectHideFlags: 0
