@@ -43,7 +43,7 @@ public class EnemySkillBehaviour : MonoBehaviour
 
     void UseSkill(EnemySkill skl)
     {
-        Debug.Log("UseSkill " + skl.id);
+        //Debug.Log("UseSkill " + skl.id);
         crtSkill = skl;
         skl.cdTimer = skl.cd;
         _durationTimer = skl.duration;
@@ -103,7 +103,7 @@ public class EnemySkillBehaviour : MonoBehaviour
         Vector2 dist = p1 - p2;
         if (dist.magnitude < 1)
         {
-            PlayerBehaviour.instance.OnHit();
+            PlayerBehaviour.instance.OnHit(transform);
         }
         CombatSystem.instance.ShakeWeak();
     }
