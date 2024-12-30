@@ -150,8 +150,6 @@ UI
     {
         get
         {
-            if (!isDefending)
-                return false;
             var animator = PlayerBehaviour.instance.animator;
             if (animator.GetCurrentAnimatorClipInfo(0)[0].clip.name == "bougyo_start")
             {
@@ -178,7 +176,7 @@ UI
     {
         get
         {
-            return isDefending || isInDefendEnd;
+            return isDefending || isInDefendEnd || isDeflecting;
         }
     }
     public void TriggerDeflect(bool isSuperToGainFullPower = false)
