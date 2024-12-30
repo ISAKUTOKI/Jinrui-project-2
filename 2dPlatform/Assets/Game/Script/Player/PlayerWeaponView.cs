@@ -23,6 +23,11 @@ public class PlayerWeaponView : MonoBehaviour
 
     public void SetState(State s)
     {
+        if (state==s)
+        {
+            return;
+        }
+
         Debug.Log("SetState " + s);
         state = s;
         switch (state)

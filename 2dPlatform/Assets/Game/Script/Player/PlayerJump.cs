@@ -63,12 +63,25 @@ public class PlayerJump : MonoBehaviour
         var v = PlayerBehaviour.instance.movePosition.rb.velocity;
         if (v.y > 0)
             return;
+
+        //Debug.Log("highFall " + v.y);
+        var highFall = false;
+        if (v.y < -12)//一般跳跃下落速度-6.624929，地震-1.95
+        {
+            highFall = true;//掉落伤害
+        }
         v.y = 0;
         PlayerBehaviour.instance.movePosition.rb.velocity = v;
-        PlayerBehaviour.instance.movePosition.StopXMovement();
-        PlayerBehaviour.instance.animator.SetBool("walk", false);
-        PlayerBehaviour.instance.animator.SetBool("jump", false);
-        PlayerBehaviour.instance.weaponView.SetState(PlayerWeaponView.State.idle);
+
+        if (highFall)
+        {
+            PlayerBehaviour.instance.movePosition.StopXMovement();
+            PlayerBehaviour.instance.animator.SetBool("walk", false);
+            PlayerBehaviour.instance.animator.SetBool("jump", false);
+            PlayerBehaviour.instance.weaponView.SetState(PlayerWeaponView.State.idle);
+            PlayerBehaviour.instance.OnHit(null);//掉落伤害 打断防御
+        }
+
         //Debug.Log("jumpUpTime清零");
     }
 
