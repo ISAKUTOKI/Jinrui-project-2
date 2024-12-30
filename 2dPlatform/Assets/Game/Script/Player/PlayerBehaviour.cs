@@ -71,9 +71,9 @@ public class PlayerBehaviour : MonoBehaviour
                 Debug.Log("TriggerDefend isToRight " + isToRight);
                 defend.TriggerDefend();
                 if (isToRight)
-                    move.knockback.KnockBackToRight(5);
+                    move.knockback.KnockBackToRight(1);
                 else
-                    move.knockback.KnockBackToLeft(5);
+                    move.knockback.KnockBackToLeft(1);
                 return;
             }
         }
