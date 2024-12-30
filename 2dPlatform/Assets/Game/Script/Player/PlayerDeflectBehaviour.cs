@@ -161,7 +161,26 @@ UI
         }
     }
 
+    public bool isInDefendEnd
+    {
+        get
+        {
+            var animator = PlayerBehaviour.instance.animator;
+            if (animator.GetCurrentAnimatorClipInfo(0)[0].clip.name == "bougyo_end")
+            {
+                return true;
+            }
+            return false;
+        }
+    }
 
+    public bool isInNoMoveState
+    {
+        get
+        {
+            return isDefending || isInDefendEnd;
+        }
+    }
     public void TriggerDeflect(bool isSuperToGainFullPower = false)
     {
         if (isSuperToGainFullPower)

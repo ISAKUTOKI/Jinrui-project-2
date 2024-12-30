@@ -113,7 +113,11 @@ public class PlayerAttackBehaviour : MonoBehaviour
             InterruptAttack();
             return;
         }
-
+        if (PlayerBehaviour.instance.defend.isInNoMoveState)
+        {
+            InterruptAttack();
+            return;
+        }
         var clipInfo = PlayerBehaviour.instance.animator.GetCurrentAnimatorClipInfo(0)[0];
         var clip = clipInfo.clip;
         switch (currentAttackSwingPhase)
@@ -156,6 +160,8 @@ public class PlayerAttackBehaviour : MonoBehaviour
         if (_health.isDead)
             return;
         if (PlayerBehaviour.instance.health.isWounding)
+            return;
+        if (PlayerBehaviour.instance.defend.isInNoMoveState)
             return;
         if (Input.GetKeyDown(KeyCode.J))
         {
