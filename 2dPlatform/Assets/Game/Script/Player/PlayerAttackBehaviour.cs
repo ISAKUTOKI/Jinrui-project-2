@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Game.Script.HUD_interface.Combat;
+using System.Collections;
 using UnityEngine;
 
 public class PlayerAttackBehaviour : MonoBehaviour
@@ -41,6 +42,11 @@ public class PlayerAttackBehaviour : MonoBehaviour
     public AnimationClipData clip_swing2;
     public AnimationClipData clip_swing3;
 
+    private float clipDefaultSpeed_swing1;
+    private float clipDefaultSpeed_swing2;
+    private float clipDefaultSpeed_swing3;
+    public float superAttackSwingSpeedMultiplier = 2;
+
     public Collider2D[] swing1_Cols;
     public Collider2D[] swing2_Cols;
     public Collider2D[] swing3_Cols;
@@ -62,6 +68,48 @@ public class PlayerAttackBehaviour : MonoBehaviour
         _health = GetComponent<PlayerHealthBehaviour>();
         currentAttackSwingPhase = 0;
         isSuperAttack = false;
+
+        clipDefaultSpeed_swing1 = clip_swing1.speedRatio;
+        clipDefaultSpeed_swing2 = clip_swing2.speedRatio;
+        clipDefaultSpeed_swing3 = clip_swing3.speedRatio;
+    }
+
+    void SyncSwingAnim(int phase)
+    {
+        //PlayerBehaviour.instance.animator.SetBool("super", isSuperAttack);
+        switch (phase)
+        {
+            case 1:
+                if (isSuperAttack)
+                {
+                    clip_swing1.speedRatio = clipDefaultSpeed_swing1 * superAttackSwingSpeedMultiplier;
+                }
+                else
+                {
+                    clip_swing1.speedRatio = clipDefaultSpeed_swing1;
+                }
+                break;
+            case 2:
+                if (isSuperAttack)
+                {
+                    clip_swing2.speedRatio = clipDefaultSpeed_swing2 * superAttackSwingSpeedMultiplier;
+                }
+                else
+                {
+                    clip_swing2.speedRatio = clipDefaultSpeed_swing2;
+                }
+                break;
+            case 3:
+                if (isSuperAttack)
+                {
+                    clip_swing3.speedRatio = clipDefaultSpeed_swing3 * superAttackSwingSpeedMultiplier;
+                }
+                else
+                {
+                    clip_swing3.speedRatio = clipDefaultSpeed_swing3;
+                }
+                break;
+        }
     }
 
     private void Update()
@@ -81,8 +129,18 @@ public class PlayerAttackBehaviour : MonoBehaviour
                 if (_comboOn)
                 {
                     //Debug.LogWarning("进入第2段");
+                    if (WeaponPowerSystem.instance.power > 0)
+                    {
+                        isSuperAttack = true;
+                        WeaponPowerSystem.instance.ConsumePower_cell(1);
+                    }
+                    else
+                    {
+                        isSuperAttack = false;
+                    }
                     SetAttackPhase(2);
                     PlayerBehaviour.instance.weaponView.SetState(PlayerWeaponView.State.hide);
+                    SyncSwingAnim(2);
                     PlayerBehaviour.instance.animator.SetTrigger("combo");
                     _comboOn = false;
                 }
@@ -91,8 +149,18 @@ public class PlayerAttackBehaviour : MonoBehaviour
                 if (_comboOn)
                 {
                     //Debug.LogWarning("进入第3段");
+                    if (WeaponPowerSystem.instance.power > 0)
+                    {
+                        isSuperAttack = true;
+                        WeaponPowerSystem.instance.ConsumePower_cell(1);
+                    }
+                    else
+                    {
+                        isSuperAttack = false;
+                    }
                     SetAttackPhase(3);
                     PlayerBehaviour.instance.weaponView.SetState(PlayerWeaponView.State.hide);
+                    SyncSwingAnim(3);
                     PlayerBehaviour.instance.animator.SetTrigger("combo");
                     _comboOn = false;
                 }
@@ -101,8 +169,18 @@ public class PlayerAttackBehaviour : MonoBehaviour
                 if (_comboOn)
                 {
                     //Debug.LogWarning("进入第1段");
+                    if (WeaponPowerSystem.instance.power > 0)
+                    {
+                        isSuperAttack = true;
+                        WeaponPowerSystem.instance.ConsumePower_cell(1);
+                    }
+                    else
+                    {
+                        isSuperAttack = false;
+                    }
                     SetAttackPhase(1);
                     PlayerBehaviour.instance.weaponView.SetState(PlayerWeaponView.State.hide);
+                    SyncSwingAnim(1);
                     PlayerBehaviour.instance.animator.SetTrigger("combo");
                     _comboOn = false;
                 }
@@ -167,11 +245,18 @@ public class PlayerAttackBehaviour : MonoBehaviour
             return;
         if (PlayerBehaviour.instance.health.isWounding)
             return;
-        if (PlayerBehaviour.instance.defend.isInNoMoveState)
+        if (PlayerBehaviour.instance.defend.isDefending)
             return;
+        if (PlayerBehaviour.instance.defend.isInDefendEnd)
+            return;
+        if (PlayerBehaviour.instance.defend.isDeflecting &&
+    !PlayerBehaviour.instance.defend.deflectedThisMovement)
+        {
+            return;
+        }
         if (Input.GetKeyDown(KeyCode.J))
         {
-            TryAttack();
+            PerformAttack();
         }
     }
 
@@ -192,16 +277,28 @@ public class PlayerAttackBehaviour : MonoBehaviour
 
     public bool isAttacking { get { return currentAttackSwingPhase != 0; } }
 
-    void TryAttack()
-    {
-        PerformAttack();
-    }
-
     void PerformAttack()
     {
+        if (PlayerBehaviour.instance.defend.isDeflecting)
+        {
+            PlayerBehaviour.instance.defend.ExitDefend(false);
+        }
+
         switch (currentAttackSwingPhase)
         {
             case 0:
+                //Debug.LogWarning("首次 进入第1段");
+                if (WeaponPowerSystem.instance.power > 0)
+                {
+                    isSuperAttack = true;
+                    WeaponPowerSystem.instance.ConsumePower_cell(1);
+                }
+                else
+                {
+                    isSuperAttack = false;
+                }
+
+                SyncSwingAnim(1);
                 PlayerBehaviour.instance.animator.SetTrigger("attack");
                 _comboOn = false;
                 PlayerBehaviour.instance.weaponView.SetState(PlayerWeaponView.State.hide);

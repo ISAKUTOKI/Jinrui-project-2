@@ -49,9 +49,12 @@ UI
 */
 
     public DeflectAreaBehaviour deflectArea;
+    public bool deflectedThisMovement { get; private set; }
+
+
     private void Awake()
     {
-
+        deflectedThisMovement = false;
     }
 
     private void Update()
@@ -123,6 +126,7 @@ UI
         isDefending = true;
         deflectArea.enabled = true;
         PlayerBehaviour.instance.weaponView.SetState(PlayerWeaponView.State.hide);
+        deflectedThisMovement = false;
     }
     public void OnWound()
     {
@@ -135,6 +139,7 @@ UI
         //没能量就进入防御退出
         isDefending = false;
         deflectArea.enabled = false;
+        deflectedThisMovement = false;
         PlayerBehaviour.instance.animator.ResetTrigger("bougyo_start");
         if (withAnim)
             PlayerBehaviour.instance.animator.SetTrigger("bougyo_out");
@@ -180,6 +185,7 @@ UI
     public void TriggerDeflect(bool isSuperToGainFullPower = false)
     {
         Debug.Log("TriggerDeflect");
+        deflectedThisMovement = true;
         if (isSuperToGainFullPower)
         {
             // 立即在当前帧停顿，并插入超大弹反特效
