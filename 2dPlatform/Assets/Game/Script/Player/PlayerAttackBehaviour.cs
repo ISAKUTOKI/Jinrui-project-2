@@ -6,49 +6,54 @@ public class PlayerAttackBehaviour : MonoBehaviour
     private PlayerJump _jump;
     private Rigidbody2D rb;
 
-    public Transform damageOrigin;
-    public float damageRadius = 1.5f;
+    //public Transform damageOrigin;
+    //public float damageRadius = 1.5f;
 
     public void Start()
     {
         rb = GetComponent<Rigidbody2D>();
     }
 
-    public int GetDamage(bool isSecond)
+    public int GetDamage(bool isSuper)
     {
         switch (currentAttackSwingPhase)
         {
             case 1:
-                if (isSecond)
-                    return damage_swing1_2;
+                if (isSuper)
+                    return damage_swing1_Super;
                 return damage_swing1;
             case 2:
-                if (isSecond)
-                    return damage_swing2_2;
+                if (isSuper)
+                    return damage_swing2_Super;
                 return damage_swing2;
             case 3:
-                if (isSecond)
-                    return damage_swing3_2;
+                if (isSuper)
+                    return damage_swing3_Super;
                 return damage_swing3;
         }
         return 0;
     }
 
     private PlayerHealthBehaviour _health;
-    public ParticleSystem ps;
+    //public ParticleSystem ps;
 
     public AnimationClipData clip_swing1;
     public AnimationClipData clip_swing2;
     public AnimationClipData clip_swing3;
-    public int damage_swing1;
-    public int damage_swing1_2;
-    public int damage_swing2;
-    public int damage_swing2_2;
-    public int damage_swing3;
-    public int damage_swing3_2;
-    public int currentAttackSwingPhase;//0 没有攻击 1~3 第1~3次斩击 
 
-    public PlayerActionPerformDependency dependency;
+    public Collider2D[] swing1_Cols;
+    public Collider2D[] swing2_Cols;
+    public Collider2D[] swing3_Cols;
+
+    public int damage_swing1;
+    public int damage_swing1_Super;
+    public int damage_swing2;
+    public int damage_swing2_Super;
+    public int damage_swing3;
+    public int damage_swing3_Super;
+    public int currentAttackSwingPhase;//0 没有攻击 1~3 第1~3次斩击 
+    public bool isSuperAttack;//弹反攻击
+    //public PlayerActionPerformDependency dependency;
     private bool _comboOn;
 
     private void Awake()
@@ -56,6 +61,7 @@ public class PlayerAttackBehaviour : MonoBehaviour
         _jump = GetComponent<PlayerJump>();
         _health = GetComponent<PlayerHealthBehaviour>();
         currentAttackSwingPhase = 0;
+        isSuperAttack = false;
     }
 
     private void Update()
@@ -173,6 +179,7 @@ public class PlayerAttackBehaviour : MonoBehaviour
     {
         //Debug.LogWarning("攻击被打断 " + currentAttackSwingPhase);
         _comboOn = false;
+        isSuperAttack = false;
         currentAttackSwingPhase = 0;
         PlayerBehaviour.instance.weaponView.SetState(PlayerWeaponView.State.idle);
     }
@@ -213,16 +220,51 @@ public class PlayerAttackBehaviour : MonoBehaviour
 
     }
 
-    public void OnAttacked(bool isSecondDamage)
+    public void CheckDamageCollision(int n)
     {
-        var targets = Physics2D.OverlapCircleAll(damageOrigin.position, damageRadius);
+        Debug.Log("CheckDamageCollision " + n);
+        Collider2D[] cols = null;
+        switch (currentAttackSwingPhase)
+        {
+            case 1:
+                cols = swing1_Cols;
+                break;
+            case 2:
+                cols = swing2_Cols;
+                break;
+            case 3:
+                cols = swing3_Cols;
+                break;
+        }
+        if (cols == null)
+        {
+            Debug.LogWarning("no valid Cols! currentAttackSwingPhase " + currentAttackSwingPhase);
+            return;
+        }
+        if (n - 1 >= cols.Length)
+        {
+            n = cols.Length;
+        }
+
+        Collider2D col = cols[n - 1];
+
+        //Vector2 point, Vector2 size, float angle, int layerMask
+        var bounds = col.bounds;
+        var point = bounds.center;
+        var size = bounds.size;
+        var targets = Physics2D.OverlapBoxAll(point, size, 0);
+        DealDamage(isSuperAttack, targets);
+    }
+
+    void DealDamage(bool isSuper, Collider2D[] targets)
+    {
         foreach (var t in targets)
         {
             var ene = t.GetComponent<EnemyBehaviour>();
             if (ene != null)
             {
                 //ps.Play();
-                ene.TakeDamage(GetDamage(isSecondDamage));
+                ene.TakeDamage(GetDamage(isSuper));
             }
 
             var des = t.GetComponent<Destroyable>();
