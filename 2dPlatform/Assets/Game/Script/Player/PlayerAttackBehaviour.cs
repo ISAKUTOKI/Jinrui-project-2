@@ -113,11 +113,11 @@ public class PlayerAttackBehaviour : MonoBehaviour
             InterruptAttack();
             return;
         }
-        if (PlayerBehaviour.instance.defend.isInNoMoveState)
-        {
-            InterruptAttack();
-            return;
-        }
+        // if (PlayerBehaviour.instance.defend.isInNoMoveState)
+        // {
+        //     InterruptAttack();
+        //     return;
+        // }
         var clipInfo = PlayerBehaviour.instance.animator.GetCurrentAnimatorClipInfo(0)[0];
         var clip = clipInfo.clip;
         switch (currentAttackSwingPhase)

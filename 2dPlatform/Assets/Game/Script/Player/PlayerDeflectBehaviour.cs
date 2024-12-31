@@ -7,9 +7,6 @@ using UnityEngine;
 public class PlayerDeflectBehaviour : MonoBehaviour
 {
     public float deflectStartTime { get; private set; }
-    public ParticleSystem ps;
-
-    public PlayerActionPerformDependency dependency;
 
     //弹反和防御系统
     /*

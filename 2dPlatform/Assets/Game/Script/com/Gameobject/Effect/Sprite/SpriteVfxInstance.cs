@@ -15,6 +15,7 @@ namespace com
         {
             _index = 0;
             _sr = GetComponent<SpriteRenderer>();
+            transform.localScale = data.scale * Vector3.one;
             StartCoroutine(Co());
         }
 

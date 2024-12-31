@@ -9,10 +9,11 @@ namespace com
     {
         public string id;
         public Vector2 offset;
-        public bool loop;
-        public float frameTime;
+        public bool loop = false;
+        public float frameTime = 0.04f;
         public Sprite[] sps;
-        public bool autoDestroy;
+        public bool autoDestroy = true;
         public Action endCallback;
+        public float scale = 1f;
     }
 }
