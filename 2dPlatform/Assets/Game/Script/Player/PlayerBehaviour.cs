@@ -61,19 +61,14 @@ public class PlayerBehaviour : MonoBehaviour
             {
                 if (defend.isDeflecting)
                 {
-                    Debug.Log("TriggerDeflect");
                     defend.TriggerDeflect();
                     return;
                 }
 
                 var dx = hitSource.position.x - transform.position.x;
                 bool isToRight = dx < 0;
-                Debug.Log("TriggerDefend isToRight " + isToRight);
-                defend.TriggerDefend();
-                if (isToRight)
-                    move.knockback.KnockBackToRight(1);
-                else
-                    move.knockback.KnockBackToLeft(1);
+
+                defend.TriggerDefend(isToRight);
                 return;
             }
         }

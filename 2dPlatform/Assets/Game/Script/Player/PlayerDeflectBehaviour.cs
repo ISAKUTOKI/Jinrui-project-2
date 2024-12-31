@@ -1,4 +1,5 @@
 ﻿using Assets.Game.Script.HUD_interface.Combat;
+using com;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -181,6 +182,7 @@ UI
     }
     public void TriggerDeflect(bool isSuperToGainFullPower = false)
     {
+        Debug.Log("TriggerDeflect");
         if (isSuperToGainFullPower)
         {
             // 立即在当前帧停顿，并插入超大弹反特效
@@ -193,13 +195,20 @@ UI
             WeaponPowerSystem.instance.GainOnePower();
             //Instantiate(deflectEffectPrefab, deflectEffectPosition, Quaternion.identity);
         }
-        //
+        CreateSpriteVfxSystem.instance.Create("Firelight2", deflectArea.transform.position);
     }
 
-    public void TriggerDefend()
+    public void TriggerDefend(bool isToRight)
     {
+        Debug.Log("TriggerDefend isToRight " + isToRight);
         //击退
+        if (isToRight)
+            PlayerBehaviour.instance.move.knockback.KnockBackToRight(1);
+        else
+            PlayerBehaviour.instance.move.knockback.KnockBackToLeft(1);
+
         WeaponPowerSystem.instance.ConsumePower_cell(1);
+        CreateSpriteVfxSystem.instance.Create("Firelight1", deflectArea.transform.position);
     }
 
     // 弹反后进入攻击动画
