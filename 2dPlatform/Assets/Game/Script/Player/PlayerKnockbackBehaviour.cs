@@ -7,7 +7,8 @@ using UnityEngine;
 public class PlayerKnockbackBehaviour : MonoBehaviour
 {
     public Rigidbody2D rb { get; private set; }
-    public float dec;
+    public float dec = 18;
+    public float speedFacter = 18;
     float _speed;
     Vector3 _dir;
 
@@ -18,17 +19,17 @@ public class PlayerKnockbackBehaviour : MonoBehaviour
 
     public void KnockBackToRight(float speed)
     {
-        KnockBack(new Vector3(1, 0.1f, 0), speed);
+        KnockBack(new Vector2(speedFacter, 0f), speed);
     }
 
     public void KnockBackToLeft(float speed)
     {
-        KnockBack(new Vector3(-1, 0.1f, 0), speed);
+        KnockBack(new Vector2(-speedFacter, 0f), speed);
     }
 
-    public void KnockBack(Vector3 dir, float speed)
+    public void KnockBack(Vector2 dir, float speed)
     {
-        Debug.Log("KnockBack " + dir.x);
+        Debug.Log("KnockBack " + dir.x + " speed " + speed);
         _dir = dir;
         _speed = speed;
     }
@@ -41,7 +42,8 @@ public class PlayerKnockbackBehaviour : MonoBehaviour
             return;
 
         var dt = Time.deltaTime;// com.GameTime.deltaTime
-        rb.MovePosition(_dir * _speed * dt);
+        //rb.MovePosition(_dir * _speed * dt);
+        transform.position += _dir * _speed * dt;
         _speed -= dec * dt;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Assets.Game.Script.HUD_interface.Combat;
+using com;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,9 +7,6 @@ using UnityEngine;
 public class PlayerDeflectBehaviour : MonoBehaviour
 {
     public float deflectStartTime { get; private set; }
-    public ParticleSystem ps;
-
-    public PlayerActionPerformDependency dependency;
 
     //弹反和防御系统
     /*
@@ -51,9 +49,12 @@ UI
 */
 
     public DeflectAreaBehaviour deflectArea;
+    public bool deflectedThisMovement { get; private set; }
+
+
     private void Awake()
     {
-
+        deflectedThisMovement = false;
     }
 
     private void Update()
@@ -125,6 +126,7 @@ UI
         isDefending = true;
         deflectArea.enabled = true;
         PlayerBehaviour.instance.weaponView.SetState(PlayerWeaponView.State.hide);
+        deflectedThisMovement = false;
     }
     public void OnWound()
     {
@@ -137,6 +139,7 @@ UI
         //没能量就进入防御退出
         isDefending = false;
         deflectArea.enabled = false;
+        deflectedThisMovement = false;
         PlayerBehaviour.instance.animator.ResetTrigger("bougyo_start");
         if (withAnim)
             PlayerBehaviour.instance.animator.SetTrigger("bougyo_out");
@@ -150,10 +153,13 @@ UI
     {
         get
         {
-            if (!isDefending)
-                return false;
             var animator = PlayerBehaviour.instance.animator;
-            if (animator.GetCurrentAnimatorClipInfo(0)[0].clip.name == "bougyo_start")
+            var infos = animator.GetCurrentAnimatorClipInfo(0);
+            if (infos.Length < 1)
+            {
+                return false;
+            }
+            if (infos[0].clip.name == "bougyo_start")
             {
                 return true;
             }
@@ -161,9 +167,35 @@ UI
         }
     }
 
+    public bool isInDefendEnd
+    {
+        get
+        {
+            var animator = PlayerBehaviour.instance.animator;
+            var infos = animator.GetCurrentAnimatorClipInfo(0);
+            if (infos.Length < 1)
+            {
+                return false;
+            }
+            if (infos[0].clip.name == "bougyo_end")
+            {
+                return true;
+            }
+            return false;
+        }
+    }
 
+    public bool isInNoMoveState
+    {
+        get
+        {
+            return isDefending || isInDefendEnd || isDeflecting;
+        }
+    }
     public void TriggerDeflect(bool isSuperToGainFullPower = false)
     {
+        Debug.Log("TriggerDeflect");
+        deflectedThisMovement = true;
         if (isSuperToGainFullPower)
         {
             // 立即在当前帧停顿，并插入超大弹反特效
@@ -176,13 +208,20 @@ UI
             WeaponPowerSystem.instance.GainOnePower();
             //Instantiate(deflectEffectPrefab, deflectEffectPosition, Quaternion.identity);
         }
-        //
+        CreateSpriteVfxSystem.instance.Create("Firelight2", deflectArea.transform.position);
     }
 
-    public void TriggerDefend()
+    public void TriggerDefend(bool isToRight)
     {
+        Debug.Log("TriggerDefend isToRight " + isToRight);
         //击退
+        if (isToRight)
+            PlayerBehaviour.instance.move.knockback.KnockBackToRight(1);
+        else
+            PlayerBehaviour.instance.move.knockback.KnockBackToLeft(1);
+
         WeaponPowerSystem.instance.ConsumePower_cell(1);
+        CreateSpriteVfxSystem.instance.Create("Firelight1", deflectArea.transform.position);
     }
 
     // 弹反后进入攻击动画

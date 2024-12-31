@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class PlayerBehaviour : MonoBehaviour
@@ -35,6 +36,8 @@ public class PlayerBehaviour : MonoBehaviour
         health = GetComponent<PlayerHealthBehaviour>();
         weaponView = GetComponent<PlayerWeaponView>();
         defend = GetComponent<PlayerDeflectBehaviour>();
+
+        // animController = animator.runtimeAnimatorController as AnimatorController;
     }
 
     public void Init()
@@ -61,23 +64,46 @@ public class PlayerBehaviour : MonoBehaviour
             {
                 if (defend.isDeflecting)
                 {
-                    Debug.Log("TriggerDeflect");
                     defend.TriggerDeflect();
                     return;
                 }
 
                 var dx = hitSource.position.x - transform.position.x;
                 bool isToRight = dx < 0;
-                Debug.Log("TriggerDefend isToRight " + isToRight);
-                defend.TriggerDefend();
-                if (isToRight)
-                    move.knockback.KnockBackToRight(5);
-                else
-                    move.knockback.KnockBackToLeft(5);
+
+                defend.TriggerDefend(isToRight);
                 return;
             }
         }
 
         health.TakeDamage(1);
     }
+
+    private Animator anim;
+    private AnimatorController animController;
+
+
+    //public void SetAnimatorSpeed(int layerIndex, string stateName, float speed)
+    //{
+    //    foreach (var state in animController.layers[layerIndex].stateMachine.states)
+    //    {
+    //        if (state.state.name == stateName)
+    //        {
+    //            state.state.speed = speed;
+    //        }
+    //    }
+    //}
+    //
+    //public float GetAnimatorSpeed(int layerIndex, string stateName)
+    //{
+    //    foreach (var state in animController.layers[layerIndex].stateMachine.states)
+    //    {
+    //        if (state.state.name == stateName)
+    //        {
+    //            return state.state.speed;
+    //        }
+    //    }
+    //
+    //    return 0;
+    //}
 }

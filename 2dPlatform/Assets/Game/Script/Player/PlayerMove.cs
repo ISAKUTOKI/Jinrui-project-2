@@ -38,7 +38,8 @@ public class PlayerMove : MonoBehaviour
     void ReadInput()
     {
         if (PlayerBehaviour.instance.health.isDead ||
-            PlayerBehaviour.instance.health.isWounding)
+            PlayerBehaviour.instance.health.isWounding ||
+            PlayerBehaviour.instance.defend.isInNoMoveState)
         {
             _speedX = 0;
             return;

@@ -77,8 +77,14 @@ public class PlayerHealthBehaviour : MonoBehaviour
     {
         get
         {
-            var clipInfo = PlayerBehaviour.instance.animator.GetCurrentAnimatorClipInfo(0)[0];
-            var clip = clipInfo.clip;
+            var clipInfo = PlayerBehaviour.instance.animator.GetCurrentAnimatorClipInfo(0);
+            if (clipInfo.Length < 1)
+            {
+                return false;
+            }
+
+            var c = clipInfo[0];
+            var clip = c.clip;
             return clip == woundClip;
         }
     }
