@@ -4,37 +4,6 @@ using UnityEngine;
 
 public class PlayerAttackBehaviour : MonoBehaviour
 {
-    private PlayerJump _jump;
-    private Rigidbody2D rb;
-
-    //public Transform damageOrigin;
-    //public float damageRadius = 1.5f;
-
-    public void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-    }
-
-    public int GetDamage(bool isSuper)
-    {
-        switch (currentAttackSwingPhase)
-        {
-            case 1:
-                if (isSuper)
-                    return damage_swing1_Super;
-                return damage_swing1;
-            case 2:
-                if (isSuper)
-                    return damage_swing2_Super;
-                return damage_swing2;
-            case 3:
-                if (isSuper)
-                    return damage_swing3_Super;
-                return damage_swing3;
-        }
-        return 0;
-    }
-
     private PlayerHealthBehaviour _health;
     //public ParticleSystem ps;
 
@@ -62,52 +31,64 @@ public class PlayerAttackBehaviour : MonoBehaviour
     //public PlayerActionPerformDependency dependency;
     private bool _comboOn;
 
+    //public Transform damageOrigin;
+    //public float damageRadius = 1.5f;
+
+
     private void Awake()
     {
-        _jump = GetComponent<PlayerJump>();
+        //_jump = GetComponent<PlayerJump>();
         _health = GetComponent<PlayerHealthBehaviour>();
         currentAttackSwingPhase = 0;
         isSuperAttack = false;
-
-        clipDefaultSpeed_swing1 = clip_swing1.speedRatio;
-        clipDefaultSpeed_swing2 = clip_swing2.speedRatio;
-        clipDefaultSpeed_swing3 = clip_swing3.speedRatio;
     }
+
+    public void Start()
+    {
+        //clipDefaultSpeed_swing1 = clip_swing1.speedRatio;
+        //clipDefaultSpeed_swing2 = clip_swing2.speedRatio;
+        //clipDefaultSpeed_swing3 = clip_swing3.speedRatio;
+    }
+
+    public int GetDamage(bool isSuper)
+    {
+        switch (currentAttackSwingPhase)
+        {
+            case 1:
+                if (isSuper)
+                    return damage_swing1_Super;
+                return damage_swing1;
+            case 2:
+                if (isSuper)
+                    return damage_swing2_Super;
+                return damage_swing2;
+            case 3:
+                if (isSuper)
+                    return damage_swing3_Super;
+                return damage_swing3;
+        }
+        return 0;
+    }
+
 
     void SyncSwingAnim(int phase)
     {
+        Debug.Log("SyncSwingAnim " + phase + " " + isSuperAttack);
+        var f = isSuperAttack ? superAttackSwingSpeedMultiplier : 1;
         //PlayerBehaviour.instance.animator.SetBool("super", isSuperAttack);
         switch (phase)
         {
             case 1:
-                if (isSuperAttack)
-                {
-                    clip_swing1.speedRatio = clipDefaultSpeed_swing1 * superAttackSwingSpeedMultiplier;
-                }
-                else
-                {
-                    clip_swing1.speedRatio = clipDefaultSpeed_swing1;
-                }
+                PlayerBehaviour.instance.animator.SetFloat("attack1Speed", f);
+                // PlayerBehaviour.instance.SetAnimatorSpeed(0, "attack1", clipDefaultSpeed_swing1 * f);
                 break;
             case 2:
-                if (isSuperAttack)
-                {
-                    clip_swing2.speedRatio = clipDefaultSpeed_swing2 * superAttackSwingSpeedMultiplier;
-                }
-                else
-                {
-                    clip_swing2.speedRatio = clipDefaultSpeed_swing2;
-                }
+                PlayerBehaviour.instance.animator.SetFloat("attack2Speed", f);
+                //  PlayerBehaviour.instance.SetAnimatorSpeed(0, "attack2", clipDefaultSpeed_swing2 * f);
                 break;
             case 3:
-                if (isSuperAttack)
-                {
-                    clip_swing3.speedRatio = clipDefaultSpeed_swing3 * superAttackSwingSpeedMultiplier;
-                }
-                else
-                {
-                    clip_swing3.speedRatio = clipDefaultSpeed_swing3;
-                }
+                PlayerBehaviour.instance.animator.SetFloat("attack3Speed", f);
+                // PlayerBehaviour.instance.SetAnimatorSpeed(0, "attack3", clipDefaultSpeed_swing3 * f);
                 break;
         }
     }
@@ -128,7 +109,7 @@ public class PlayerAttackBehaviour : MonoBehaviour
             case 1:
                 if (_comboOn)
                 {
-                    //Debug.LogWarning("进入第2段");
+                    Debug.LogWarning("进入第2段");
                     if (WeaponPowerSystem.instance.power > 0)
                     {
                         isSuperAttack = true;
@@ -148,7 +129,7 @@ public class PlayerAttackBehaviour : MonoBehaviour
             case 2:
                 if (_comboOn)
                 {
-                    //Debug.LogWarning("进入第3段");
+                    Debug.LogWarning("进入第3段");
                     if (WeaponPowerSystem.instance.power > 0)
                     {
                         isSuperAttack = true;
@@ -168,7 +149,7 @@ public class PlayerAttackBehaviour : MonoBehaviour
             case 3:
                 if (_comboOn)
                 {
-                    //Debug.LogWarning("进入第1段");
+                    Debug.LogWarning("进入第1段");
                     if (WeaponPowerSystem.instance.power > 0)
                     {
                         isSuperAttack = true;
@@ -202,38 +183,45 @@ public class PlayerAttackBehaviour : MonoBehaviour
         //     InterruptAttack();
         //     return;
         // }
-        var clipInfo = PlayerBehaviour.instance.animator.GetCurrentAnimatorClipInfo(0)[0];
+        var clipInfos = PlayerBehaviour.instance.animator.GetCurrentAnimatorClipInfo(0);
+        if (clipInfos.Length < 1)
+        {
+            return;
+        }
+
+        var clipInfo = clipInfos[0];
         var clip = clipInfo.clip;
+
         switch (currentAttackSwingPhase)
         {
             case 0:
                 if (clip == clip_swing1.clip || clip == clip_swing2.clip || clip == clip_swing3.clip)
                 {
-                    //Debug.Log(clip);
-                    //Debug.LogWarning("不该出现这个情况");
+                    Debug.Log(clip);
+                    Debug.LogWarning("不该出现这个情况");
                 }
                 break;
             case 1:
                 if (clip != clip_swing1.clip && clip != clip_swing3.clip)
                 {
-                    //Debug.Log(clip);
-                    //Debug.LogWarning("第1段攻击被打断");
+                    Debug.Log(clip);
+                    Debug.LogWarning("第1段攻击被打断");
                     InterruptAttack();
                 }
                 break;
             case 2:
                 if (clip != clip_swing1.clip && clip != clip_swing2.clip)
                 {
-                    //Debug.Log(clip);
-                    //Debug.LogWarning("第2段攻击被打断");
+                    Debug.Log(clip);
+                    Debug.LogWarning("第2段攻击被打断");
                     InterruptAttack();
                 }
                 break;
             case 3:
                 if (clip != clip_swing2.clip && clip != clip_swing3.clip)
                 {
-                    //Debug.Log(clip);
-                    //Debug.LogWarning("第3段攻击被打断");
+                    Debug.Log(clip);
+                    Debug.LogWarning("第3段攻击被打断");
                     InterruptAttack();
                 }
                 break;
@@ -250,10 +238,11 @@ public class PlayerAttackBehaviour : MonoBehaviour
         if (PlayerBehaviour.instance.defend.isInDefendEnd)
             return;
         if (PlayerBehaviour.instance.defend.isDeflecting &&
-    !PlayerBehaviour.instance.defend.deflectedThisMovement)
+            !PlayerBehaviour.instance.defend.deflectedThisMovement)
         {
             return;
         }
+
         if (Input.GetKeyDown(KeyCode.J))
         {
             PerformAttack();
@@ -262,7 +251,7 @@ public class PlayerAttackBehaviour : MonoBehaviour
 
     void InterruptAttack()
     {
-        //Debug.LogWarning("攻击被打断 " + currentAttackSwingPhase);
+        Debug.LogWarning("攻击被打断 " + currentAttackSwingPhase);
         _comboOn = false;
         isSuperAttack = false;
         currentAttackSwingPhase = 0;
@@ -271,7 +260,7 @@ public class PlayerAttackBehaviour : MonoBehaviour
 
     void SetAttackPhase(int i)
     {
-        //Debug.LogWarning("进入第" + i + "段攻击");
+        Debug.LogWarning("进入第" + i + "段攻击");
         currentAttackSwingPhase = i;
     }
 
@@ -284,10 +273,11 @@ public class PlayerAttackBehaviour : MonoBehaviour
             PlayerBehaviour.instance.defend.ExitDefend(false);
         }
 
+        Debug.LogWarning("PerformAttack " + currentAttackSwingPhase);
         switch (currentAttackSwingPhase)
         {
             case 0:
-                //Debug.LogWarning("首次 进入第1段");
+                Debug.LogWarning("首次 进入第1段");
                 if (WeaponPowerSystem.instance.power > 0)
                 {
                     isSuperAttack = true;

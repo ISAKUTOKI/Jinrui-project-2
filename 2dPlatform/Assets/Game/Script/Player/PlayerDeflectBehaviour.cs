@@ -154,7 +154,12 @@ UI
         get
         {
             var animator = PlayerBehaviour.instance.animator;
-            if (animator.GetCurrentAnimatorClipInfo(0)[0].clip.name == "bougyo_start")
+            var infos = animator.GetCurrentAnimatorClipInfo(0);
+            if (infos.Length < 1)
+            {
+                return false;
+            }
+            if (infos[0].clip.name == "bougyo_start")
             {
                 return true;
             }
@@ -167,7 +172,12 @@ UI
         get
         {
             var animator = PlayerBehaviour.instance.animator;
-            if (animator.GetCurrentAnimatorClipInfo(0)[0].clip.name == "bougyo_end")
+            var infos = animator.GetCurrentAnimatorClipInfo(0);
+            if (infos.Length < 1)
+            {
+                return false;
+            }
+            if (infos[0].clip.name == "bougyo_end")
             {
                 return true;
             }
