@@ -447,7 +447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71b08a5895ddfb143979c13d28885981, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4
+  speed: 5
   dependency:
     notCrouching: 0
     notPerformingCrouching: 0
@@ -515,9 +515,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1f957cdbd8b01c40be6524498b2243c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageOrigin: {fileID: 5873147090495866894}
-  damageRadius: 1.5
-  ps: {fileID: 0}
   clip_swing1:
     clip: {fileID: 7400000, guid: 7422036d27913ca4aad1931dfcae239b, type: 2}
     speedRatio: 1
@@ -527,23 +524,18 @@ MonoBehaviour:
   clip_swing3:
     clip: {fileID: 7400000, guid: c6e2da7389fc0ae4f8e979345228dc65, type: 2}
     speedRatio: 1
+  superAttackSwingSpeedMultiplier: 2
+  swing1_Cols: []
+  swing2_Cols: []
+  swing3_Cols: []
   damage_swing1: 30
-  damage_swing1_2: 30
+  damage_swing1_Super: 0
   damage_swing2: 30
-  damage_swing2_2: 30
+  damage_swing2_Super: 0
   damage_swing3: 60
-  damage_swing3_2: 60
+  damage_swing3_Super: 0
   currentAttackSwingPhase: 0
-  dependency:
-    notCrouching: 0
-    notPerformingCrouching: 0
-    noGunDrawn: 0
-    notPerformingDrawGun: 0
-    notTurnedBack: 0
-    notTurning: 0
-    notShooting: 0
-    notWalking: 0
-    notHiting: 0
+  isSuperAttack: 0
 --- !u!114 &3762812233060501361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -628,17 +620,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 757df30de8e71fa4cb9280e62a80affb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ps: {fileID: 0}
-  dependency:
-    notCrouching: 0
-    notPerformingCrouching: 0
-    noGunDrawn: 0
-    notPerformingDrawGun: 0
-    notTurnedBack: 0
-    notTurning: 0
-    notShooting: 0
-    notWalking: 0
-    notHiting: 0
   deflectArea: {fileID: 8230661983109193613}
 --- !u!114 &1041149254954387028
 MonoBehaviour:
