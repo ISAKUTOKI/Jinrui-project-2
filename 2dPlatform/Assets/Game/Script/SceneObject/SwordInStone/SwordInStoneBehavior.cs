@@ -157,7 +157,7 @@ public class SwordInStoneBehavior : MonoBehaviour
         cameraCanBackToInitial = true;
         checkSucceeded = true;
         animator.SetTrigger("got");
-        //Debug.Log("拔出来了");
+        Debug.Log("拔出来了");
         JKey.seeable = false;
         //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }//拔剑成功
