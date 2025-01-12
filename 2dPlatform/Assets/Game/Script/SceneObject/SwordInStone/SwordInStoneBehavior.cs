@@ -16,12 +16,12 @@ public class SwordInStoneBehavior : MonoBehaviour
 
     //以下为用于检测拔剑的变量
     int tapCounter = 0;
-    int tapTargetCount = 13;
+    int tapTargetCount = 13;//需要按下的次数
     bool isChecking = false;
     bool canFirstCheck = true;
     bool checkSucceeded = false;
     float getCheckTimer = 0f;
-    float getCheckDuration = 2.0f;
+    float getCheckDuration = 2.0f;//规定时间内
 
     //以下为相机用变量
     bool cameraCanBackToInitial = false;
@@ -108,13 +108,14 @@ public class SwordInStoneBehavior : MonoBehaviour
     }//拔剑计时器
     void GetCountCheck()
     {
+        //Debug.Log("aaaaaaaaaaaaaaaaaaaa" + tapCounter);
         //GiveUpGetCheck();
         //Debug.Log("次数检查");
         if (Input.GetKeyDown(KeyCode.J) && !canFirstCheck)
         {
             tapCounter++;
             //GiveUpToGetCheck();
-            //Debug.Log(giveUpCheckTimer);
+            //Debug.Log("aaaaaaaaaaaaaaaaaaaa"+tapCounter);
         }
         if (tapCounter >= tapTargetCount)//如果成功达到了次数
         {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Musouloom_ExposionDamage : MonoBehaviour
 {
-    public bool playerIsInArea;
+    [HideInInspector]public bool playerIsInArea;
 
     public GameObject Neko;
 
