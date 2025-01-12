@@ -16,6 +16,7 @@ public class SIS_JKey : MonoBehaviour
     //以下为旋转用的变量
     private float rotationSpeed = 3.0f; // 旋转速度
     private float maxRotationAngle = 2.0f; // 最大旋转角度
+    private float initialRotationAngle;
     private bool rotateClockwise = true; // 旋转方向，true为顺时针，false为逆时针
     private float currentRotationAngle = 0.0f; // 当前旋转角度
 
@@ -24,11 +25,12 @@ public class SIS_JKey : MonoBehaviour
     private float maxScale = 1.3f; // 最大缩放比例
     private float minScale = 1.0f; // 最小缩放比例
     private bool isScalingUp = true; // 缩放方向，true为放大，false为缩小
-    private Vector3 originalScale; // 物体的原始缩放比例
+    private Vector3 initialScale; // 物体的原始缩放比例
 
     void Start()
     {
-        originalScale = transform.localScale;
+        initialScale = transform.localScale;
+        initialRotationAngle = 0.0f;
     }
 
     // Update is called once per frame
@@ -78,9 +80,9 @@ public class SIS_JKey : MonoBehaviour
         if (isScalingUp)
         {
             // 逐步放大
-            transform.localScale = Vector3.Lerp(transform.localScale, originalScale * maxScale, scaleSpeed * Time.deltaTime);
+            transform.localScale = Vector3.Lerp(transform.localScale, initialScale * maxScale, scaleSpeed * Time.deltaTime);
             // 检查是否达到最大缩放比例
-            if (transform.localScale.x >= originalScale.x * maxScale - 0.1f)
+            if (transform.localScale.x >= initialScale.x * maxScale - 0.1f)
             {
                 isScalingUp = false; // 改变缩放方向为缩小
             }
@@ -88,9 +90,9 @@ public class SIS_JKey : MonoBehaviour
         else
         {
             // 逐步缩小
-            transform.localScale = Vector3.Lerp(transform.localScale, originalScale * minScale, scaleSpeed * Time.deltaTime);
+            transform.localScale = Vector3.Lerp(transform.localScale, initialScale * minScale, scaleSpeed * Time.deltaTime);
             // 检查是否达到最小缩放比例
-            if (transform.localScale.x <= originalScale.x * minScale + 0.1f)
+            if (transform.localScale.x <= initialScale.x * minScale + 0.1f)
             {
                 isScalingUp = true; // 改变缩放方向为放大
             }
@@ -102,6 +104,7 @@ public class SIS_JKey : MonoBehaviour
         if (isTappingKey && Input.GetKeyDown(KeyCode.J) && !isTapScaling) // 检查是否按下J键并且当前没有缩放操作在进行
         {
             StartCoroutine(ScaleJKey());
+            transform.rotation = Quaternion.Euler(0.0f, 0.0f, initialRotationAngle);//旋转归零
             //Debug.Log("OK");
         }
     }
@@ -114,7 +117,7 @@ public class SIS_JKey : MonoBehaviour
         yield return StartCoroutine(ScaleOverTime(0.7f, 0.1f));
 
         isTapScaling = false; // 缩放操作完成，设置标志为false
-    }//控制缩放的协程
+    }//使J键图标进行缩放的协程
     IEnumerator ScaleOverTime(float targetScale, float duration)
     {
         float startTime = Time.time;
@@ -128,5 +131,5 @@ public class SIS_JKey : MonoBehaviour
         }
 
         transform.localScale = originalScale * targetScale;
-    }//进行缩放动作的协程
+    }//缩放动作
 }

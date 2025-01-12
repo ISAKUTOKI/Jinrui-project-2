@@ -5,6 +5,10 @@ using UnityEngine;
 public class PlayerGetSword : MonoBehaviour
 {
     Animator animator;
+
+    float tapTimer = 0.0f;
+    float tapDuration = 0.3f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,14 +23,18 @@ public class PlayerGetSword : MonoBehaviour
 
     public void TryToGetSword()
     {
-        //animator.SetBool("tryToGetSword", true);
+        animator.SetBool("tryToGetSword", true);
     }
     public void TappingJKey()
     {
-        //animator.SetBool("isGettingSword", true);
+        animator.SetBool("isGettingSword", true);
+        tapTimer = Time.time;
+        if (tapTimer - Time.time > tapDuration)
+            animator.SetBool("isGettingSword", false);
+
     }
     public void FailToGetSword()
     {
-        //animator.SetBool("tryToGetSword", false);
+        animator.SetBool("tryToGetSword", false);
     }
 }

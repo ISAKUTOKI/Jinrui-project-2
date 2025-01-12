@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Musouloom_ExposionDamage : MonoBehaviour
+public class Musouloom_ExplosionDamage : MonoBehaviour
 {
     [HideInInspector]public bool playerIsInArea;
 

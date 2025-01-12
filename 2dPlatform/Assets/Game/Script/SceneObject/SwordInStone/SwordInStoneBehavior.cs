@@ -37,14 +37,11 @@ public class SwordInStoneBehavior : MonoBehaviour
         CameraInitialSet();
         //ColliderCheck();
     }
-
     void Update()
     {
         if (canTryToGetSword)
             TapKeyCheck();
     }
-
-
 
     /// <summary>
     /// 检查Neko是否进入碰撞箱
@@ -158,12 +155,11 @@ public class SwordInStoneBehavior : MonoBehaviour
         cameraCanBackToInitial = true;
         checkSucceeded = true;
         animator.SetTrigger("got");
-        Debug.Log("拔出来了");
+        //Debug.Log("拔出来了");
         JKey.seeable = false;
         StartCoroutine(CameraTryBackToInitialCoroutine());
         //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }//拔剑成功
-
 
     /// <summary>
     /// 各种其他效果
@@ -186,7 +182,6 @@ public class SwordInStoneBehavior : MonoBehaviour
         cameraCurrentSize = cameraCurrentSize * 0.97f;
         Camera.orthographicSize = cameraCurrentSize;
     }
-
     IEnumerator CameraTryBackToInitialCoroutine()
     {
         //Debug.Log("摄像机初始尺寸为 " + cameraInitialSize);
@@ -224,8 +219,5 @@ public class SwordInStoneBehavior : MonoBehaviour
     //        cameraCurrentSize = cameraInitialSize;
     //        //Debug.Log("调用了");
     //    }
-
-
     //}//镜头归位
-
 }
