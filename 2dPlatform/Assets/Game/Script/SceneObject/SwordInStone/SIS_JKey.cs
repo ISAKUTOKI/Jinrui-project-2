@@ -102,11 +102,8 @@ public class SIS_JKey : MonoBehaviour
         if (isTappingKey && Input.GetKeyDown(KeyCode.J) && !isTapScaling) // 检查是否按下J键并且当前没有缩放操作在进行
         {
             StartCoroutine(ScaleJKey());
-            Debug.Log("OK");
+            //Debug.Log("OK");
         }
-
-        if (isTapScaling)
-            Debug.Log("is Scaling");
     }
     IEnumerator ScaleJKey()
     {

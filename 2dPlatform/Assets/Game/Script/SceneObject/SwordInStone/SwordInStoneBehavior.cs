@@ -27,8 +27,8 @@ public class SwordInStoneBehavior : MonoBehaviour
     bool cameraCanBackToInitial = false;
     float cameraInitialSize;
     float cameraCurrentSize;
-    float cameraScaleWaitTimer = 0f;
-    float cameraScaleWaitDuration = 1.5f;
+    //float cameraScaleWaitTimer = 0f;
+    //float cameraScaleWaitDuration = 1.5f;
 
 
     void Start()
@@ -59,7 +59,7 @@ public class SwordInStoneBehavior : MonoBehaviour
     }//检查是否存在
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject == Neko)
+        if (other.gameObject == Neko && !checkSucceeded)
         {
             canTryToGetSword = true;
             JKey.seeable = true;
@@ -95,7 +95,6 @@ public class SwordInStoneBehavior : MonoBehaviour
             IsGettingSword();
             GetTimeCheck();
             GetCountCheck();
-            CameraTryBackToInitial();
             //Debug.Log("isChecking is:" + isChecking);
         }//如果是正在进行检查，那么就调用计时器和计数器
     }//检测是否拔剑
@@ -124,7 +123,7 @@ public class SwordInStoneBehavior : MonoBehaviour
     }//拔剑计数器
     void IsGettingSword()
     {
-        cameraCanBackToInitial=false;
+        cameraCanBackToInitial = false;
         animator.SetBool("isGetting", true);
         CameraTapScale();
         JKey.canSelfRotate = false;
@@ -144,7 +143,8 @@ public class SwordInStoneBehavior : MonoBehaviour
         JKey.canSelfRotate = true;
         JKey.canSelfScale = true;
         JKey.isTappingKey = false;
-        StartCoroutine(FailedTimerCoroutine(1.5f));
+        StartCoroutine(CameraTryBackToInitialCoroutine());
+        StartCoroutine(FailedTimerCoroutine(0.5f));
     }//拔剑失败
     IEnumerator FailedTimerCoroutine(float waitTime)
     {
@@ -159,6 +159,7 @@ public class SwordInStoneBehavior : MonoBehaviour
         animator.SetTrigger("got");
         Debug.Log("拔出来了");
         JKey.seeable = false;
+        StartCoroutine(CameraTryBackToInitialCoroutine());
         //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }//拔剑成功
 
@@ -175,30 +176,55 @@ public class SwordInStoneBehavior : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.J))
         {
-            cameraCurrentSize = cameraCurrentSize * 0.97f;
-            Camera.orthographicSize = cameraCurrentSize;
+            StartCoroutine(CameraTapScaleCoroutine(0));
         }
     }//按下按键的时候进行一次镜头缩放
-    void CameraTryBackToInitial()
+    IEnumerator CameraTapScaleCoroutine(float waitTime)
     {
+        yield return new WaitForSeconds(waitTime);
+        cameraCurrentSize = cameraCurrentSize * 0.97f;
+        Camera.orthographicSize = cameraCurrentSize;
+    }
+
+    IEnumerator CameraTryBackToInitialCoroutine()
+    {
+        //Debug.Log("摄像机初始尺寸为 " + cameraInitialSize);
         if (cameraCanBackToInitial && checkSucceeded)
         {
-            cameraScaleWaitTimer += Time.deltaTime;//计时开始
-            if (cameraScaleWaitTimer >= cameraScaleWaitDuration)
-            {
-                Camera.orthographicSize = Mathf.Lerp(Camera.orthographicSize, cameraInitialSize, Time.deltaTime * 2.0f);
-                cameraCurrentSize = cameraInitialSize;
-            }
-            return;
-        }
-        if (cameraCanBackToInitial)
-        {
-            Camera.orthographicSize = Mathf.Lerp(Camera.orthographicSize, cameraInitialSize, Time.deltaTime * 1.0f);
+            yield return new WaitForSeconds(1.5f);
+            Camera.orthographicSize = cameraInitialSize;
             cameraCurrentSize = cameraInitialSize;
-            //Debug.Log("调用了");
-        }
+            //Debug.Log("成功");
+            //Debug.Log("摄像机当前尺寸为 " + Camera.orthographicSize);
+        }//成功的情况
+        if (cameraCanBackToInitial && !checkSucceeded)
+        {
+            yield return new WaitForSeconds(0);
+            Camera.orthographicSize = cameraInitialSize;
+            cameraCurrentSize = cameraInitialSize;
+            //Debug.Log("摄像机当前尺寸为 " + Camera.orthographicSize);
+        }//失败的情况
+    }
+    //void CameraTryBackToInitial()
+    //{
+    //    if (cameraCanBackToInitial && checkSucceeded)
+    //    {
+    //        cameraScaleWaitTimer += Time.deltaTime;//计时开始
+    //        if (cameraScaleWaitTimer >= cameraScaleWaitDuration)
+    //        {
+    //            Camera.orthographicSize = Mathf.Lerp(Camera.orthographicSize, cameraInitialSize, Time.deltaTime * 2.0f);
+    //            cameraCurrentSize = cameraInitialSize;
+    //        }
+    //        return;
+    //    }
+    //    if (cameraCanBackToInitial)
+    //    {
+    //        Camera.orthographicSize = Mathf.Lerp(Camera.orthographicSize, cameraInitialSize, Time.deltaTime * 1.0f);
+    //        cameraCurrentSize = cameraInitialSize;
+    //        //Debug.Log("调用了");
+    //    }
 
 
-    }//镜头归位
+    //}//镜头归位
 
 }
