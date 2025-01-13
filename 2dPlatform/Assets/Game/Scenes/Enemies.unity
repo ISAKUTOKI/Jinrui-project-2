@@ -4104,6 +4104,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 784190bc371a28d44aa0a585d1f28651, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Neko: {fileID: 6163516765222177149}
+  attackBehaviour: {fileID: 1900028163}
 --- !u!1 &440237627
 GameObject:
   m_ObjectHideFlags: 0
@@ -7045,6 +7047,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d690137686378e468fc193e39771fe4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Neko: {fileID: 6163516765222177149}
+  attackBehaviour: {fileID: 1900028163}
 --- !u!1 &748178058
 GameObject:
   m_ObjectHideFlags: 0
@@ -7680,6 +7684,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39820b44b560f1f4aadfda1e9a05d7ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Neko: {fileID: 6163516765222177149}
+  attackBehaviour: {fileID: 1900028163}
 --- !u!1 &805896121
 GameObject:
   m_ObjectHideFlags: 0
@@ -9740,8 +9746,8 @@ Transform:
   m_GameObject: {fileID: 1040412429}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.2242835, y: 0.58406854, z: -0.040037904}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1900028160}
@@ -9758,6 +9764,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de4e6a629d002854ea444d2f7d332080, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: {fileID: 1900028164}
+  attack: {fileID: 1900028163}
 --- !u!1 &1047662935
 GameObject:
   m_ObjectHideFlags: 0
@@ -15803,6 +15811,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d014caf7260f63d47a311f5d94d3a8ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Neko: {fileID: 6163516765222177149}
+  attackBehaviour: {fileID: 1900028163}
 --- !u!1 &1878677098
 GameObject:
   m_ObjectHideFlags: 0
@@ -15954,6 +15964,7 @@ GameObject:
   - component: {fileID: 1900028160}
   - component: {fileID: 1900028162}
   - component: {fileID: 1900028163}
+  - component: {fileID: 1900028164}
   m_Layer: 0
   m_Name: MeowBody
   m_TagString: Untagged
@@ -15970,8 +15981,8 @@ Transform:
   m_GameObject: {fileID: 1900028159}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.854, y: 1.108, z: 0.024368}
-  m_LocalScale: {x: 0.60861844, y: 0.60861844, z: 0.60861844}
+  m_LocalPosition: {x: 2.88, y: 0.52, z: 0.024368}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1040412432}
@@ -16010,8 +16021,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 3.3627534, y: -0.37223682}
-  m_Size: {x: 2.9205544, y: 1.9494467}
+  m_Offset: {x: 1.0445808, y: 0.3898122}
+  m_Size: {x: 1.7877281, y: 1.1633792}
   m_Direction: 1
 --- !u!114 &1900028163
 MonoBehaviour:
@@ -16025,6 +16036,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a26e91995f8690d428ab484d6b178ccd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponPowerSystem: {fileID: 1177876046}
+  NekoHealth: {fileID: 8028479227178024447}
+  animator: {fileID: 1040412430}
+  minAttackInterval: 2
+  maxAttackInterval: 5
+  attack1Cooldown: 3
+  attack2Cooldown: 5
+  Neko: {fileID: 8396068325877525509}
+  canAttackNeko: 0
+--- !u!114 &1900028164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1900028159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0887ebda53513c14f84ff60cfa9a71b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 1040412430}
+  maxHealth: 1000
+  isHurt: 0
 --- !u!1 &1905616274
 GameObject:
   m_ObjectHideFlags: 0
@@ -16739,8 +16774,8 @@ Transform:
   m_GameObject: {fileID: 1952300222}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -1.06, y: 0.59, z: 0}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1877323415}
