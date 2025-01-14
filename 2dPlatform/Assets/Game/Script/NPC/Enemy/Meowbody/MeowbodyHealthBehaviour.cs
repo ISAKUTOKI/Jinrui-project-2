@@ -5,31 +5,37 @@ using UnityEngine.Events;
 
 public class MeowbodyHealthBehaviour : MonoBehaviour
 {
-    public Animator animator;
+    public MeowbodyGetComponent component;
 
     // 血量属性
     public float maxHealth = 100f; // 最大血量
     private float currentHealth; // 当前血量
 
-    [HideInInspector]public bool isHurt;
 
 
     void Start()
     {
-        isHurt = false;
         // 初始化血量
         currentHealth = maxHealth;
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F12))
+        {
+            Die();
+        }
+    }
     // 受到伤害的方法
     public void TakeDamage(float damageAmount)
     {
         if (currentHealth <= 0) return; // 如果已经死亡，则不再处理伤害
 
-        isHurt=true;
+        component.attackSystem.ResetAttackTimer();
+        component.attackSystem.ResetCooldowns();
         // 减少血量
         currentHealth -= damageAmount;
-        animator.SetTrigger("hurt");
+        component.animator.SetTrigger("hurt");
         Debug.Log(gameObject.name + " took " + damageAmount + " damage! Current health: " + currentHealth);
 
         // 检查是否死亡
@@ -40,12 +46,12 @@ public class MeowbodyHealthBehaviour : MonoBehaviour
     }
 
     // 死亡逻辑
-    private void Die()
+    public void Die()
     {
+        component.animator.SetTrigger("die");
         Debug.Log(gameObject.name + " has died!");
-
         // 销毁敌人对象（可以根据需求替换为播放死亡动画等）
-        animator.SetTrigger("die");
+        component.attackSystem.DiedAttack();
     }
 
     // 获取当前血量（可选）

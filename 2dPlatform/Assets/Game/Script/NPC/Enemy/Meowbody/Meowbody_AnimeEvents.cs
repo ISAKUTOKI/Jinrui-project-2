@@ -4,25 +4,49 @@ using UnityEngine;
 
 public class Meowbody_AnimeEvents : MonoBehaviour
 {
-    public MeowbodyHealthBehaviour health;
-    public MeowbodyAttackBehaviour attack;
+    public MeowbodyGetComponent component;
     public void Attack1Hit()
     {
-        attack.AttackTakeDamage(1);
+        if (component.attackSystem.attack1CanAttackNeko)
+        {
+            component.attackSystem.AttackTakeDamage(1);
+        }
     }
 
     public void Attack2Hit()
     {
-        attack.AttackTakeDamage(1);
+        if (component.attackSystem.attack2CanAttackNeko)
+        {
+            component.attackSystem.AttackTakeDamage(1);
+        }
     }
 
     public void FastAttack()
     {
-        attack.AttackTakeDamage(2);
+        if (component.attackSystem.fastAttackCanAttackNeko)
+        {
+            component.attackSystem.AttackTakeDamage(2);
+        }
     }
 
-    public void HurtEnd()
+    public void DiedAttack()
     {
-        health.isHurt = false;
+        if (component.attackSystem.diedAttackCanAttackNeko)
+        {
+            component.attackSystem.AttackTakeDamage(1);
+        }
+    }
+
+    public void AttackBegin()
+    {
+        component.attackSystem.isAttacking = true;
+    }
+    public void AttackEnd()
+    {
+        component.attackSystem.isAttacking = false;
+    }
+    public void TimeToDie()
+    {
+        component.attackSystem.DestroyMeowbody();
     }
 }
