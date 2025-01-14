@@ -14,7 +14,7 @@ public class MeowbodyGetComponent : MonoBehaviour
     public Animator animator;
     public GameObject view;
 
-    public MeowbodyAttackBehaviour attackSystem;
+    public MeowbodyBehaviour attackSystem;
     public MeowbodyHealthBehaviour healthSystem;
     public MeowbodyPunishFastAttack fastAttackCheck;
 

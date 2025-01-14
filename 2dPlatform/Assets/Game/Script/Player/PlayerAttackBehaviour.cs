@@ -353,6 +353,12 @@ public class PlayerAttackBehaviour : MonoBehaviour
                 //ps.Play();
                 ene.TakeDamage(GetDamage(isSuper));
             }
+            
+            var meo =t.GetComponent<MeowbodyGetComponent>();
+            if (meo != null)
+            {
+                meo.healthSystem.TakeDamage(GetDamage(isSuper));
+            }
 
             var des = t.GetComponent<Destroyable>();
             if (des != null)

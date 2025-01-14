@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeowbodyAttackBehaviour : MonoBehaviour
+public class MeowbodyBehaviour : MonoBehaviour
 {
     public MeowbodyGetComponent component;
     // 攻击间隔范围
@@ -58,8 +58,6 @@ public class MeowbodyAttackBehaviour : MonoBehaviour
                 }
             }
         }
-
-
     }
 
     // 重置攻击间隔计时器
@@ -67,14 +65,12 @@ public class MeowbodyAttackBehaviour : MonoBehaviour
     {
         attackTimer = Random.Range(minAttackInterval, maxAttackInterval);
     }
-
     // 重置所有攻击的冷却时间
     public void ResetCooldowns()
     {
         attack1Timer = 0;
         attack2Timer = 0;
     }
-
     // 更新所有攻击的冷却时间
     private void UpdateCooldowns()
     {
@@ -111,7 +107,6 @@ public class MeowbodyAttackBehaviour : MonoBehaviour
                 break;
         }
     }
-
     // 获取当前可用的攻击方式数量
     private int GetAvailableAttacks()
     {
@@ -142,21 +137,19 @@ public class MeowbodyAttackBehaviour : MonoBehaviour
         }
     }
 
-    // 调整朝向为右侧
+    //转向
     private void FlipRight()
     {
         //Debug.Log("");
         component.view.transform.localScale = new Vector3(1, 1, 1); // 默认朝向（右侧）
     }
-
-    // 调整朝向为左侧
     private void FlipLeft()
     {
         //Debug.Log("");
         component.view.transform.localScale = new Vector3(-1, 1, 1); // 水平翻转（左侧）
     }
 
-    // 攻击方式1
+    //攻击
     public void Attack1()
     {
         if (attack1Timer > 0) return; // 如果仍在冷却中，则跳过
@@ -166,8 +159,6 @@ public class MeowbodyAttackBehaviour : MonoBehaviour
         attack1Timer = attack1Cooldown; // 重置冷却时间
         // 在这里实现攻击1的具体逻辑
     }
-
-    // 攻击方式2
     public void Attack2()
     {
         if (attack2Timer > 0) return; // 如果仍在冷却中，则跳过
@@ -177,7 +168,6 @@ public class MeowbodyAttackBehaviour : MonoBehaviour
         attack2Timer = attack2Cooldown; // 重置冷却时间
         // 在这里实现攻击2的具体逻辑
     }
-
     public void FastAttack()
     {
         ResetAttackTimer();
@@ -188,18 +178,17 @@ public class MeowbodyAttackBehaviour : MonoBehaviour
         attack1Timer = 0;
         attack2Timer = 0;
     }
-
     public void DiedAttack()
     {
         CheckPlayerPosition(-1);
         //Debug.Log("正在进行 DiedAttack!");
     }
-
     public void AttackTakeDamage(int damage)
     {
         component.NekoHealth.TakeDamage(damage);
     }
 
+    //死亡
     public void DestroyMeowbody()
     {
         Destroy(gameObject);
