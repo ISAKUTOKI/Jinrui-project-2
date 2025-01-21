@@ -4,28 +4,26 @@ using UnityEngine;
 
 public class MeowbodyPunishFastAttack : MonoBehaviour
 {
-    public MeowbodyGetComponent component;
-    float checkTimer;
-    float checkDuration = 4.3f;
-    [HideInInspector] public bool canCheck;
+    private float checkTimer = 4.3f;
+    [HideInInspector] public bool isChecking;
     // Start is called before the first frame update
     void Start()
     {
-        canCheck = false;
+        isChecking = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (canCheck)
+        if (isChecking)
         {
-            checkTimer += Time.deltaTime;
+            checkTimer -= Time.deltaTime;
         }
 
-        if (checkTimer > checkDuration)
+        if (checkTimer <= 0)
         {
-            component.attackSystem.FastAttack();
-            checkTimer = 0;
+            MeowbodyBehaviour.instance.attack.FastAttack();
+            ResetCheckTimer();
         }
 
         if (Input.GetKeyDown(KeyCode.F11))
@@ -35,18 +33,22 @@ public class MeowbodyPunishFastAttack : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject == component.Neko)
+        if (other.gameObject == MeowbodyBehaviour.instance.Neko)
         {
-            canCheck = true;
+            isChecking = true;
         }
     }
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject == component.Neko)
+        if (other.gameObject == MeowbodyBehaviour.instance.Neko)
         {
-            canCheck = false;
-            checkTimer = 0;
+            isChecking = false;
+            ResetCheckTimer();
         }
+    }
+    public void ResetCheckTimer()
+    {
+        checkTimer = 4.3f;
     }
 
 

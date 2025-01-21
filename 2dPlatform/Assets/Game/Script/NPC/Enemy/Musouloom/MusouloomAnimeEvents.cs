@@ -2,27 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Musouloom_AnimeEvents : MonoBehaviour
+public class MusouloomAnimeEvents : MonoBehaviour
 {
-    public Musouloom_Behaviour musouloom;
     // Start is called before the first frame update
     public void TimeToDie()
     {
-        musouloom.Die();
+        MusouloomBehaviour.instance.health.Die();
     }
 
     public void SearchBegin()
     {
-        musouloom.canSearch = true;
+        MusouloomBehaviour.instance.move.canSearch = true;
     }
 
     public void SearchEnd()
     {
-        musouloom.canSearch = false;
+        MusouloomBehaviour.instance.move.canSearch = false;
     }
 
     public void ExplosionDamage()
     {
-        musouloom.ExplosionHurtPlayer();
+        MusouloomBehaviour.instance.exposion.ExplosionHurtPlayer();
     }
 }

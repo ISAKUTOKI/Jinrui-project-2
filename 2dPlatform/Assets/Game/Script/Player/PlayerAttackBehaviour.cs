@@ -73,7 +73,7 @@ public class PlayerAttackBehaviour : MonoBehaviour
 
     void SyncSwingAnim(int phase)
     {
-        Debug.Log("SyncSwingAnim " + phase + " " + isSuperAttack);
+        //Debug.Log("SyncSwingAnim " + phase + " " + isSuperAttack);
         var f = isSuperAttack ? superAttackSwingSpeedMultiplier : 1;
         //PlayerBehaviour.instance.animator.SetBool("super", isSuperAttack);
         switch (phase)
@@ -251,7 +251,7 @@ public class PlayerAttackBehaviour : MonoBehaviour
 
     void InterruptAttack()
     {
-        Debug.LogWarning("攻击被打断 " + currentAttackSwingPhase);
+        //Debug.LogWarning("攻击被打断 " + currentAttackSwingPhase);
         _comboOn = false;
         isSuperAttack = false;
         currentAttackSwingPhase = 0;
@@ -260,7 +260,7 @@ public class PlayerAttackBehaviour : MonoBehaviour
 
     void SetAttackPhase(int i)
     {
-        Debug.LogWarning("进入第" + i + "段攻击");
+        //Debug.LogWarning("进入第" + i + "段攻击");
         currentAttackSwingPhase = i;
     }
 
@@ -273,11 +273,11 @@ public class PlayerAttackBehaviour : MonoBehaviour
             PlayerBehaviour.instance.defend.ExitDefend(false);
         }
 
-        Debug.LogWarning("PerformAttack " + currentAttackSwingPhase);
+        //Debug.LogWarning("PerformAttack " + currentAttackSwingPhase);
         switch (currentAttackSwingPhase)
         {
             case 0:
-                Debug.LogWarning("首次 进入第1段");
+                //Debug.LogWarning("首次 进入第1段");
                 if (WeaponPowerSystem.instance.power > 0)
                 {
                     isSuperAttack = true;
@@ -309,7 +309,7 @@ public class PlayerAttackBehaviour : MonoBehaviour
 
     public void CheckDamageCollision(int n)
     {
-        Debug.Log("CheckDamageCollision " + n);
+        //Debug.Log("CheckDamageCollision " + n);
         Collider2D[] cols = null;
         switch (currentAttackSwingPhase)
         {
@@ -352,19 +352,19 @@ public class PlayerAttackBehaviour : MonoBehaviour
             {
                 //ps.Play();
                 ene.TakeDamage(GetDamage(isSuper));
-            }
-            
-            var meo =t.GetComponent<MeowbodyGetComponent>();
+            }//敌人
+
+            var meo = t.GetComponent<MeowbodyBehaviour>();
             if (meo != null)
             {
-                meo.healthSystem.TakeDamage(GetDamage(isSuper));
-            }
+                meo.health.TakeDamage(GetDamage(isSuper));
+            }//Meowbody
 
             var des = t.GetComponent<Destroyable>();
             if (des != null)
             {
                 Destroy(des.gameObject);
-            }
-        }
-    }
+            }//可摧毁
+        }///对所有挂载了以上脚本的物体进行伤害行为
+    }///造成伤害
 }

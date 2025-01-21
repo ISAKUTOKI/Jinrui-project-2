@@ -146,6 +146,8 @@ public class PlayerHealthBehaviour : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+
+
     //void ObjDisable()
     //{
     //    GameObject targetObject = GameObject.Find(weaponParent1);

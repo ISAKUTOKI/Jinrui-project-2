@@ -4,18 +4,15 @@ using UnityEngine;
 
 public class MeowbodyDiedAttack : MonoBehaviour
 {
-    public MeowbodyGetComponent component;
-    // Start is called before the first frame update
-
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject == component.Neko)
-            component.attackSystem.diedAttackCanAttackNeko = true;
+        if (other.gameObject == MeowbodyBehaviour.instance.Neko)
+            MeowbodyBehaviour.instance.attack.diedAttackCanAttackNeko = true;
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject == component.Neko)
-            component.attackSystem.diedAttackCanAttackNeko = false;
+        if (other.gameObject == MeowbodyBehaviour.instance.Neko)
+            MeowbodyBehaviour.instance.attack.diedAttackCanAttackNeko = false;
     }
 }

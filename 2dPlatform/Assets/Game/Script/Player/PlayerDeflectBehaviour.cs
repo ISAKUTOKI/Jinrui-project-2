@@ -130,7 +130,7 @@ UI
     }
     public void OnWound()
     {
-        Debug.Log("OnWound");
+        //Debug.Log("OnWound");
         ExitDefend(false);
     }
 
@@ -144,7 +144,7 @@ UI
         if (withAnim)
             PlayerBehaviour.instance.animator.SetTrigger("bougyo_out");
         //PlayerBehaviour.instance.weaponView.SetState(PlayerWeaponView.State.idle);
-        Debug.Log("ExitDefend！ withAnim " + withAnim);
+        ////Debug.Log("ExitDefend！ withAnim " + withAnim);
     }
 
     public bool isDefending { get; private set; }
