@@ -6,7 +6,7 @@ public class SwordInStoneBehavior : MonoBehaviour
     Animator animator;
     public GameObject Neko;
     public Camera Camera;
-    public SIS_JKey JKey;
+    public SIS_JKey JKey { get; private set; }
     bool canTryToGetSword = false;
 
     //拔剑变量
@@ -26,6 +26,7 @@ public class SwordInStoneBehavior : MonoBehaviour
     void Start()
     {
         animator = GetComponentInChildren<Animator>();
+        JKey = GetComponentInChildren<SIS_JKey>();
         CameraInitialSet();//初始化相机
     }
 

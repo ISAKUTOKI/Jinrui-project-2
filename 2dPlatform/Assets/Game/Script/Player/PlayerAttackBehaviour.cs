@@ -109,7 +109,7 @@ public class PlayerAttackBehaviour : MonoBehaviour
             case 1:
                 if (_comboOn)
                 {
-                    Debug.LogWarning("进入第2段");
+                    //Debug.LogWarning("进入第2段");
                     if (WeaponPowerSystem.instance.power > 0)
                     {
                         isSuperAttack = true;
@@ -129,7 +129,7 @@ public class PlayerAttackBehaviour : MonoBehaviour
             case 2:
                 if (_comboOn)
                 {
-                    Debug.LogWarning("进入第3段");
+                    //Debug.LogWarning("进入第3段");
                     if (WeaponPowerSystem.instance.power > 0)
                     {
                         isSuperAttack = true;
@@ -197,31 +197,31 @@ public class PlayerAttackBehaviour : MonoBehaviour
             case 0:
                 if (clip == clip_swing1.clip || clip == clip_swing2.clip || clip == clip_swing3.clip)
                 {
-                    Debug.Log(clip);
-                    Debug.LogWarning("不该出现这个情况");
+                    //Debug.Log(clip);
+                    //Debug.LogWarning("不该出现这个情况");
                 }
                 break;
             case 1:
                 if (clip != clip_swing1.clip && clip != clip_swing3.clip)
                 {
-                    Debug.Log(clip);
-                    Debug.LogWarning("第1段攻击被打断");
+                    //Debug.Log(clip);
+                    //Debug.LogWarning("第1段攻击被打断");
                     InterruptAttack();
                 }
                 break;
             case 2:
                 if (clip != clip_swing1.clip && clip != clip_swing2.clip)
                 {
-                    Debug.Log(clip);
-                    Debug.LogWarning("第2段攻击被打断");
+                    //Debug.Log(clip);
+                    //Debug.LogWarning("第2段攻击被打断");
                     InterruptAttack();
                 }
                 break;
             case 3:
                 if (clip != clip_swing2.clip && clip != clip_swing3.clip)
                 {
-                    Debug.Log(clip);
-                    Debug.LogWarning("第3段攻击被打断");
+                    //Debug.Log(clip);
+                    //Debug.LogWarning("第3段攻击被打断");
                     InterruptAttack();
                 }
                 break;

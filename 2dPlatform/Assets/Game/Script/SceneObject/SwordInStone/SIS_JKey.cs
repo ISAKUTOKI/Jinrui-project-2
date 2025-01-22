@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class SIS_JKey : MonoBehaviour
 {
-    public GameObject JKey;
-    public SpriteRenderer JKeyRenderer;
+    GameObject JKey;
+    SpriteRenderer JKeyRenderer;
 
     [HideInInspector] public bool seeable = false;
     [HideInInspector] public bool canSelfRotate = false;
@@ -31,6 +31,9 @@ public class SIS_JKey : MonoBehaviour
     {
         initialScale = transform.localScale;
         initialRotationAngle = 0.0f;
+
+        JKeyRenderer = GetComponent<SpriteRenderer>();
+        JKey = this.gameObject;
     }
 
     // Update is called once per frame

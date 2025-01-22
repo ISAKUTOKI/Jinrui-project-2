@@ -54,12 +54,12 @@ public class PlayerBehaviour : MonoBehaviour
     /// <param name="hitSource"></param>
     public void OnHit(Transform hitSource = null)
     {
-        Debug.Log("neko OnHit");
+        //Debug.Log("neko OnHit");
         var inDeflectArea = defend.deflectArea.InAreaCheck(hitSource);
         //Debug.Log("inDeflectArea " + inDeflectArea);
         if (hitSource != null && inDeflectArea)
         {
-            Debug.Log("inDeflectArea");
+            //Debug.Log("inDeflectArea");
             if (defend.isDefending)
             {
                 if (defend.isDeflecting)

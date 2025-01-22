@@ -941,7 +941,7 @@ GameObject:
   - component: {fileID: 6071904059022827104}
   - component: {fileID: 2768212234300113044}
   m_Layer: 5
-  m_Name: Panel Hp 1
+  m_Name: Panel Hp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
