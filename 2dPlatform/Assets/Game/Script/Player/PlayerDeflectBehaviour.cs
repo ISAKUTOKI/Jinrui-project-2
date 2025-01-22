@@ -120,7 +120,7 @@ UI
         //perform deflect
         //stop walking
         //有能量就进入防御持续
-        Debug.Log("bougyo_start");
+        //Debug.Log("bougyo_start");
         PlayerBehaviour.instance.animator.ResetTrigger("bougyo_out");
         PlayerBehaviour.instance.animator.SetTrigger("bougyo_start");
         isDefending = true;

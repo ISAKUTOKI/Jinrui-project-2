@@ -325,7 +325,7 @@ public class PlayerAttackBehaviour : MonoBehaviour
         }
         if (cols == null)
         {
-            Debug.LogWarning("no valid Cols! currentAttackSwingPhase " + currentAttackSwingPhase);
+            //Debug.LogWarning("no valid Cols! currentAttackSwingPhase " + currentAttackSwingPhase);
             return;
         }
         if (n - 1 >= cols.Length)
