@@ -600,8 +600,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 100709622926546982}
   - {fileID: 2570546788250694664}
+  - {fileID: 100709622926546982}
   - {fileID: 3021013597032160227}
   - {fileID: 3466657537103310535}
   - {fileID: 5448932666652066642}
@@ -8154,7 +8154,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7211639929616256605, guid: edbd7ad3a61c838448e870826c90fa84, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 7211639929616256605, guid: edbd7ad3a61c838448e870826c90fa84, type: 3}
       propertyPath: m_LocalRotation.w
