@@ -7,7 +7,7 @@ public class PlayerBehaviour : MonoBehaviour
 {
     public static PlayerBehaviour instance;
 
-    public PlayerGetSword getSword { get; private set; }
+    public PlayerGetSwordBehaviour getSword { get; private set; }
     public PlayerHealthBehaviour health { get; private set; }
     public PlayerMove move { get; private set; }
     public PlayerAttackBehaviour attack { get; private set; }
@@ -30,7 +30,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         instance = this;
 
-        getSword = GetComponent<PlayerGetSword>();
+        getSword = GetComponent<PlayerGetSwordBehaviour>();
         animator = GetComponentInChildren<Animator>();
         movePosition = GetComponent<PlayerMovePosition>();
         deflect = GetComponent<PlayerDeflectBehaviour>();
