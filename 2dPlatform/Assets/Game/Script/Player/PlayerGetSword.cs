@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 
 public class PlayerGetSword : MonoBehaviour
 {
@@ -17,10 +18,14 @@ public class PlayerGetSword : MonoBehaviour
     {
         if (hasGotSword)
         {
+            //Debug.Log("ÓÐ½£");
             canSetPlayerPhase = false;
+            SetPlayerHaveWeapon();
         }
         else
         {
+            //Debug.Log("Ã»½£");
+            PlayerBehaviour.instance.weaponView.SetState(PlayerWeaponView.State.hide);
             canSetPlayerPhase = true;
         }
     }
@@ -59,5 +64,6 @@ public class PlayerGetSword : MonoBehaviour
     {
         PlayerBehaviour.instance.attack.canAttack = true;
         PlayerBehaviour.instance.deflect.canDeflect = true;
+        PlayerBehaviour.instance.weaponView.SetState(PlayerWeaponView.State.idle);
     }
 }
