@@ -126,8 +126,13 @@ public class SwordInStoneBehavior : MonoBehaviour
         animator.SetTrigger("got");
         JKey.seeable = false;
         StartCoroutine(CameraTryBackToInitialCoroutine());
+        Invoke("DelayChangePLayerPhase",1.5f);
     }//拔剑成功，设定变量
 
+    void DelayChangePLayerPhase()
+    {
+        PlayerBehaviour.instance.getSword.hasGotSword = true;
+    }
     void CameraInitialSet()
     {
         cameraInitialSize = Camera.orthographicSize;

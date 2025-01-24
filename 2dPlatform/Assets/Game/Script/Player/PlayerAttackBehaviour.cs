@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerAttackBehaviour : MonoBehaviour
 {
+    [HideInInspector] public bool canAttack;
+
     private PlayerHealthBehaviour _health;
     //public ParticleSystem ps;
 
@@ -95,8 +97,11 @@ public class PlayerAttackBehaviour : MonoBehaviour
 
     private void Update()
     {
-        CheckStopAttack();
-        CheckAttack();
+        if(canAttack)
+        {
+            CheckStopAttack();
+            CheckAttack();
+        }
     }
 
     public void OnCheckCombo()
@@ -149,7 +154,7 @@ public class PlayerAttackBehaviour : MonoBehaviour
             case 3:
                 if (_comboOn)
                 {
-                    Debug.LogWarning("进入第1段");
+                    //Debug.LogWarning("进入第1段");
                     if (WeaponPowerSystem.instance.power > 0)
                     {
                         isSuperAttack = true;

@@ -6,19 +6,36 @@ public class PlayerGetSword : MonoBehaviour
 {
     Animator animator;
 
+    public bool hasGotSword = true;///默认为真，手动设置
+    private bool canSetPlayerPhase = true;
+
     float tapTimer = 0.0f;
     float tapDuration = 0.3f;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        if (hasGotSword)
+        {
+            canSetPlayerPhase = false;
+        }
+        else
+        {
+            canSetPlayerPhase = true;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if (canSetPlayerPhase)
+        {
+            if (hasGotSword)
+            {
+                SetPlayerHaveWeapon();
+                canSetPlayerPhase = false;
+            }
+        }
     }
 
     public void TryToGetSword()
@@ -36,5 +53,11 @@ public class PlayerGetSword : MonoBehaviour
     public void FailToGetSword()
     {
         animator.SetBool("tryToGetSword", false);
+    }
+
+    void SetPlayerHaveWeapon()
+    {
+        PlayerBehaviour.instance.attack.canAttack = true;
+        PlayerBehaviour.instance.deflect.canDeflect = true;
     }
 }

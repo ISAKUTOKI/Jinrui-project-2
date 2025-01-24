@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Reflection;
 using UnityEditor.Animations;
 using UnityEngine;
 
@@ -6,10 +7,11 @@ public class PlayerBehaviour : MonoBehaviour
 {
     public static PlayerBehaviour instance;
 
+    public PlayerGetSword getSword { get; private set; }
     public PlayerHealthBehaviour health { get; private set; }
     public PlayerMove move { get; private set; }
     public PlayerAttackBehaviour attack { get; private set; }
-
+    public PlayerDeflectBehaviour deflect { get; private set; }
     public PlayerJump jump { get; private set; }
 
     public PlayerDeflectBehaviour defend { get; private set; }
@@ -28,8 +30,10 @@ public class PlayerBehaviour : MonoBehaviour
     {
         instance = this;
 
+        getSword = GetComponent<PlayerGetSword>();
         animator = GetComponentInChildren<Animator>();
         movePosition = GetComponent<PlayerMovePosition>();
+        deflect = GetComponent<PlayerDeflectBehaviour>();
         attack = GetComponent<PlayerAttackBehaviour>();
         jump = GetComponent<PlayerJump>();
         move = GetComponent<PlayerMove>();
