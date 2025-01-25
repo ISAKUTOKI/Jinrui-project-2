@@ -64,34 +64,25 @@ public class PlayerJump : MonoBehaviour
         if (v.y > 0)
             return;
 
+        PlayerBehaviour.instance.animator.SetBool("jump", false);
         //Debug.Log("highFall " + v.y);
-        var highFall = false;
-        if (v.y < -12)//一般跳跃下落速度-6.624929，地震-1.95
-        {
-            highFall = true;//掉落伤害
-        }
-        v.y = 0;
-        PlayerBehaviour.instance.movePosition.rb.velocity = v;
+        //var highFall = false;
+        //if (v.y < -12)//一般跳跃下落速度-6.624929，地震-1.95
+        //{
+        //    highFall = true;//掉落伤害
+        //}
+        //v.y = 0;
+        //PlayerBehaviour.instance.movePosition.rb.velocity = v;
 
-        if (highFall)
-        {
-            PlayerBehaviour.instance.movePosition.StopXMovement();
-            PlayerBehaviour.instance.animator.SetBool("walk", false);
-            PlayerBehaviour.instance.animator.SetBool("jump", false);
-            PlayerBehaviour.instance.weaponView.SetState(PlayerWeaponView.State.idle);
-            PlayerBehaviour.instance.OnHit(null);//掉落伤害 打断防御
-        }
+        //if (highFall)
+        //{
+        //    PlayerBehaviour.instance.movePosition.StopXMovement();
+        //    PlayerBehaviour.instance.animator.SetBool("walk", false);
+        //    PlayerBehaviour.instance.animator.SetBool("jump", false);
+        //    PlayerBehaviour.instance.weaponView.SetState(PlayerWeaponView.State.idle);
+        //    PlayerBehaviour.instance.OnHit(null);//掉落伤害 打断防御
+        //}
 
-        //Debug.Log("jumpUpTime清零");
     }
-
-    //void JumpDropSwitch()
-    //{
-    //    PlayerBehaviour.instance.animator.SetBool("jump", true);
-    //    PlayerBehaviour.instance.animator.SetBool("jump", false);
-
-    //    PlayerBehaviour.instance.animator.SetBool("drop", true);
-    //    PlayerBehaviour.instance.animator.SetBool("drop", false);
-    //}
 
 }

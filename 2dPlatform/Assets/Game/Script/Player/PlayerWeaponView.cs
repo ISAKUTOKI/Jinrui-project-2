@@ -23,24 +23,27 @@ public class PlayerWeaponView : MonoBehaviour
 
     public void SetState(State s)
     {
-        if (state==s)
+        if (state == s)
         {
             return;
         }
 
-        Debug.Log("SetState " + s);
+        //Debug.Log("SetState " + s);
         state = s;
         switch (state)
         {
             case State.idle:
+                //Debug.Log("当前显示图片 " + state);
                 sr.sprite = weaponIdle;
                 sr.enabled = true;
                 break;
             case State.run:
+                //Debug.Log("当前显示图片 " + state);
                 sr.sprite = weaponRun;
                 sr.enabled = true;
                 break;
             case State.hide:
+                //Debug.Log("当前不显示图片");
                 sr.enabled = false;
                 break;
         }
@@ -48,12 +51,23 @@ public class PlayerWeaponView : MonoBehaviour
 
     void LateUpdate()
     {
-        // if (state == State.hide)
-        //      return;
+
+        if (!PlayerBehaviour.instance.getSword.hasGotSword)
+        {
+            SetState(State.hide);
+            return;
+        }
+        //Debug.Log("正在状态检测");
+        //if (state == State.hide)
+        //{
+        //    Debug.Log("当前为隐藏状态");
+        //    return;
+        //}
+
+        //Debug.Log("当前为显示状态");
 
         Vector3 p0 = weaponFollow.position;
         Vector3 p1 = weaponParent.position;
-
 
         if (p0 != p1)
         {
@@ -80,5 +94,7 @@ public class PlayerWeaponView : MonoBehaviour
         {
             weaponFlip.localScale = new Vector3(PlayerBehaviour.instance.flip.localScale.x > 0 ? 1 : -1, 1, 1);
         }
+
+
     }
 }

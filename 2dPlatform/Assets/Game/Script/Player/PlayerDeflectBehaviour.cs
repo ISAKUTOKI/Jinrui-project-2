@@ -8,6 +8,7 @@ public class PlayerDeflectBehaviour : MonoBehaviour
 {
     public float deflectStartTime { get; private set; }
 
+    [HideInInspector]public bool canDeflect;
     //弹反和防御系统
     /*
 设计目的
@@ -59,23 +60,26 @@ UI
 
     private void Update()
     {
-        var keyCode = KeyCode.K;
-        if (Input.GetKeyDown(keyCode))
+        if(canDeflect)
         {
-            TryDefend();
-        }
-
-        if (Input.GetKeyUp(keyCode))
-        {
-            TryStopDefend();
-        }
-
-        if (isDefending)
-        {
-            var animator = PlayerBehaviour.instance.animator;
-            if (animator.GetCurrentAnimatorClipInfo(0)[0].clip.name == "bougyo")
+            var keyCode = KeyCode.K;
+            if (Input.GetKeyDown(keyCode))
             {
-                WeaponPowerSystem.instance.OnDefending();
+                TryDefend();
+            }
+
+            if (Input.GetKeyUp(keyCode))
+            {
+                TryStopDefend();
+            }
+
+            if (isDefending)
+            {
+                var animator = PlayerBehaviour.instance.animator;
+                if (animator.GetCurrentAnimatorClipInfo(0)[0].clip.name == "bougyo")
+                {
+                    WeaponPowerSystem.instance.OnDefending();
+                }
             }
         }
     }
@@ -120,7 +124,7 @@ UI
         //perform deflect
         //stop walking
         //有能量就进入防御持续
-        Debug.Log("bougyo_start");
+        //Debug.Log("bougyo_start");
         PlayerBehaviour.instance.animator.ResetTrigger("bougyo_out");
         PlayerBehaviour.instance.animator.SetTrigger("bougyo_start");
         isDefending = true;
@@ -130,7 +134,7 @@ UI
     }
     public void OnWound()
     {
-        Debug.Log("OnWound");
+        //Debug.Log("OnWound");
         ExitDefend(false);
     }
 
@@ -144,7 +148,7 @@ UI
         if (withAnim)
             PlayerBehaviour.instance.animator.SetTrigger("bougyo_out");
         //PlayerBehaviour.instance.weaponView.SetState(PlayerWeaponView.State.idle);
-        Debug.Log("ExitDefend！ withAnim " + withAnim);
+        ////Debug.Log("ExitDefend！ withAnim " + withAnim);
     }
 
     public bool isDefending { get; private set; }

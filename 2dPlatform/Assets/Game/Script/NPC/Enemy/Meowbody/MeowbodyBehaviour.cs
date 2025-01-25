@@ -1,27 +1,41 @@
-using System.Collections;
-using System.Collections.Generic;
+using Assets.Game.Script.HUD_interface.Combat;
 using UnityEngine;
 
 public class MeowbodyBehaviour : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
+    public static MeowbodyBehaviour instance;
 
+    public WeaponPowerSystem weaponPowerSystem { get; private set; }
+    public PlayerHealthBehaviour NekoHealth { get; private set; }
+
+    public MeowbodyAttackBehaviour attack { get; private set; }
+    public MeowbodyHealthBehaviour health { get; private set; }
+    public MeowbodyView MeowbodyView { get; private set; }
+    public Animator animator { get; private set; }
+    public MeowbodyPunishFastAttack punishFastAttack { get; private set; }
+    public GameObject view { get; private set; }
+
+
+    public GameObject Neko;
+
+
+    private void Awake()
+    {
+        instance = this;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
+        weaponPowerSystem = WeaponPowerSystem.instance;
+        NekoHealth = PlayerBehaviour.instance.health;
 
-    }
+        attack = GetComponent<MeowbodyAttackBehaviour>();
+        health = GetComponent<MeowbodyHealthBehaviour>();
 
-    void FlipLeft()
-    {
-        transform.localScale = new Vector3(1, 1, 1);
-    }
-    void FlipRight()
-    {
-        transform.localScale = new Vector3(-1, 1, 1);
+        MeowbodyView = GetComponentInChildren<MeowbodyView>();
+        animator = GetComponentInChildren<Animator>();
+        punishFastAttack = GetComponentInChildren<MeowbodyPunishFastAttack>();
+
+        view = MeowbodyView.gameObject;
     }
 }

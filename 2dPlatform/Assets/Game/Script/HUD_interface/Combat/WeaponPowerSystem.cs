@@ -18,7 +18,7 @@ namespace Assets.Game.Script.HUD_interface.Combat
 
         private void Start()
         {
-            power = 3;
+            power = 0;
             weaponUiBehaviour.SyncPowerValue(power);
         }
 
@@ -157,7 +157,7 @@ namespace Assets.Game.Script.HUD_interface.Combat
             var res = OnPlayerDefending(v);
             if (!res)
             {
-                Debug.Log("能量耗尽，自动结束防御");
+                //Debug.Log("能量耗尽，自动结束防御");
                 PlayerBehaviour.instance.defend.ExitDefend();
             }
         }
