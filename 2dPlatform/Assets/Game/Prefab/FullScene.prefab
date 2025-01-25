@@ -6231,6 +6231,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Platforms
       objectReference: {fileID: 0}
+    - target: {fileID: 1826159318300366675, guid: 67acfe42d053e5447a3f2f2a4e44a9dd, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 4178b7d5de2f13a4ba903d5b55d3d642, type: 2}
+    - target: {fileID: 7126269737898694182, guid: 67acfe42d053e5447a3f2f2a4e44a9dd, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 4178b7d5de2f13a4ba903d5b55d3d642, type: 2}
     - target: {fileID: 7910149488714996675, guid: 67acfe42d053e5447a3f2f2a4e44a9dd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
