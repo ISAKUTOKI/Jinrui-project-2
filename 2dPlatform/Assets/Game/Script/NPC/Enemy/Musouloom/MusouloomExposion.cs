@@ -16,7 +16,8 @@ public class MusouloomExposion : MonoBehaviour
     {
         if (MusouloomBehaviour.instance.explosionDamageArea.playerIsInDamageArea)
         {
-            PlayerBehaviour.instance.health.TakeDamage(2);
+            PlayerBehaviour.instance.OnHit();
+            PlayerBehaviour.instance.OnHit();
         }
     }
 }

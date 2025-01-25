@@ -1028,8 +1028,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   freq: 4
   offset: 2.29
-  amplitude: 0.25
-  someLerpSpeed: 0
+  amplitude: 1
+  someLerpSpeed: 1
   xAxis: 0
   yAxis: 1
   zAxis: 0
@@ -1656,7 +1656,6 @@ MonoBehaviour:
   damage_swing2_Super: 90
   damage_swing3: 60
   damage_swing3_Super: 300
-  currentAttackSwingPhase: 0
   isSuperAttack: 0
 --- !u!114 &2704307906029319665
 MonoBehaviour:
@@ -3326,7 +3325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93f59fc0538ca7845b0f6be8de18e888, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 823670017562525148, guid: ec81485a96933ae47ada990cc40b5d1e, type: 3}
+  prefab: {fileID: 0}
   datas:
   - id: Firelight1
     offset: {x: 0, y: 0}
@@ -6232,6 +6231,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Platforms
       objectReference: {fileID: 0}
+    - target: {fileID: 1826159318300366675, guid: 67acfe42d053e5447a3f2f2a4e44a9dd, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 4178b7d5de2f13a4ba903d5b55d3d642, type: 2}
+    - target: {fileID: 7126269737898694182, guid: 67acfe42d053e5447a3f2f2a4e44a9dd, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 4178b7d5de2f13a4ba903d5b55d3d642, type: 2}
     - target: {fileID: 7910149488714996675, guid: 67acfe42d053e5447a3f2f2a4e44a9dd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -6404,6 +6411,10 @@ PrefabInstance:
       propertyPath: targetTrans
       value: 
       objectReference: {fileID: 3466657537103310535}
+    - target: {fileID: 973380672041945872, guid: edbd7ad3a61c838448e870826c90fa84, type: 3}
+      propertyPath: followLerpFactor
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2731409911083235135, guid: edbd7ad3a61c838448e870826c90fa84, type: 3}
       propertyPath: orthographic size
       value: 3.3

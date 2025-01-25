@@ -20,6 +20,7 @@ public class DeflectAreaBehaviour : MonoBehaviour
     {
         //Debug.LogWarning("DeflectAreaBehaviour OnTriggerEnter2D " + collision.gameObject);
         var ene = collision.GetComponent<EnemyBehaviour>();
+
         if (ene != null)
         {
             if (!hitSources.Contains(ene.transform))
