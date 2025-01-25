@@ -25,6 +25,15 @@ public class PlayerHealthBehaviour : MonoBehaviour
 
     private void Start()
     {
+        if (hpView == null)
+        {
+            hpView = FindFirstObjectByType<HpHalfHeartsBehaviour>();
+        }
+        if (hpView == null)
+        {
+            Debug.LogError("no hpView in scene!");
+        }
+
         FullFill();
         Time.timeScale = 1f; // 确保开始时Time.timeScale为1
     }

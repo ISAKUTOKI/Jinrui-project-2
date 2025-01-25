@@ -6,7 +6,7 @@ public class PlayerMovePosition : MonoBehaviour
     public Rigidbody2D rb { get; private set; }
     private Vector3 _movement;
 
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
     }
