@@ -2207,6 +2207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d967cd8a9027a94eabd4ee298cb3313, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInTest: 0
   hpbar: {fileID: 3601855967927125814}
   hpMax: 190
   dieSound: 
@@ -5697,6 +5698,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d967cd8a9027a94eabd4ee298cb3313, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInTest: 0
   hpbar: {fileID: 1235054544368491370}
   hpMax: 190
   dieSound: 
@@ -6449,6 +6451,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d967cd8a9027a94eabd4ee298cb3313, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInTest: 0
   hpbar: {fileID: 5438770598526207944}
   hpMax: 999
   dieSound: 
@@ -8301,6 +8304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d967cd8a9027a94eabd4ee298cb3313, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInTest: 0
   hpbar: {fileID: 9038806970368178986}
   hpMax: 190
   dieSound: 
@@ -9949,6 +9953,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d967cd8a9027a94eabd4ee298cb3313, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInTest: 0
   hpbar: {fileID: 6788160654103863496}
   hpMax: 190
   dieSound: 

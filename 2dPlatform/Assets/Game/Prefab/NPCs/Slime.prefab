@@ -296,6 +296,7 @@ GameObject:
   - component: {fileID: 9110433446076627564}
   - component: {fileID: 8597448072126010711}
   - component: {fileID: 6989933793401934550}
+  - component: {fileID: 1353819041433682148}
   - component: {fileID: 4771118282529150320}
   - component: {fileID: 4878072378563747961}
   m_Layer: 8
@@ -358,7 +359,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.25}
+  m_Offset: {x: -0.015942335, y: 0.13719122}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -369,7 +370,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7, y: 0.5}
+  m_Size: {x: 0.5724616, y: 0.2951778}
   m_EdgeRadius: 0
 --- !u!50 &4602741904088108078
 Rigidbody2D:
@@ -410,7 +411,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d967cd8a9027a94eabd4ee298cb3313, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isInTest: 1
+  isInTest: 0
   hpbar: {fileID: 6397822660885931344}
   hpMax: 190
   dieSound: 
@@ -468,6 +469,20 @@ MonoBehaviour:
   stopDuration: 1
   npcController: {fileID: 0}
   state: 0
+--- !u!114 &1353819041433682148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1812429514702718233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd6f6a7dc4e1a814da07b7d477c9749f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DamageCD: 0.7
+  checkArea: 0.3
 --- !u!114 &4771118282529150320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -494,7 +509,7 @@ MonoBehaviour:
     launchEffect: {fileID: 0}
   - id: smash
     canUseWhenNotAlerted: 0
-    damage: 1
+    damage: 0
     desc: 
     prefab: {fileID: 0}
     duration: 2
@@ -505,7 +520,7 @@ MonoBehaviour:
     launchEffect: {fileID: 0}
   - id: smash_noTarget
     canUseWhenNotAlerted: 1
-    damage: 1
+    damage: 0
     desc: 
     prefab: {fileID: 0}
     duration: 2
