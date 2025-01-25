@@ -363,11 +363,11 @@ GameObject:
   - component: {fileID: 8893709888613894721}
   - component: {fileID: 5190229999155299325}
   - component: {fileID: 8591659008738467645}
+  - component: {fileID: 7564536213511461409}
   - component: {fileID: 8963626058913461170}
   - component: {fileID: 7983560561805322523}
   - component: {fileID: 1484750978912526628}
   - component: {fileID: 2409732142063604249}
-  - component: {fileID: 7564536213511461409}
   - component: {fileID: 2414475169757590636}
   - component: {fileID: 7002358559618335444}
   - component: {fileID: 3015891663751273918}
@@ -472,6 +472,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flip: {fileID: 4529367322451256450}
+--- !u!114 &7564536213511461409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4015501376133681110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 124e22a77973bb64198b87a90acca0cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasGotSword: 1
 --- !u!114 &8963626058913461170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -540,18 +553,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 653700066e9ac9b409822a6b8f367831, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7564536213511461409
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4015501376133681110}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 124e22a77973bb64198b87a90acca0cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2414475169757590636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -564,6 +565,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1f957cdbd8b01c40be6524498b2243c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canAttack: 0
   clip_swing1:
     clip: {fileID: 7400000, guid: 7422036d27913ca4aad1931dfcae239b, type: 2}
     speedRatio: 0.8
@@ -623,6 +625,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 757df30de8e71fa4cb9280e62a80affb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canDeflect: 0
   deflectArea: {fileID: 6254474198876330384}
 --- !u!114 &5247688153393349246
 MonoBehaviour:

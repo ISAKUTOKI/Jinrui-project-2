@@ -194,6 +194,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5774955439949920464}
   - component: {fileID: 5256411283071381836}
+  - component: {fileID: 4518815019840655688}
   m_Layer: 8
   m_Name: patrol spot r alert
   m_TagString: Untagged
@@ -268,6 +269,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4518815019840655688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1562550955777116027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84e9d24e14c63734ba64f994538668f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1812429514702718233
 GameObject:
   m_ObjectHideFlags: 0
@@ -397,6 +410,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d967cd8a9027a94eabd4ee298cb3313, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInTest: 1
   hpbar: {fileID: 6397822660885931344}
   hpMax: 190
   dieSound: 
@@ -536,7 +550,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3647344009909256728
 RectTransform:
   m_ObjectHideFlags: 0
@@ -662,6 +676,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8986634406913845919}
   - component: {fileID: 5900114492204696798}
+  - component: {fileID: 1379540220127991992}
   m_Layer: 8
   m_Name: patrol spot l
   m_TagString: Untagged
@@ -736,6 +751,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1379540220127991992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3051389013057293071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84e9d24e14c63734ba64f994538668f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3358215229555265998
 GameObject:
   m_ObjectHideFlags: 0
@@ -746,6 +773,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3489490713915500352}
   - component: {fileID: 693830208148874942}
+  - component: {fileID: 5707963005903261167}
   m_Layer: 8
   m_Name: patrol spot r
   m_TagString: Untagged
@@ -820,6 +848,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5707963005903261167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3358215229555265998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84e9d24e14c63734ba64f994538668f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4191237225907632677
 GameObject:
   m_ObjectHideFlags: 0
@@ -1011,6 +1051,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1626536644434811126}
   - component: {fileID: 7827068058963025530}
+  - component: {fileID: 5256574972589202696}
   m_Layer: 8
   m_Name: patrol spot l alert
   m_TagString: Untagged
@@ -1085,6 +1126,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5256574972589202696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4719381682465517544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84e9d24e14c63734ba64f994538668f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6308791582567398409
 GameObject:
   m_ObjectHideFlags: 0
