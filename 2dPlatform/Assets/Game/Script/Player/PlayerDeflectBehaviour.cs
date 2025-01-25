@@ -52,6 +52,7 @@ UI
     public DeflectAreaBehaviour deflectArea;
     public bool deflectedThisMovement { get; private set; }
 
+    private bool _isDefending;
 
     private void Awake()
     {
@@ -73,7 +74,7 @@ UI
                 TryStopDefend();
             }
 
-            if (isDefending)
+            if (_isDefending)
             {
                 var animator = PlayerBehaviour.instance.animator;
                 if (animator.GetCurrentAnimatorClipInfo(0)[0].clip.name == "bougyo")
@@ -96,7 +97,8 @@ UI
             bool isWounding = PlayerBehaviour.instance.health.isWounding;
             bool isGrounded = !PlayerBehaviour.instance.jump.IsJumping;
             //bool isWalking = false;
-            return (!isAttacking || (isAttacking && isAttackingButInCanDeflectState))
+            Debug.Log(isAttacking + "" + isAttackingButInCanDeflectState);
+            return (!isAttacking || isAttackingButInCanDeflectState)
                 && isGrounded
                 && !isWounding;
         }
@@ -105,7 +107,7 @@ UI
     {
         if (!currentCharacterStateAllowDeflect)
             return;
-        if (isDefending)
+        if (_isDefending)
             return;
 
         EnterDefend();
@@ -113,7 +115,7 @@ UI
 
     void TryStopDefend()
     {
-        if (!isDefending)
+        if (!_isDefending)
             return;
 
         ExitDefend();
@@ -124,10 +126,10 @@ UI
         //perform deflect
         //stop walking
         //有能量就进入防御持续
-        //Debug.Log("bougyo_start");
+        Debug.Log("bougyo_start");
         PlayerBehaviour.instance.animator.ResetTrigger("bougyo_out");
         PlayerBehaviour.instance.animator.SetTrigger("bougyo_start");
-        isDefending = true;
+        _isDefending = true;
         deflectArea.enabled = true;
         PlayerBehaviour.instance.weaponView.SetState(PlayerWeaponView.State.hide);
         deflectedThisMovement = false;
@@ -141,7 +143,7 @@ UI
     public void ExitDefend(bool withAnim = true)
     {
         //没能量就进入防御退出
-        isDefending = false;
+        _isDefending = false;
         deflectArea.enabled = false;
         deflectedThisMovement = false;
         PlayerBehaviour.instance.animator.ResetTrigger("bougyo_start");
@@ -151,7 +153,28 @@ UI
         ////Debug.Log("ExitDefend！ withAnim " + withAnim);
     }
 
-    public bool isDefending { get; private set; }
+    public bool isDefending
+    {
+        get
+        {
+            if (_isDefending)
+            {
+                return true;
+            }
+            var animator = PlayerBehaviour.instance.animator;
+            var infos = animator.GetCurrentAnimatorClipInfo(0);
+            if (infos.Length < 1)
+            {
+                return false;
+            }
+            var n = infos[0].clip.name;
+            if (n == "bougyo_start" || n == "bougyo")
+            {
+                return true;
+            }
+            return false;
+        }
+    }
 
     public bool isDeflecting
     {
@@ -193,7 +216,7 @@ UI
     {
         get
         {
-            return isDefending || isInDefendEnd || isDeflecting;
+            return _isDefending || isInDefendEnd || isDeflecting;
         }
     }
     public void TriggerDeflect(bool isSuperToGainFullPower = false)

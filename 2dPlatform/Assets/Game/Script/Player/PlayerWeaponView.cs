@@ -21,6 +21,20 @@ public class PlayerWeaponView : MonoBehaviour
         hide,
     }
 
+    public void SmartSetState()
+    {
+        var res = State.idle;
+        if (PlayerBehaviour.instance.defend.isDefending)
+            res = State.hide;
+        if (PlayerBehaviour.instance.defend.isInDefendEnd)
+            res = State.hide;
+        if (PlayerBehaviour.instance.attack.isAttacking)
+            res = State.hide;
+        if (PlayerBehaviour.instance.move.isMoving)
+            res = State.run;
+        PlayerBehaviour.instance.weaponView.SetState(res);
+    }
+
     public void SetState(State s)
     {
         if (state == s)
@@ -28,7 +42,7 @@ public class PlayerWeaponView : MonoBehaviour
             return;
         }
 
-        //Debug.Log("SetState " + s);
+        Debug.Log("PlayerWeaponView SetState " + s);
         state = s;
         switch (state)
         {

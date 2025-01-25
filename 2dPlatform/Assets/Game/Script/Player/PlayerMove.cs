@@ -45,6 +45,7 @@ public class PlayerMove : MonoBehaviour
             _speedX = 0;
             return;
         }
+
         //Debug.LogWarning("ReadInput " + PlayerBehaviour.instance.attack.isAttacking);
         if (PlayerBehaviour.instance.attack.isAttacking)
         {

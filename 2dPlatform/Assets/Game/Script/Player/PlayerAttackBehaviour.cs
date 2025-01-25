@@ -129,10 +129,80 @@ public class PlayerAttackBehaviour : MonoBehaviour
                 float clipLength = stateInfo.length;
                 float playbackTime = normalizedTime * clipLength;
                 Debug.Log("isAttackingButCanInterrupt clip " + clip.name + " playbackTime " + playbackTime);
-                return playbackTime < 0.5f;
+                return playbackTime < 0.35f;
             }
 
             return false;
+        }
+    }
+
+    public void OnCheckCombo()
+    {
+        //Debug.LogWarning("OnCheckCombo " + _comboOn);
+        PlayerBehaviour.instance.animator.ResetTrigger("combo");
+
+        switch (_attackMovementPhase)
+        {
+            case 1:
+                if (_comboOn)
+                {
+                    //Debug.LogWarning("进入第2段");
+                    if (WeaponPowerSystem.instance.power > 0)
+                    {
+                        isSuperAttack = true;
+                        WeaponPowerSystem.instance.ConsumePower_cell(1);
+                    }
+                    else
+                    {
+                        isSuperAttack = false;
+                    }
+                    SetAttackPhase(2);
+                    PlayerBehaviour.instance.weaponView.SetState(PlayerWeaponView.State.hide);
+                    SyncSwingAnim(2);
+                    PlayerBehaviour.instance.animator.SetTrigger("combo");
+                    _comboOn = false;
+                }
+                break;
+            case 2:
+                if (_comboOn)
+                {
+                    //Debug.LogWarning("进入第3段");
+                    if (WeaponPowerSystem.instance.power > 0)
+                    {
+                        isSuperAttack = true;
+                        WeaponPowerSystem.instance.ConsumePower_cell(1);
+                    }
+                    else
+                    {
+                        isSuperAttack = false;
+                    }
+                    SetAttackPhase(3);
+                    PlayerBehaviour.instance.weaponView.SetState(PlayerWeaponView.State.hide);
+                    SyncSwingAnim(3);
+                    PlayerBehaviour.instance.animator.SetTrigger("combo");
+                    _comboOn = false;
+                }
+                break;
+            case 3:
+                if (_comboOn)
+                {
+                    //Debug.LogWarning("进入第1段");
+                    if (WeaponPowerSystem.instance.power > 0)
+                    {
+                        isSuperAttack = true;
+                        WeaponPowerSystem.instance.ConsumePower_cell(1);
+                    }
+                    else
+                    {
+                        isSuperAttack = false;
+                    }
+                    SetAttackPhase(1);
+                    PlayerBehaviour.instance.weaponView.SetState(PlayerWeaponView.State.hide);
+                    SyncSwingAnim(1);
+                    PlayerBehaviour.instance.animator.SetTrigger("combo");
+                    _comboOn = false;
+                }
+                break;
         }
     }
 
@@ -222,7 +292,7 @@ public class PlayerAttackBehaviour : MonoBehaviour
         _comboOn = false;
         isSuperAttack = false;
         SetAttackPhase(0);
-        PlayerBehaviour.instance.weaponView.SetState(PlayerWeaponView.State.idle);
+        PlayerBehaviour.instance.weaponView.SmartSetState();
     }
 
     void SetAttackPhase(int i)
