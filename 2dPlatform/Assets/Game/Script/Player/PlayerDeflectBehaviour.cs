@@ -216,7 +216,7 @@ UI
     {
         get
         {
-            return _isDefending || isInDefendEnd || isDeflecting;
+            return isDefending || isInDefendEnd || isDeflecting;
         }
     }
     public void TriggerDeflect(bool isSuperToGainFullPower = false)
