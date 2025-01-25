@@ -8,7 +8,7 @@ public class PlayerDeflectBehaviour : MonoBehaviour
 {
     public float deflectStartTime { get; private set; }
 
-    [HideInInspector]public bool canDeflect;
+    [HideInInspector] public bool canDeflect;
     //弹反和防御系统
     /*
 设计目的
@@ -60,7 +60,7 @@ UI
 
     private void Update()
     {
-        if(canDeflect)
+        if (canDeflect)
         {
             var keyCode = KeyCode.K;
             if (Input.GetKeyDown(keyCode))
@@ -91,10 +91,10 @@ UI
             //按下k就进入防御开始动作
             //attack(刚开始几帧不可以) wound jump(must grounded)
             //walk interrupt walk
-            bool isAttacking = false;
-            bool isAttackingButInCanDeflectState = false;
-            bool isWounding = false;
-            bool isGrounded = true;
+            bool isAttacking = PlayerBehaviour.instance.attack.isAttacking;
+            bool isAttackingButInCanDeflectState = PlayerBehaviour.instance.attack.isAttackingButCanInterrupt;
+            bool isWounding = PlayerBehaviour.instance.health.isWounding;
+            bool isGrounded = !PlayerBehaviour.instance.jump.IsJumping;
             //bool isWalking = false;
             return (!isAttacking || (isAttacking && isAttackingButInCanDeflectState))
                 && isGrounded

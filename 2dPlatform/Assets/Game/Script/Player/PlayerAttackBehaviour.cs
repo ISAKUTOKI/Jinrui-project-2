@@ -106,73 +106,33 @@ public class PlayerAttackBehaviour : MonoBehaviour
         }
     }
 
-    public void OnCheckCombo()
+    /// <summary>
+    /// 攻击中，但是处于攻击的前几帧，可以用弹反打断的时间段
+    /// </summary>
+    /// <returns></returns>
+    public bool isAttackingButCanInterrupt
     {
-        //Debug.LogWarning("OnCheckCombo " + _comboOn);
-        PlayerBehaviour.instance.animator.ResetTrigger("combo");
-
-        switch (_attackMovementPhase)
+        get
         {
-            case 1:
-                if (_comboOn)
-                {
-                    //Debug.LogWarning("进入第2段");
-                    if (WeaponPowerSystem.instance.power > 0)
-                    {
-                        isSuperAttack = true;
-                        WeaponPowerSystem.instance.ConsumePower_cell(1);
-                    }
-                    else
-                    {
-                        isSuperAttack = false;
-                    }
-                    SetAttackPhase(2);
-                    PlayerBehaviour.instance.weaponView.SetState(PlayerWeaponView.State.hide);
-                    SyncSwingAnim(2);
-                    PlayerBehaviour.instance.animator.SetTrigger("combo");
-                    _comboOn = false;
-                }
-                break;
-            case 2:
-                if (_comboOn)
-                {
-                    //Debug.LogWarning("进入第3段");
-                    if (WeaponPowerSystem.instance.power > 0)
-                    {
-                        isSuperAttack = true;
-                        WeaponPowerSystem.instance.ConsumePower_cell(1);
-                    }
-                    else
-                    {
-                        isSuperAttack = false;
-                    }
-                    SetAttackPhase(3);
-                    PlayerBehaviour.instance.weaponView.SetState(PlayerWeaponView.State.hide);
-                    SyncSwingAnim(3);
-                    PlayerBehaviour.instance.animator.SetTrigger("combo");
-                    _comboOn = false;
-                }
-                break;
-            case 3:
-                if (_comboOn)
-                {
-                    //Debug.LogWarning("进入第1段");
-                    if (WeaponPowerSystem.instance.power > 0)
-                    {
-                        isSuperAttack = true;
-                        WeaponPowerSystem.instance.ConsumePower_cell(1);
-                    }
-                    else
-                    {
-                        isSuperAttack = false;
-                    }
-                    SetAttackPhase(1);
-                    PlayerBehaviour.instance.weaponView.SetState(PlayerWeaponView.State.hide);
-                    SyncSwingAnim(1);
-                    PlayerBehaviour.instance.animator.SetTrigger("combo");
-                    _comboOn = false;
-                }
-                break;
+            var clipInfos = PlayerBehaviour.instance.animator.GetCurrentAnimatorClipInfo(0);
+            if (clipInfos.Length < 1)
+            {
+                return false;
+            }
+
+            var clipInfo = clipInfos[0];
+            var clip = clipInfo.clip;
+            if (clip == clip_swing1.clip || clip == clip_swing2.clip || clip == clip_swing3.clip)
+            {
+                var stateInfo = PlayerBehaviour.instance.animator.GetCurrentAnimatorStateInfo(0);
+                float normalizedTime = stateInfo.normalizedTime;
+                float clipLength = stateInfo.length;
+                float playbackTime = normalizedTime * clipLength;
+                Debug.Log("isAttackingButCanInterrupt clip " + clip.name + " playbackTime " + playbackTime);
+                return playbackTime < 0.5f;
+            }
+
+            return false;
         }
     }
 
@@ -247,10 +207,9 @@ public class PlayerAttackBehaviour : MonoBehaviour
             return;
         if (PlayerBehaviour.instance.defend.isDeflecting &&
             !PlayerBehaviour.instance.defend.deflectedThisMovement)
-        {
             return;
-        }
-
+        if (PlayerBehaviour.instance.jump.IsJumping)
+            return;
         if (Input.GetKeyDown(KeyCode.J))
         {
             PerformAttack();
