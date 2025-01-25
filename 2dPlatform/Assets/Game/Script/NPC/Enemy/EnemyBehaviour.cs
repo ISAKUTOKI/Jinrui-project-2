@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class EnemyBehaviour : MonoBehaviour
 {
+    public bool isInTest;
+
     public HpBarFixedWidthBehaviour hpbar;
     public int hpMax;
     private int _hp;
