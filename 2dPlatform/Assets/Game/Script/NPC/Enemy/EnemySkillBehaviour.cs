@@ -12,7 +12,7 @@ public class EnemySkillBehaviour : MonoBehaviour
 
     float _durationTimer;
     public Transform meleeCenter;
-
+    public float smashXDistance = 1.5f;
     private void Awake()
     {
         _enemy = GetComponent<EnemyBehaviour>();
@@ -84,7 +84,8 @@ public class EnemySkillBehaviour : MonoBehaviour
         var p2 = PlayerBehaviour.instance.transform.position;
         if (!targetPlayer)
         {
-            p2 = p1 + new Vector3(_enemy.patrolBehaviour.facingRight ? 3 : -3, 0, 0);
+            var x = smashXDistance * (_enemy.patrolBehaviour.facingRight ? 3 : -3);
+            p2 = p1 + new Vector3(x, 0, 0);
         }
         var p3 = (p1 + p2) * 0.5f;
         p3.y += 3.4f;
