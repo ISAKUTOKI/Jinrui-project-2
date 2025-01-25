@@ -15980,6 +15980,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7562399197295959403, guid: 0554c06579d168d42a3ed96d19032dd6, type: 3}
+      propertyPath: followLerpFactor
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7746455847458727533, guid: 0554c06579d168d42a3ed96d19032dd6, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

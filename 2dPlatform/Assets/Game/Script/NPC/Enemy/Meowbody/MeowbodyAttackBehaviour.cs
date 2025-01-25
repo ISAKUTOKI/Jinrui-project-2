@@ -176,7 +176,7 @@ public class MeowbodyAttackBehaviour : MonoBehaviour
     }
     public void AttackTakeDamage(int damage)
     {
-        MeowbodyBehaviour.instance.NekoHealth.TakeDamage(damage);
+        PlayerBehaviour.instance.OnHit();
     }
 
     ///×ªÏò

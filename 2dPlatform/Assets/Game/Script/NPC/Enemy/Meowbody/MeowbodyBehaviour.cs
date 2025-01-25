@@ -6,7 +6,6 @@ public class MeowbodyBehaviour : MonoBehaviour
     public static MeowbodyBehaviour instance;
 
     public WeaponPowerSystem weaponPowerSystem { get; private set; }
-    public PlayerHealthBehaviour NekoHealth { get; private set; }
 
     public MeowbodyAttackBehaviour attack { get; private set; }
     public MeowbodyHealthBehaviour health { get; private set; }
@@ -27,7 +26,6 @@ public class MeowbodyBehaviour : MonoBehaviour
     private void Start()
     {
         weaponPowerSystem = WeaponPowerSystem.instance;
-        NekoHealth = PlayerBehaviour.instance.health;
 
         attack = GetComponent<MeowbodyAttackBehaviour>();
         health = GetComponent<MeowbodyHealthBehaviour>();

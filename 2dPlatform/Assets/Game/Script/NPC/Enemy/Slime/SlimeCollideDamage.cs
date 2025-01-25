@@ -20,7 +20,7 @@ public class SlimeCollideDamage : MonoBehaviour
     void DealDamage()
     {
         //‘Ï≥……À∫¶
-        PlayerBehaviour.instance.health.TakeDamage(1);
+        PlayerBehaviour.instance.OnHit();
         _lastDealDamageTime = Time.time;
     }
 

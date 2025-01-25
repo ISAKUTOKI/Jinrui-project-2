@@ -173,22 +173,22 @@ public class EnemySkillBehaviour : MonoBehaviour
                 switch (crtSkill.id)
                 {
                     case "sky fire":
-                        player.health.TakeDamage(dmg);
+                        player.OnHit();
                         //1.4f
                         break;
 
                     case "spike":
-                        player.health.TakeDamage(dmg);
+                        player.OnHit();
                         //1.35
                         break;
 
                     case "melee":
-                        player.health.TakeDamage(dmg);
+                        player.OnHit();
                         //
                         break;
 
                     case "melee minion":
-                        player.health.TakeDamage(dmg);
+                        player.OnHit();
                         //
                         break;
                 }
