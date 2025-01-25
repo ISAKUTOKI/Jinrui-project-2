@@ -10,6 +10,7 @@ public class PlayerMove : MonoBehaviour
     private Vector3 _defaultFilpScale;
     public PlayerActionPerformDependency dependency;
     public PlayerKnockbackBehaviour knockback { get; private set; }
+
     void Start()
     {
         _defaultFilpScale = PlayerBehaviour.instance.flip.localScale;
@@ -44,7 +45,7 @@ public class PlayerMove : MonoBehaviour
             _speedX = 0;
             return;
         }
-
+        //Debug.LogWarning("ReadInput " + PlayerBehaviour.instance.attack.isAttacking);
         if (PlayerBehaviour.instance.attack.isAttacking)
         {
             if (!PlayerBehaviour.instance.jump.IsJumping)

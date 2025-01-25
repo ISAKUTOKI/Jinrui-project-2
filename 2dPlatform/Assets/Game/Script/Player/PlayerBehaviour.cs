@@ -83,10 +83,6 @@ public class PlayerBehaviour : MonoBehaviour
         health.TakeDamage(1);
     }
 
-    private Animator anim;
-    private AnimatorController animController;
-
-
     //public void SetAnimatorSpeed(int layerIndex, string stateName, float speed)
     //{
     //    foreach (var state in animController.layers[layerIndex].stateMachine.states)

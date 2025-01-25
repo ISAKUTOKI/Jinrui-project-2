@@ -7,6 +7,7 @@ public class PlayerAttackBehaviour : MonoBehaviour
     [HideInInspector] public bool canAttack;
 
     private PlayerHealthBehaviour _health;
+    private PlayerMove _move;
     //public ParticleSystem ps;
 
     public AnimationClipData clip_swing1;
@@ -28,7 +29,7 @@ public class PlayerAttackBehaviour : MonoBehaviour
     public int damage_swing2_Super;
     public int damage_swing3;
     public int damage_swing3_Super;
-    public int currentAttackSwingPhase;//0 没有攻击 1~3 第1~3次斩击 
+    private int _attackMovementPhase;//0 没有攻击 1~3 第1~3次斩击 
     public bool isSuperAttack;//弹反攻击
     //public PlayerActionPerformDependency dependency;
     private bool _comboOn;
@@ -41,7 +42,8 @@ public class PlayerAttackBehaviour : MonoBehaviour
     {
         //_jump = GetComponent<PlayerJump>();
         _health = GetComponent<PlayerHealthBehaviour>();
-        currentAttackSwingPhase = 0;
+        _move = GetComponent<PlayerMove>();
+        SetAttackPhase(0);
         isSuperAttack = false;
     }
 
@@ -54,7 +56,7 @@ public class PlayerAttackBehaviour : MonoBehaviour
 
     public int GetDamage(bool isSuper)
     {
-        switch (currentAttackSwingPhase)
+        switch (_attackMovementPhase)
         {
             case 1:
                 if (isSuper)
@@ -97,7 +99,7 @@ public class PlayerAttackBehaviour : MonoBehaviour
 
     private void Update()
     {
-        if(canAttack)
+        if (canAttack)
         {
             CheckStopAttack();
             CheckAttack();
@@ -109,7 +111,7 @@ public class PlayerAttackBehaviour : MonoBehaviour
         //Debug.LogWarning("OnCheckCombo " + _comboOn);
         PlayerBehaviour.instance.animator.ResetTrigger("combo");
 
-        switch (currentAttackSwingPhase)
+        switch (_attackMovementPhase)
         {
             case 1:
                 if (_comboOn)
@@ -176,8 +178,9 @@ public class PlayerAttackBehaviour : MonoBehaviour
 
     void CheckStopAttack()
     {
-        if (currentAttackSwingPhase == 0)
+        if (_attackMovementPhase == 0)
             return;
+
         if (_health.isDead || PlayerBehaviour.instance.health.isWounding)
         {
             InterruptAttack();
@@ -197,7 +200,7 @@ public class PlayerAttackBehaviour : MonoBehaviour
         var clipInfo = clipInfos[0];
         var clip = clipInfo.clip;
 
-        switch (currentAttackSwingPhase)
+        switch (_attackMovementPhase)
         {
             case 0:
                 if (clip == clip_swing1.clip || clip == clip_swing2.clip || clip == clip_swing3.clip)
@@ -256,20 +259,20 @@ public class PlayerAttackBehaviour : MonoBehaviour
 
     void InterruptAttack()
     {
-        //Debug.LogWarning("攻击被打断 " + currentAttackSwingPhase);
+        Debug.LogWarning("攻击被打断 " + _attackMovementPhase);
         _comboOn = false;
         isSuperAttack = false;
-        currentAttackSwingPhase = 0;
+        SetAttackPhase(0);
         PlayerBehaviour.instance.weaponView.SetState(PlayerWeaponView.State.idle);
     }
 
     void SetAttackPhase(int i)
     {
-        //Debug.LogWarning("进入第" + i + "段攻击");
-        currentAttackSwingPhase = i;
+        Debug.LogWarning("进入第" + i + "段攻击");
+        _attackMovementPhase = i;
     }
 
-    public bool isAttacking { get { return currentAttackSwingPhase != 0; } }
+    public bool isAttacking { get { return _attackMovementPhase != 0; } }
 
     void PerformAttack()
     {
@@ -277,9 +280,10 @@ public class PlayerAttackBehaviour : MonoBehaviour
         {
             PlayerBehaviour.instance.defend.ExitDefend(false);
         }
+        //_move.StopMove();
 
         //Debug.LogWarning("PerformAttack " + currentAttackSwingPhase);
-        switch (currentAttackSwingPhase)
+        switch (_attackMovementPhase)
         {
             case 0:
                 //Debug.LogWarning("首次 进入第1段");
@@ -316,7 +320,7 @@ public class PlayerAttackBehaviour : MonoBehaviour
     {
         //Debug.Log("CheckDamageCollision " + n);
         Collider2D[] cols = null;
-        switch (currentAttackSwingPhase)
+        switch (_attackMovementPhase)
         {
             case 1:
                 cols = swing1_Cols;
