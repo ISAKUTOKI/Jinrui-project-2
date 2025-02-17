@@ -1,25 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class DebugButtonBehaviour : MonoBehaviour
+public class DebugPanelController : MonoBehaviour
 {
-    [SerializeField] bool isInTest;
-    [SerializeField] GameObject panelDebug;
+    [SerializeField]
+    private bool isInTest;
+
+    [SerializeField]
+    private GameObject panelDebug;
+
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        if (isInTest)
-            panelDebug.SetActive(true);
-        else
-            panelDebug.SetActive(false);
+        panelDebug.SetActive(isInTest);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-
 }

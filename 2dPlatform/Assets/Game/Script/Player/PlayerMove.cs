@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
+    [HideInInspector] public bool canMove = true;
+
     public float speed;
     private float _speedX;
     public bool isMoving { get; private set; }
@@ -19,7 +21,8 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
-        ReadInput();
+        if (canMove)
+            ReadInput();
     }
 
     /// <summary>
@@ -30,7 +33,8 @@ public class PlayerMove : MonoBehaviour
     /// </summary>
     private void FixedUpdate()
     {
-        Move();
+        if (canMove)
+            Move();
     }
 
     /// <summary>
