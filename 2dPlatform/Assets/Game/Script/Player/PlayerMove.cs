@@ -120,6 +120,8 @@ public class PlayerMove : MonoBehaviour
             PlayerBehaviour.instance.movePosition.StopXMovement();
     }
 
+
+
     void FlipRight()
     {
         PlayerBehaviour.instance.flip.localScale = _defaultFilpScale;

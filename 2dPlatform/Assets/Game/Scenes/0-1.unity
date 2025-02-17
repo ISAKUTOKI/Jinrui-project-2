@@ -15781,8 +15781,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1837027611}
-  - component: {fileID: 1837027612}
   - component: {fileID: 1837027613}
+  - component: {fileID: 1837027612}
   m_Layer: 0
   m_Name: Chat
   m_TagString: Untagged
@@ -15799,7 +15799,7 @@ Transform:
   m_GameObject: {fileID: 1837027610}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -27.7, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15837,7 +15837,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -1.5505219, y: -2.2342148}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -15848,7 +15848,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.977829, y: 3.0755002}
   m_EdgeRadius: 0
 --- !u!114 &1837027613
 MonoBehaviour:
@@ -15863,12 +15863,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chat:
-  - "\u4F60\u597D"
-  - "\u4F60\u518D\u597D"
-  - "\u4F60\u975E\u5E38\u597D"
-  - "\u4F60\u7279\u522B\u7279\u522B\u597D"
-  - "\u518D\u89C1"
-  isPauseChat: 0
+  - text: "\u4F60\u597D"
+    pauseTime: 2
+  - text: "\u8FD9\u662F\u4E00\u6761\u8BD5\u9A8C"
+    pauseTime: 3
+  - text: "\u7B49\u5F97\u6709\u70B9\u4E45\u4F46\u662F\u4E5F\u7B97\u662F\u505A\u51FA\u6765\u4E86"
+    pauseTime: 5
+  - text: "\u603B\u4E4B\u662F\u518D\u89C1"
+    pauseTime: 3
+  isPauseChat: 1
 --- !u!1001 &6481415248595292227
 PrefabInstance:
   m_ObjectHideFlags: 0

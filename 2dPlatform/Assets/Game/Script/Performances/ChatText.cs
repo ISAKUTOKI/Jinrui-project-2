@@ -10,14 +10,19 @@ public class ChatText : MonoBehaviour
 
     private void Start()
     {
-
+        chat.Add(new ChatTextInfo("", 0));
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            PlayerBehaviour.instance.move.canMove = !isPauseChat;
+            if (isPauseChat)
+            {
+                PlayerBehaviour.instance.animator.SetBool("walk", false);
+                PlayerBehaviour.instance.movePosition.StopXMovement();
+                PlayerBehaviour.instance.move.canMove = false;
+            }
 
             ChatBoxSystem.instance.IWantTalk();
 
@@ -35,11 +40,9 @@ public class ChatText : MonoBehaviour
                 yield return new WaitForSeconds(item.pauseTime);
             }
         }
-        else
-        {
-            ChatBoxTextMeshBehaviour.instance.ClearText();
 
-            PlayerBehaviour.instance.move.canMove = true;
-        }
+        //Debug.Log("Chat text end");
+        ChatBoxSystem.instance.IWantStop();
+        PlayerBehaviour.instance.move.canMove = true;
     }
 }

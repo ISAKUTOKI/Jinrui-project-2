@@ -6,24 +6,25 @@ using UnityEngine;
 public class ChatBoxTextMeshBehaviour : MonoBehaviour
 {
     public static ChatBoxTextMeshBehaviour instance;
-    [HideInInspector]public TextMeshPro textMeshPro;
+    public TextMeshProUGUI textMeshProUGUI { get; private set; }
 
     private void Awake()
     {
         instance = this;
-        ClearText();
     }
     private void Start()
     {
-        textMeshPro = GetComponent<TextMeshPro>();
+        textMeshProUGUI = GetComponent<TextMeshProUGUI>();
+        ClearText();
     }
+
 
     public void SetText(string text)
     {
-        textMeshPro.text = text;
+        textMeshProUGUI.text = text;
     }
     public void ClearText()
     {
-        textMeshPro.text = "";
+        textMeshProUGUI.text = "";
     }
 }

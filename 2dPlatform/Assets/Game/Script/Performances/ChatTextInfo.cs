@@ -1,6 +1,8 @@
+using System;
 using UnityEngine;
 
-[SerializeField]public class ChatTextInfo
+[Serializable]
+public class ChatTextInfo
 {
     public string text;
     public float pauseTime;
