@@ -7,6 +7,10 @@ public class ChatText : MonoBehaviour
 {
     [SerializeField] List<ChatTextInfo> chat = new List<ChatTextInfo>();
     [SerializeField] bool isPauseChat = false;
+    [SerializeField] bool isExitEndChat = false;
+    [SerializeField] bool canChatAgain = false;
+    bool isChatted = false;
+    Coroutine currentCoroutine;
 
     private void Start()
     {
@@ -15,6 +19,8 @@ public class ChatText : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (isChatted)
+            return;
         if (collision.CompareTag("Player"))
         {
             if (isPauseChat)
@@ -26,7 +32,24 @@ public class ChatText : MonoBehaviour
 
             ChatBoxSystem.instance.IWantTalk();
 
-            StartCoroutine(PlayChatTextCoroutine());
+            currentCoroutine = StartCoroutine(PlayChatTextCoroutine());
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            if (isExitEndChat)
+            {
+                ChatBoxSystem.instance.IWantStop();
+                PlayerBehaviour.instance.move.canMove = true;
+                if (currentCoroutine != null)
+                {
+                    StopCoroutine(currentCoroutine);
+                }
+                ChatBoxTextMeshBehaviour.instance.SetText("");
+            }
         }
     }
 
@@ -44,5 +67,14 @@ public class ChatText : MonoBehaviour
         //Debug.Log("Chat text end");
         ChatBoxSystem.instance.IWantStop();
         PlayerBehaviour.instance.move.canMove = true;
+
+        if (canChatAgain)
+        {
+            isChatted = false;
+        }
+        else
+        {
+            isChatted = true;
+        }
     }
 }
