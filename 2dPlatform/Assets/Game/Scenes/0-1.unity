@@ -24166,6 +24166,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4101550198624165204, guid: 0554c06579d168d42a3ed96d19032dd6, type: 3}
+      propertyPath: m_Size.x
+      value: 1.2238159
+      objectReference: {fileID: 0}
+    - target: {fileID: 4101550198624165204, guid: 0554c06579d168d42a3ed96d19032dd6, type: 3}
+      propertyPath: m_Size.y
+      value: 5.838729
+      objectReference: {fileID: 0}
+    - target: {fileID: 4101550198624165204, guid: 0554c06579d168d42a3ed96d19032dd6, type: 3}
+      propertyPath: m_Offset.x
+      value: 38.23237
+      objectReference: {fileID: 0}
+    - target: {fileID: 4101550198624165204, guid: 0554c06579d168d42a3ed96d19032dd6, type: 3}
+      propertyPath: m_Offset.y
+      value: 1.1876884
+      objectReference: {fileID: 0}
     - target: {fileID: 4654123075880886596, guid: 0554c06579d168d42a3ed96d19032dd6, type: 3}
       propertyPath: m_ClearFlags
       value: 1
@@ -24353,6 +24369,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 4433103860386147223, guid: 0554c06579d168d42a3ed96d19032dd6, type: 3}
+    - {fileID: 5108198046262915528, guid: 0554c06579d168d42a3ed96d19032dd6, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 6979940303013150313, guid: 0554c06579d168d42a3ed96d19032dd6, type: 3}
       insertIndex: -1

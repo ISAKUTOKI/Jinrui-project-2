@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
 
@@ -14,7 +15,7 @@ public class ChatText : MonoBehaviour
 
     private void Start()
     {
-        chat.Add(new ChatTextInfo("", 0,ChatTextInfo.ChatBoxAction.Stop));
+        chat.Add(new ChatTextInfo("", 0, ChatTextInfo.ChatBoxAction.Stop));
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -59,16 +60,16 @@ public class ChatText : MonoBehaviour
         {
             foreach (var item in chat)
             {
-                // ���� ChatBoxSystem �Ķ�Ӧ����
+
                 item.InvokeChatBoxAction();
 
-                // �����ı�����
+
                 ChatBoxTextMeshBehaviour.instance.SetText(item.text);
                 yield return new WaitForSeconds(item.pauseTime);
+                Debug.Log(isPauseChat);
             }
         }
 
-        // �������
         ChatBoxSystem.instance.IWantStop();
         PlayerBehaviour.instance.move.canMove = true;
 

@@ -14,7 +14,6 @@ public class PlayerJump : MonoBehaviour
     void Update()
     {
         ReadInput();
-
     }
 
     public bool IsJumping { get { return _isFloating; } }
@@ -40,14 +39,12 @@ public class PlayerJump : MonoBehaviour
 
     void TryJump()
     {
-        if (canNotJump)
+        if (!canJump)
             return;
-
         DoJump();
     }
 
-
-    bool canNotJump { get { return _isFloating || PlayerBehaviour.instance.defend.isInNoMoveState || PlayerBehaviour.instance.attack.isAttacking || PlayerBehaviour.instance.health.isDead; } }
+    public bool canJump { get { return !_isFloating && !PlayerBehaviour.instance.defend.isInNoMoveState && !PlayerBehaviour.instance.attack.isAttacking && !PlayerBehaviour.instance.health.isDead; } }
 
     void DoJump()
     {
@@ -84,5 +81,4 @@ public class PlayerJump : MonoBehaviour
         //}
 
     }
-
 }
