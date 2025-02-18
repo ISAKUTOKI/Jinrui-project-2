@@ -14,7 +14,7 @@ public class ChatText : MonoBehaviour
 
     private void Start()
     {
-        chat.Add(new ChatTextInfo("", 0));
+        chat.Add(new ChatTextInfo("", 0,ChatTextInfo.ChatBoxAction.Stop));
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -59,12 +59,16 @@ public class ChatText : MonoBehaviour
         {
             foreach (var item in chat)
             {
+                // ���� ChatBoxSystem �Ķ�Ӧ����
+                item.InvokeChatBoxAction();
+
+                // �����ı�����
                 ChatBoxTextMeshBehaviour.instance.SetText(item.text);
                 yield return new WaitForSeconds(item.pauseTime);
             }
         }
 
-        //Debug.Log("Chat text end");
+        // �������
         ChatBoxSystem.instance.IWantStop();
         PlayerBehaviour.instance.move.canMove = true;
 
