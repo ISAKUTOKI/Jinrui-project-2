@@ -214,20 +214,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chat:
   - text: "<b>\u304A\u6C17\u3092\u3064\u3044\u3066...</b>"
-    pauseTime: 1.3
+    duration: 1.7
     chatBoxAction: 1
   - text: "\u3053\u306E\u524D\u306F<color=red>\u3053\u306E\u30B2\u30FC\u30E0\u306E\u30B3\u30FC\u30A2</color>\u3078\u306E\u9053\u3060"
-    pauseTime: 1.7
+    duration: 2.5
     chatBoxAction: 1
   - text: "\u5371\u967A\u304C\u591A\u3044\u306E\u3067"
-    pauseTime: 1.3
+    duration: 1.3
     chatBoxAction: 1
   - text: "<b><size=100>\u304A\u6C17\u3092\u3064\u3044\u3066</size></b>"
-    pauseTime: 1.7
-    chatBoxAction: 1
-  - text: "\u4FFA\u306E\u4F53\u3092\u5931\u3063\u3066\u306A\u3063\u3061\u3083\u3044\u305F\u304F\u306A\u3044\u3093\u304B\u3089"
-    pauseTime: 3
-    chatBoxAction: 1
+    duration: 2.5
+    chatBoxAction: 3
+  - text: "<size=80>\u4FFA\u306E\u4F53\u3092\u5931\u3063\u3066\u306A\u3063\u3061\u3083\u3044\u305F\u304F\u306A\u3044\u3093\u304B\u3089</size>"
+    duration: 2.5
+    chatBoxAction: 3
+  - text: 
+    duration: 0
+    chatBoxAction: 6
   isPauseChat: 1
   isExitEndChat: 0
   canChatAgain: 0
@@ -8258,20 +8261,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chat:
   - text: "\u3088\u304F\u3084\u3063\u3066\u304D\u305F"
-    pauseTime: 1.3
+    duration: 1.3
     chatBoxAction: 1
   - text: "\u6D41\u77F3\u4FFA\u306E\u4F53\u3060"
-    pauseTime: 1.3
+    duration: 1.3
     chatBoxAction: 2
   - text: "\u3055\u3041"
-    pauseTime: 0.7
+    duration: 0.7
     chatBoxAction: 1
-  - text: "\u884C\u3053\u3046"
-    pauseTime: 1.3
-    chatBoxAction: 1
+  - text: "\u884C\u3051\u3047\u3047\u3047\u3047\u3047"
+    duration: 1.3
+    chatBoxAction: 3
   - text: "\u307E\u305A\u306F\u5411\u3053\u3046\u307E\u3067\u8DF3\u306D\u3066\u884C\u3053\u3046"
-    pauseTime: 2.5
+    duration: 3
     chatBoxAction: 1
+  - text: 
+    duration: 0
+    chatBoxAction: 6
   isPauseChat: 1
   isExitEndChat: 0
   canChatAgain: 0
@@ -23908,35 +23914,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chat:
   - text: "\u4FFA\u306F\u8AB0\uFF1F"
-    pauseTime: 1.3
+    duration: 1.3
     chatBoxAction: 1
   - text: ..........
-    pauseTime: 2
+    duration: 2
     chatBoxAction: 0
   - text: "\u7C21\u5358\u306B\u8A00\u3048\u3070"
-    pauseTime: 1.3
+    duration: 1.3
     chatBoxAction: 1
   - text: "<i><size=100>\u4FFA\u306F\u304A\u524D\u3060</size></i>"
-    pauseTime: 1.7
+    duration: 2
     chatBoxAction: 2
   - text: "\u8A73\u3057\u304F\u8A00\u3048\u3070"
-    pauseTime: 1.3
+    duration: 1.3
     chatBoxAction: 1
   - text: "\u3042\u306A\u305F\u304C\u64CD\u4F5C\u3057\u3066\u3044\u308B\u3084\u3064\u3053\u305D\u4FFA\u306E\u4F53\u3060"
-    pauseTime: 3
+    duration: 3
     chatBoxAction: 2
+  - text: "\u305D\u3057\u3066..."
+    duration: 1.3
+    chatBoxAction: 1
   - text: "\u4FFA\u306F\u3053\u3053\u306B\u4F4F\u3093\u3067\u3044\u308B<i><b>\u5996\u602A\u3055\u3093...</b></i>\u306A\u3093\u3066\u306D\u3047"
-    pauseTime: 3
+    duration: 3
     chatBoxAction: 1
   - text: "\u3053\u3053\u306F......"
-    pauseTime: 2
-    chatBoxAction: 0
+    duration: 1.3
+    chatBoxAction: 1
   - text: "\u307E\u3041"
-    pauseTime: 0.7
-    chatBoxAction: 0
+    duration: 0.7
+    chatBoxAction: 1
   - text: "\u9045\u304B\u308C\u65E9\u304B\u308C\u5206\u304B\u308B\u3053\u3068\u3060"
-    pauseTime: 1.3
+    duration: 2.5
     chatBoxAction: 2
+  - text: 
+    duration: 0
+    chatBoxAction: 5
   isPauseChat: 1
   isExitEndChat: 0
   canChatAgain: 0
@@ -24021,16 +24033,36 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6415128526837887625, guid: 45d3e7766f49a814cb395b0c5798fde0, type: 3}
+      propertyPath: chat.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6415128526837887625, guid: 45d3e7766f49a814cb395b0c5798fde0, type: 3}
       propertyPath: chat.Array.data[0].text
       value: "W\u3067\u8DF3\u306D\u308B"
+      objectReference: {fileID: 0}
+    - target: {fileID: 6415128526837887625, guid: 45d3e7766f49a814cb395b0c5798fde0, type: 3}
+      propertyPath: chat.Array.data[1].text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6415128526837887625, guid: 45d3e7766f49a814cb395b0c5798fde0, type: 3}
+      propertyPath: chat.Array.data[0].duration
+      value: 999
       objectReference: {fileID: 0}
     - target: {fileID: 6415128526837887625, guid: 45d3e7766f49a814cb395b0c5798fde0, type: 3}
       propertyPath: chat.Array.data[0].pauseTime
       value: 999
       objectReference: {fileID: 0}
     - target: {fileID: 6415128526837887625, guid: 45d3e7766f49a814cb395b0c5798fde0, type: 3}
+      propertyPath: chat.Array.data[1].pauseTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6415128526837887625, guid: 45d3e7766f49a814cb395b0c5798fde0, type: 3}
       propertyPath: chat.Array.data[0].chatBoxAction
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6415128526837887625, guid: 45d3e7766f49a814cb395b0c5798fde0, type: 3}
+      propertyPath: chat.Array.data[1].chatBoxAction
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -24097,6 +24129,14 @@ PrefabInstance:
     - target: {fileID: 1055319811575898584, guid: 0554c06579d168d42a3ed96d19032dd6, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1477547322873117417, guid: 0554c06579d168d42a3ed96d19032dd6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 38.21
+      objectReference: {fileID: 0}
+    - target: {fileID: 1477547322873117417, guid: 0554c06579d168d42a3ed96d19032dd6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.96
       objectReference: {fileID: 0}
     - target: {fileID: 1630791196680094499, guid: 0554c06579d168d42a3ed96d19032dd6, type: 3}
       propertyPath: m_AnchorMax.y
@@ -24168,19 +24208,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4101550198624165204, guid: 0554c06579d168d42a3ed96d19032dd6, type: 3}
       propertyPath: m_Size.x
-      value: 1.2238159
+      value: 0.88320315
       objectReference: {fileID: 0}
     - target: {fileID: 4101550198624165204, guid: 0554c06579d168d42a3ed96d19032dd6, type: 3}
       propertyPath: m_Size.y
-      value: 5.838729
+      value: 1.3392658
       objectReference: {fileID: 0}
     - target: {fileID: 4101550198624165204, guid: 0554c06579d168d42a3ed96d19032dd6, type: 3}
       propertyPath: m_Offset.x
-      value: 38.23237
+      value: 0.052836657
       objectReference: {fileID: 0}
     - target: {fileID: 4101550198624165204, guid: 0554c06579d168d42a3ed96d19032dd6, type: 3}
       propertyPath: m_Offset.y
-      value: 1.1876884
+      value: 0.02502811
       objectReference: {fileID: 0}
     - target: {fileID: 4654123075880886596, guid: 0554c06579d168d42a3ed96d19032dd6, type: 3}
       propertyPath: m_ClearFlags
@@ -24244,6 +24284,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6794033669941599521, guid: 0554c06579d168d42a3ed96d19032dd6, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6896544329118931615, guid: 0554c06579d168d42a3ed96d19032dd6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6896544329118931615, guid: 0554c06579d168d42a3ed96d19032dd6, type: 3}
+      propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6979940303013150313, guid: 0554c06579d168d42a3ed96d19032dd6, type: 3}
@@ -24366,7 +24414,8 @@ PrefabInstance:
       propertyPath: m_AnchorMin.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2438170877561577318, guid: 0554c06579d168d42a3ed96d19032dd6, type: 3}
     m_RemovedGameObjects:
     - {fileID: 4433103860386147223, guid: 0554c06579d168d42a3ed96d19032dd6, type: 3}
     - {fileID: 5108198046262915528, guid: 0554c06579d168d42a3ed96d19032dd6, type: 3}

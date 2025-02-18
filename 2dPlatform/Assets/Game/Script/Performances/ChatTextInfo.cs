@@ -5,13 +5,13 @@ using UnityEngine;
 public class ChatTextInfo
 {
     public string text;
-    public float pauseTime;
+    public float duration;
     public ChatBoxAction chatBoxAction;
 
     public ChatTextInfo(string t, float p, ChatBoxAction action)
     {
         text = t;
-        pauseTime = p;
+        duration = p;
         chatBoxAction = action;
     }
 
@@ -22,7 +22,8 @@ public class ChatTextInfo
         Show,
         Shock,
         Hurt,
-        Stop
+        Stop,
+        FastStop
     }
 
     public void InvokeChatBoxAction()
@@ -45,6 +46,9 @@ public class ChatTextInfo
                 break;
             case ChatBoxAction.Stop:
                 ChatBoxSystem.instance.IWantStop();
+                break;
+            case ChatBoxAction.FastStop:
+                ChatBoxSystem.instance.IWantFastStop();
                 break;
             default:
                 Debug.LogWarning("Unknown ChatBoxAction: " + chatBoxAction);

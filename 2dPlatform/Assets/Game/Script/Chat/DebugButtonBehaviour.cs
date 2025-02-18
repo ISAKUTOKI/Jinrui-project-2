@@ -11,6 +11,6 @@ public class DebugPanelController : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        panelDebug.SetActive(!isInTest);
+        panelDebug.SetActive(isInTest);
     }
 }

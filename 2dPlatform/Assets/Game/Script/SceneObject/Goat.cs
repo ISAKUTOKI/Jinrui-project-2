@@ -21,7 +21,7 @@ public class Goat : MonoBehaviour
         // Check if the collider has the tag "Player"
         if (other.CompareTag("Player"))
         {
-            // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             Debug.Log("Player has entered the trigger");
         }
     }

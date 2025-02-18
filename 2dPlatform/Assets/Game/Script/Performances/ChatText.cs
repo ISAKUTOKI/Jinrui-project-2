@@ -10,12 +10,13 @@ public class ChatText : MonoBehaviour
     [SerializeField] bool isPauseChat = false;
     [SerializeField] bool isExitEndChat = false;
     [SerializeField] bool canChatAgain = false;
+    [SerializeField] bool isSafeChat = false;
     bool isChatted = false;
     Coroutine currentCoroutine;
 
     private void Start()
     {
-        chat.Add(new ChatTextInfo("", 0, ChatTextInfo.ChatBoxAction.Stop));
+        //chat.Add(new ChatTextInfo("", 0, ChatTextInfo.ChatBoxAction.Stop));
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -30,11 +31,16 @@ public class ChatText : MonoBehaviour
                 PlayerBehaviour.instance.movePosition.StopXMovement();
                 PlayerBehaviour.instance.move.canMove = false;
             }
+            if (isSafeChat)
+            {
+                PlayerBehaviour.instance.health.canBeWounded = false;
+            }
 
             ChatBoxSystem.instance.IWantTalk();
 
             currentCoroutine = StartCoroutine(PlayChatTextCoroutine());
         }
+
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -50,12 +56,22 @@ public class ChatText : MonoBehaviour
                     StopCoroutine(currentCoroutine);
                 }
                 ChatBoxTextMeshBehaviour.instance.SetText("");
+                PlayerBehaviour.instance.health.canBeWounded = true;
             }
         }
     }
 
     private IEnumerator PlayChatTextCoroutine()
     {
+        if (canChatAgain)
+        {
+            isChatted = false;
+        }
+        else
+        {
+            isChatted = true;
+        }
+
         if (chat != null)
         {
             foreach (var item in chat)
@@ -65,21 +81,21 @@ public class ChatText : MonoBehaviour
 
 
                 ChatBoxTextMeshBehaviour.instance.SetText(item.text);
-                yield return new WaitForSeconds(item.pauseTime);
-                Debug.Log(isPauseChat);
+                yield return new WaitForSeconds(item.duration);
+                //Debug.Log(isPauseChat);
             }
         }
 
-        ChatBoxSystem.instance.IWantStop();
-        PlayerBehaviour.instance.move.canMove = true;
+        if (chat.Count > 0)
+        {
+            var lastChatAction = chat[chat.Count - 1].chatBoxAction;
+            if (lastChatAction != ChatTextInfo.ChatBoxAction.Stop && lastChatAction != ChatTextInfo.ChatBoxAction.FastStop)
+            {
+                ChatBoxSystem.instance.IWantStop();
+            }
+        }
 
-        if (canChatAgain)
-        {
-            isChatted = false;
-        }
-        else
-        {
-            isChatted = true;
-        }
+        PlayerBehaviour.instance.move.canMove = true;
+        PlayerBehaviour.instance.health.canBeWounded = true;
     }
 }
