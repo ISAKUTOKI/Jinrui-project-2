@@ -27,4 +27,17 @@ public class ChatBoxTextMeshBehaviour : MonoBehaviour
     {
         textMeshProUGUI.text = "";
     }
+
+    TMP_FontAsset lastFont;
+
+    public void SetFont(TMP_FontAsset targetFont)
+    {
+        lastFont = textMeshProUGUI.font;
+        textMeshProUGUI.font = targetFont;
+    }
+
+    public void SetBackToLastFont()
+    {
+        textMeshProUGUI.font = lastFont;
+    }
 }

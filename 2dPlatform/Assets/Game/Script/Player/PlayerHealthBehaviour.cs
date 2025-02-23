@@ -16,14 +16,14 @@ public class PlayerHealthBehaviour : MonoBehaviour
     private int _hp;
     bool _dead;
 
-    public string dieSound;
+    //public string dieSound;
     public float deathFadeDelay;
 
-    public string weaponParent1; // 要禁用的GameObject的名称
+    //public string weaponParent1; // 要禁用的GameObject的名称
 
     public float slowMoDuration; // 慢动作持续时间
 
-    public bool canBeWounded;
+    [HideInInspector]public bool canBeWounded;
 
     private void Start()
     {
@@ -39,7 +39,7 @@ public class PlayerHealthBehaviour : MonoBehaviour
         FullFill();
         Time.timeScale = 1f; // 确保开始时Time.timeScale为1
         canBeWounded = true;
-        Debug.Log("已设置“玩家是否可被攻击”为 "+ canBeWounded);
+        //Debug.Log("已设置“玩家是否可被攻击”为 "+ canBeWounded);
     }
     public void FullFill()
     {
@@ -52,10 +52,10 @@ public class PlayerHealthBehaviour : MonoBehaviour
     private void Update()
     {
         DoRoutineMove();
-        Debug.Log("玩家现在 "+canBeWounded+" 被攻击");
+        //Debug.Log("玩家现在 "+canBeWounded+" 可以被攻击");
 
-        //if (Input.GetKeyDown(KeyCode.F12))
-        //    Die();
+        if (Input.GetKeyDown(KeyCode.F12))
+            Die();
 
     }
 
@@ -142,6 +142,12 @@ public class PlayerHealthBehaviour : MonoBehaviour
         //{
         //    sr.DOFade(0, 3).SetDelay(deathFadeDelay + Random.Range(1, 3f));
         //}
+
+        if (DieChat.instance != null)
+        {
+            DieChat.instance.DieCount++;
+            //Debug.Log("死过了 " + DieChat.instance.DieCount + " 次（血量系统）");
+        }
     }
 
     void DoRoutineMove()

@@ -36,7 +36,7 @@ public class ChatText : MonoBehaviour
                 PlayerBehaviour.instance.health.canBeWounded = false;
             }
 
-            ChatBoxSystem.instance.IWantTalk();
+            //ChatBoxSystem.instance.IWantTalk();
 
             currentCoroutine = StartCoroutine(PlayChatTextCoroutine());
         }

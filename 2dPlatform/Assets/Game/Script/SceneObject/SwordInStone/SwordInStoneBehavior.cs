@@ -6,6 +6,9 @@ public class SwordInStoneBehavior : MonoBehaviour
     Animator animator;
     public GameObject Neko;
     public Camera Camera;
+    public GameObject Chat;
+    public GameObject Goat;
+    public GameObject notGetSwordChat;
     public SIS_JKey JKey { get; private set; }
     bool canTryToGetSword = false;
 
@@ -34,6 +37,7 @@ public class SwordInStoneBehavior : MonoBehaviour
     {
         if (canTryToGetSword)
             TapKeyCheck();
+        ChangeChatEnable();
     }
 
     /// <summary>
@@ -126,7 +130,7 @@ public class SwordInStoneBehavior : MonoBehaviour
         animator.SetTrigger("got");
         JKey.seeable = false;
         StartCoroutine(CameraTryBackToInitialCoroutine());
-        Invoke("DelayChangePLayerPhase",1.5f);
+        Invoke("DelayChangePLayerPhase", 1.5f);
     }//拔剑成功，设定变量
 
     void DelayChangePLayerPhase()
@@ -165,4 +169,20 @@ public class SwordInStoneBehavior : MonoBehaviour
             cameraCurrentSize = cameraInitialSize;
         }
     }//相机归位的协程
+
+    void ChangeChatEnable()
+    {
+        if (checkSucceeded)
+        {
+            Chat.SetActive(true);
+            notGetSwordChat.SetActive(false);
+            Goat.SetActive(true);
+        }
+        else
+        {
+            Chat.SetActive(false);
+            notGetSwordChat.SetActive(true);
+            Goat.SetActive(false);
+        }
+    }
 }

@@ -216,6 +216,120 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8120393647998762540, guid: 67bf6fb14c9d6b14cb95aa87deb26e7f, type: 3}
   m_PrefabInstance: {fileID: 58455827}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &105896275
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 105896276}
+  - component: {fileID: 105896278}
+  - component: {fileID: 105896277}
+  m_Layer: 0
+  m_Name: Chat3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &105896276
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 105896275}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 40.15, y: 0.75, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1350475863}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &105896277
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 105896275}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -1.3246189, y: 0.8358128}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.3141229, y: 4.4493127}
+  m_EdgeRadius: 0
+--- !u!114 &105896278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 105896275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2fbc1d3ed986ea40bac102501c7ec09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chat:
+  - text: "\u3061\u3087\u3063\u3068\u6016\u3044\u6570\u3060\u3063\u305F\u306D..."
+    duration: 1.3
+    chatBoxAction: 1
+  - text: "<size=100>\u3067\u3082\u304A\u524D\u3082\u3084\u308B\u3093\u3058\u3083\u3093
+      !</size>"
+    duration: 2.5
+    chatBoxAction: 1
+  - text: "\u6D41\u77F3\u4FFA\u306E\u4F53"
+    duration: 1.7
+    chatBoxAction: 2
+  - text: "\u3058\u3083\u3041"
+    duration: 0.7
+    chatBoxAction: 1
+  - text: "\u3055\u3063\u3055\u3068\u6B21\u3078"
+    duration: 1.7
+    chatBoxAction: 1
+  - text: 
+    duration: 0
+    chatBoxAction: 5
+  isPauseChat: 1
+  isExitEndChat: 0
+  canChatAgain: 0
+  isSafeChat: 1
 --- !u!1001 &332325729
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -65680,6 +65794,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4452762765917617709, guid: 0554c06579d168d42a3ed96d19032dd6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 884273766}
+    - targetCorrespondingSourceObject: {fileID: 4452762765917617709, guid: 0554c06579d168d42a3ed96d19032dd6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 105896276}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0554c06579d168d42a3ed96d19032dd6, type: 3}
 --- !u!4 &699421407 stripped
@@ -74197,6 +74314,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8120393647998762540, guid: 67bf6fb14c9d6b14cb95aa87deb26e7f, type: 3}
   m_PrefabInstance: {fileID: 1637629330}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1793957649
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2162219123536275311, guid: a580156040164824b9c2f4f8da476f0a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 30.027258
+      objectReference: {fileID: 0}
+    - target: {fileID: 2162219123536275311, guid: a580156040164824b9c2f4f8da476f0a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.1252202
+      objectReference: {fileID: 0}
+    - target: {fileID: 2162219123536275311, guid: a580156040164824b9c2f4f8da476f0a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.21789047
+      objectReference: {fileID: 0}
+    - target: {fileID: 2162219123536275311, guid: a580156040164824b9c2f4f8da476f0a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2162219123536275311, guid: a580156040164824b9c2f4f8da476f0a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2162219123536275311, guid: a580156040164824b9c2f4f8da476f0a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2162219123536275311, guid: a580156040164824b9c2f4f8da476f0a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2162219123536275311, guid: a580156040164824b9c2f4f8da476f0a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2162219123536275311, guid: a580156040164824b9c2f4f8da476f0a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2162219123536275311, guid: a580156040164824b9c2f4f8da476f0a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4107210228924062175, guid: a580156040164824b9c2f4f8da476f0a, type: 3}
+      propertyPath: m_Name
+      value: DieChat
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a580156040164824b9c2f4f8da476f0a, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -74204,3 +74378,4 @@ SceneRoots:
   - {fileID: 699421406}
   - {fileID: 1174143471}
   - {fileID: 1547837317}
+  - {fileID: 1793957649}

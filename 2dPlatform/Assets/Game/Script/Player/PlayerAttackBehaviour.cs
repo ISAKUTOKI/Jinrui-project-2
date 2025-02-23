@@ -297,7 +297,7 @@ public class PlayerAttackBehaviour : MonoBehaviour
 
     void SetAttackPhase(int i)
     {
-        Debug.LogWarning("进入第" + i + "段攻击");
+        //Debug.LogWarning("进入第" + i + "段攻击");
         _attackMovementPhase = i;
     }
 

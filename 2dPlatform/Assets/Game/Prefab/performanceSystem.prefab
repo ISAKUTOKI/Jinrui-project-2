@@ -79,8 +79,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chat:
   - text: 
-    pauseTime: 0
+    duration: 0
+    chatBoxAction: 0
   isPauseChat: 1
+  isExitEndChat: 0
+  canChatAgain: 0
+  isSafeChat: 0
 --- !u!61 &88232793421577256
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -1700,9 +1700,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpView: {fileID: 0}
   hpMax: 6
-  dieSound: 
   deathFadeDelay: 0
-  weaponParent1: 
   slowMoDuration: 3
   canBeWounded: 0
   woundClip: {fileID: 7400000, guid: 634bfe08c1f491c4b9ad1fa3de491217, type: 2}
@@ -2862,8 +2860,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: TEST  TEXT
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e4a3aac5929c94b44b0aad4c9322a0d5, type: 2}
+  m_sharedMaterial: {fileID: 4674848847077406396, guid: e4a3aac5929c94b44b0aad4c9322a0d5, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2893,7 +2891,7 @@ MonoBehaviour:
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -6836,6 +6834,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6140489828576543154, guid: 45d3e7766f49a814cb395b0c5798fde0, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6276104648016660438, guid: 45d3e7766f49a814cb395b0c5798fde0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -6876,7 +6878,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6140489828576543154, guid: 45d3e7766f49a814cb395b0c5798fde0, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
