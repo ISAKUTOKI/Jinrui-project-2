@@ -25,7 +25,7 @@ public class PlayerGetSwordBehaviour : MonoBehaviour
         else
         {
             //Debug.Log("Ã»½£");
-            PlayerBehaviour.instance.weaponView.SetState(PlayerWeaponView.State.hide);
+            //PlayerBehaviour.instance.weaponView.SetState(PlayerWeaponView.State.hide);
             canSetPlayerPhase = true;
         }
     }

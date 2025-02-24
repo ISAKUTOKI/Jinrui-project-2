@@ -70,4 +70,5 @@ MonoBehaviour:
     chatBoxAction: 6
   isPauseChat: 1
   isSafeChat: 1
+  targetFont: {fileID: 11400000, guid: e4a3aac5929c94b44b0aad4c9322a0d5, type: 2}
   DieCount: 0

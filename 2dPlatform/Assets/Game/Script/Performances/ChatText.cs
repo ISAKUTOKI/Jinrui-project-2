@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class ChatText : MonoBehaviour
 {
@@ -17,6 +18,18 @@ public class ChatText : MonoBehaviour
     private void Start()
     {
         //chat.Add(new ChatTextInfo("", 0, ChatTextInfo.ChatBoxAction.Stop));
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F12))
+        {
+            if (currentCoroutine != null)
+            {
+                StopCoroutine(currentCoroutine);
+                EndChat();
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -76,16 +89,18 @@ public class ChatText : MonoBehaviour
         {
             foreach (var item in chat)
             {
-
                 item.InvokeChatBoxAction();
-
-
                 ChatBoxTextMeshBehaviour.instance.SetText(item.text);
                 yield return new WaitForSeconds(item.duration);
                 //Debug.Log(isPauseChat);
             }
         }
 
+        EndChat();
+    }
+
+    private void EndChat()
+    {
         if (chat.Count > 0)
         {
             var lastChatAction = chat[chat.Count - 1].chatBoxAction;
@@ -93,6 +108,7 @@ public class ChatText : MonoBehaviour
             {
                 ChatBoxSystem.instance.IWantStop();
             }
+            ChatBoxTextMeshBehaviour.instance.SetText("");
         }
 
         PlayerBehaviour.instance.move.canMove = true;

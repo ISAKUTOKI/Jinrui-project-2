@@ -13,15 +13,10 @@ public class PlayerBehaviour : MonoBehaviour
     public PlayerAttackBehaviour attack { get; private set; }
     public PlayerDeflectBehaviour deflect { get; private set; }
     public PlayerJump jump { get; private set; }
-
     public PlayerDeflectBehaviour defend { get; private set; }
-
     public PlayerDie die { get; private set; }
-
     public Animator animator { get; private set; }
-
     public PlayerMovePosition movePosition { get; private set; }
-
     public PlayerWeaponView weaponView { get; private set; }
 
     public Transform flip;

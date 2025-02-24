@@ -26,10 +26,10 @@ public class MeowbodyPunishFastAttack : MonoBehaviour
             ResetCheckTimer();
         }
 
-        if (Input.GetKeyDown(KeyCode.F11))
-        {
-            Debug.Log("检查计时为 " + checkTimer);
-        }
+        //if (Input.GetKeyDown(KeyCode.F11))
+        //{
+        //    Debug.Log("检查计时为 " + checkTimer);
+        //}
     }
     private void OnTriggerEnter2D(Collider2D other)
     {

@@ -23,7 +23,7 @@ public class PlayerHealthBehaviour : MonoBehaviour
 
     public float slowMoDuration; // 慢动作持续时间
 
-    [HideInInspector]public bool canBeWounded;
+    [HideInInspector] public bool canBeWounded;
 
     private void Start()
     {
@@ -54,8 +54,8 @@ public class PlayerHealthBehaviour : MonoBehaviour
         DoRoutineMove();
         //Debug.Log("玩家现在 "+canBeWounded+" 可以被攻击");
 
-        if (Input.GetKeyDown(KeyCode.F12))
-            Die();
+        if (Input.GetKeyDown(KeyCode.F11))
+            TakeDamage(1);
 
     }
 
@@ -83,8 +83,9 @@ public class PlayerHealthBehaviour : MonoBehaviour
             PlayerBehaviour.instance.weaponView.SetState(PlayerWeaponView.State.hide);
             CombatSystem.instance.BloodWeak();
             PlayerBehaviour.instance.defend.OnWound();
-            if (currentChatBoxHurtAnimeCoroutine != null)
+            if (currentChatBoxHurtAnimeCoroutine == null)
             {
+                //Debug.Log("进入了激活的协程");
                 StartCoroutine(ChatBoxHurtAnimeCoroutine());
             }
         }
@@ -94,10 +95,11 @@ public class PlayerHealthBehaviour : MonoBehaviour
 
     private IEnumerator ChatBoxHurtAnimeCoroutine()
     {
+        //Debug.Log("激活了 ChatBox 的受伤动画");
         ChatBoxSystem.instance.IWantHurt();
         yield return new WaitForSeconds(1f);
-        ChatBoxSystem.instance.IWantStop();
-        currentChatBoxHurtAnimeCoroutine.Equals(null);
+        ChatBoxSystem.instance.IWantFastStop();
+        currentChatBoxHurtAnimeCoroutine = null;
     }
 
     public AnimationClip woundClip;

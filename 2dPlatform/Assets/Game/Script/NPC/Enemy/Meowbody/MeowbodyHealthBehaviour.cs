@@ -16,10 +16,10 @@ public class MeowbodyHealthBehaviour : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F12))
-        {
-            Die();
-        }
+        //if (Input.GetKeyDown(KeyCode.F12))
+        //{
+        //    Die();
+        //}
     }
     /// 受到伤害的方法
     public void TakeDamage(float damageAmount)

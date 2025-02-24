@@ -22,7 +22,7 @@ public class Goat : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-            Debug.Log("Player has entered the trigger");
+            //Debug.Log("Player has entered the trigger");
         }
     }
 }

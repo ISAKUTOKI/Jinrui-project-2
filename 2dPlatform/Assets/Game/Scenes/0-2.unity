@@ -313,7 +313,7 @@ MonoBehaviour:
   - text: "<size=100>\u3067\u3082\u304A\u524D\u3082\u3084\u308B\u3093\u3058\u3083\u3093
       !</size>"
     duration: 2.5
-    chatBoxAction: 1
+    chatBoxAction: 2
   - text: "\u6D41\u77F3\u4FFA\u306E\u4F53"
     duration: 1.7
     chatBoxAction: 2
@@ -15128,6 +15128,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6747799332306625980, guid: 0554c06579d168d42a3ed96d19032dd6, type: 3}
+      propertyPath: m_Size.x
+      value: 76.62358
+      objectReference: {fileID: 0}
+    - target: {fileID: 6747799332306625980, guid: 0554c06579d168d42a3ed96d19032dd6, type: 3}
+      propertyPath: m_Size.y
+      value: 5.7431755
+      objectReference: {fileID: 0}
+    - target: {fileID: 6747799332306625980, guid: 0554c06579d168d42a3ed96d19032dd6, type: 3}
+      propertyPath: m_Offset.x
+      value: 17.10215
+      objectReference: {fileID: 0}
+    - target: {fileID: 6747799332306625980, guid: 0554c06579d168d42a3ed96d19032dd6, type: 3}
+      propertyPath: m_Offset.y
+      value: -5.9790726
+      objectReference: {fileID: 0}
     - target: {fileID: 6794033669941599521, guid: 0554c06579d168d42a3ed96d19032dd6, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -15222,19 +15238,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7776344958944019923, guid: 0554c06579d168d42a3ed96d19032dd6, type: 3}
       propertyPath: m_Size.x
-      value: 1.3141229
+      value: 0.984916
       objectReference: {fileID: 0}
     - target: {fileID: 7776344958944019923, guid: 0554c06579d168d42a3ed96d19032dd6, type: 3}
       propertyPath: m_Size.y
-      value: 2.851791
+      value: 4.800696
       objectReference: {fileID: 0}
     - target: {fileID: 7776344958944019923, guid: 0554c06579d168d42a3ed96d19032dd6, type: 3}
       propertyPath: m_Offset.x
-      value: -1.3246189
+      value: -1.7525882
       objectReference: {fileID: 0}
     - target: {fileID: 7776344958944019923, guid: 0554c06579d168d42a3ed96d19032dd6, type: 3}
       propertyPath: m_Offset.y
-      value: 0.037052393
+      value: 1.0115049
       objectReference: {fileID: 0}
     - target: {fileID: 8128977010958396901, guid: 0554c06579d168d42a3ed96d19032dd6, type: 3}
       propertyPath: m_AnchorMax.y
@@ -65797,13 +65813,66 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4452762765917617709, guid: 0554c06579d168d42a3ed96d19032dd6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 105896276}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2122010746028908643, guid: 0554c06579d168d42a3ed96d19032dd6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 699421409}
   m_SourcePrefab: {fileID: 100100000, guid: 0554c06579d168d42a3ed96d19032dd6, type: 3}
 --- !u!4 &699421407 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 149228357951244613, guid: 0554c06579d168d42a3ed96d19032dd6, type: 3}
   m_PrefabInstance: {fileID: 699421406}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &699421408 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2122010746028908643, guid: 0554c06579d168d42a3ed96d19032dd6, type: 3}
+  m_PrefabInstance: {fileID: 699421406}
+  m_PrefabAsset: {fileID: 0}
+--- !u!61 &699421409
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 699421408}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -3.6883242, y: 1.0378418}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.0112529, y: 4.8533697}
+  m_EdgeRadius: 0
 --- !u!1 &884273765
 GameObject:
   m_ObjectHideFlags: 0

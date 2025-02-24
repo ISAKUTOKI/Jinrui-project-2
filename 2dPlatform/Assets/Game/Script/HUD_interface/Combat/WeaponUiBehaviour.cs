@@ -14,6 +14,8 @@ public class WeaponUiBehaviour : MonoBehaviour
     public WeaponUiPart p2;
     public WeaponUiPart p3;
 
+    public GameObject view;
+
     [Serializable]
     public class WeaponUiPart
     {
@@ -39,6 +41,17 @@ public class WeaponUiBehaviour : MonoBehaviour
     private void Start()
     {
         uia.Stop();
+    }
+    private void Update()
+    {
+        if (PlayerBehaviour.instance.getSword.hasGotSword)
+        {
+            return;
+        }
+        else
+        {
+            view.SetActive(false);
+        }
     }
     public void SyncPowerValue(float v)
     {
