@@ -414,6 +414,7 @@ MonoBehaviour:
   isInTest: 0
   hpbar: {fileID: 6397822660885931344}
   hpMax: 190
+  _isWounded: 0
   dieSound: 
   deathFadeDelay: 0.1
   npcController: {fileID: 0}
@@ -468,6 +469,7 @@ MonoBehaviour:
   safePoint_Right: {fileID: 5774955439949920464}
   stopDuration: 1
   npcController: {fileID: 0}
+  enemyBehaviour: {fileID: 8036081062574282933}
   state: 0
 --- !u!114 &1353819041433682148
 MonoBehaviour:
@@ -482,7 +484,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DamageCD: 0.7
-  checkArea: 0.3
+  checkAreaRadius: 0.3
 --- !u!114 &4771118282529150320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -530,6 +532,7 @@ MonoBehaviour:
     cdTimer: 0
     launchEffect: {fileID: 0}
   meleeCenter: {fileID: 7202201055956465003}
+  smashXDistance: 1.5
 --- !u!114 &4878072378563747961
 MonoBehaviour:
   m_ObjectHideFlags: 0

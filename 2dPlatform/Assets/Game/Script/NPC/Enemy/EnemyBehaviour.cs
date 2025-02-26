@@ -11,6 +11,7 @@ public class EnemyBehaviour : MonoBehaviour
     public int hpMax;
     private int _hp;
     bool _dead;
+    [HideInInspector]public bool _isWounded;
 
     public string dieSound;
     public float deathFadeDelay;
@@ -76,6 +77,12 @@ public class EnemyBehaviour : MonoBehaviour
         if (hpbar != null)
             hpbar.Set(ratio, false);
 
+        if (woundCoroutine == null)
+        {
+            woundCoroutine = StartCoroutine(WoundCD());
+        }
+
+
         if (_hp <= 0)
         {
             Die();
@@ -86,6 +93,17 @@ public class EnemyBehaviour : MonoBehaviour
             animator.SetTrigger("jump");
             CombatSystem.instance.ShakeWeak();
         }
+    }
+
+    Coroutine woundCoroutine;
+    IEnumerator WoundCD()
+    {
+        _isWounded = true;
+        //Debug.Log("受伤中 "+_isWounded);
+        yield return new WaitForSeconds(1.0f);
+        _isWounded = false;
+        //Debug.Log("受伤中 " + _isWounded);
+        woundCoroutine = null;
     }
 
     void Die()

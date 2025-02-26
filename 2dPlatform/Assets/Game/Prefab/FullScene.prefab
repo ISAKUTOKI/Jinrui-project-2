@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 5511219551329253232}
   - component: {fileID: 4481852979642302857}
   - component: {fileID: 1275975554734479664}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -546,7 +546,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3631216420374458659}
   - component: {fileID: 711887993030382223}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: attack1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1371,7 +1371,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8816712758450571688}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: weaponParent1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2080,7 +2080,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2727201526383544608}
   - component: {fileID: 3612147725033980193}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: attack3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2290,7 +2290,7 @@ GameObject:
   m_Component:
   - component: {fileID: 727226439349928167}
   - component: {fileID: 2248525118414134246}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: attack2 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2367,7 +2367,7 @@ GameObject:
   m_Component:
   - component: {fileID: 313718120931545576}
   - component: {fileID: 4847305353185019824}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: attack1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2444,7 +2444,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3143470174207278828}
   - component: {fileID: 5196719563173770796}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: attack3 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2802,7 +2802,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7907084097601996356}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: attack origin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2981,7 +2981,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3522707302281818713}
   - component: {fileID: 4368476724495546835}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: attack2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4960,7 +4960,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6284121420490605735}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: attackArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6207,7 +6207,7 @@ GameObject:
   - component: {fileID: 8067224304600238364}
   - component: {fileID: 523576537973501632}
   - component: {fileID: 2112908708292293977}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: foot circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6594,10 +6594,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Platforms
       objectReference: {fileID: 0}
+    - target: {fileID: 1783156885703837226, guid: 67acfe42d053e5447a3f2f2a4e44a9dd, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1783156885703837226, guid: 67acfe42d053e5447a3f2f2a4e44a9dd, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1826159318300366675, guid: 67acfe42d053e5447a3f2f2a4e44a9dd, type: 3}
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 6200000, guid: 4178b7d5de2f13a4ba903d5b55d3d642, type: 2}
+    - target: {fileID: 6765346475821401005, guid: 67acfe42d053e5447a3f2f2a4e44a9dd, type: 3}
+      propertyPath: m_SortingOrder
+      value: -5
+      objectReference: {fileID: 0}
     - target: {fileID: 7126269737898694182, guid: 67acfe42d053e5447a3f2f2a4e44a9dd, type: 3}
       propertyPath: m_Material
       value: 
@@ -6641,6 +6653,18 @@ PrefabInstance:
     - target: {fileID: 7910149488714996675, guid: 67acfe42d053e5447a3f2f2a4e44a9dd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8315604960343668576, guid: 67acfe42d053e5447a3f2f2a4e44a9dd, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8315604960343668576, guid: 67acfe42d053e5447a3f2f2a4e44a9dd, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8901976418484039470, guid: 67acfe42d053e5447a3f2f2a4e44a9dd, type: 3}
+      propertyPath: m_SortingOrder
+      value: -10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6886,7 +6910,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5243639577842863075, guid: 42fe01e8acc12c14e8ed7eb04ee35a40, type: 3}
       propertyPath: m_Name
-      value: KillZone
+      value: FallKillZone
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

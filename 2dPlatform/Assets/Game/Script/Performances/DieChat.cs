@@ -36,7 +36,7 @@ public class DieChat : MonoBehaviour
         Invoke("FirstDiedChat", 0.1f);
         //Debug.Log("Scene Loaded: " + scene.name);
         //Debug.Log("Load Mode: " + mode);
-        Debug.Log("死过了 " + DieCount + " 次");
+        //Debug.Log("死过了 " + DieCount + " 次");
     }
 
     void OnEnable()

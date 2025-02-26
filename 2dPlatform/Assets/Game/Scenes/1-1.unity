@@ -153,11 +153,11 @@ PrefabInstance:
     - target: {fileID: 1335189846127900512, guid: 0554c06579d168d42a3ed96d19032dd6, type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: 792cc7cc3177eb948991d52a4b003054, type: 2}
+      objectReference: {fileID: 11400000, guid: 0346981efc9f91b4bbac1bf05f7012fc, type: 2}
     - target: {fileID: 1335189846127900512, guid: 0554c06579d168d42a3ed96d19032dd6, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: -335019635380618406, guid: 792cc7cc3177eb948991d52a4b003054, type: 2}
+      objectReference: {fileID: -7923084065193942639, guid: 0346981efc9f91b4bbac1bf05f7012fc, type: 2}
     - target: {fileID: 1335189846127900512, guid: 0554c06579d168d42a3ed96d19032dd6, type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0

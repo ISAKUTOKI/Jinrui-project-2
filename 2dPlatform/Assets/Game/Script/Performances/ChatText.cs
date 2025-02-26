@@ -26,8 +26,8 @@ public class ChatText : MonoBehaviour
         {
             if (currentCoroutine != null)
             {
-                StopCoroutine(currentCoroutine);
                 EndChat();
+                StopCoroutine(currentCoroutine);
             }
         }
     }

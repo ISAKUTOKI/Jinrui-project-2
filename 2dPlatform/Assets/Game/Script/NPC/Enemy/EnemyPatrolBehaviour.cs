@@ -38,7 +38,7 @@ public class EnemyPatrolBehaviour : MonoBehaviour
     float _stopTimer;
     [HideInInspector]
     public NpcController npcController;
-
+    public EnemyBehaviour enemyBehaviour;
     public enum PatrolState
     {
         GoRight,
@@ -86,21 +86,27 @@ public class EnemyPatrolBehaviour : MonoBehaviour
         if (_enemy.skillBehaviour.isCasting)
             return;
 
+        if (enemyBehaviour._isWounded)
+        {
+            _enemy.animator.SetBool("walk", false);
+            npcController.SetMove(false, false);
+            return;
+        }
+
         switch (state)
         {
             case PatrolState.GoRight:
                 _enemy.animator.SetBool("walk", true);
                 npcController.SetMove(true, true);
-                // _rb2D.MovePosition((Vector2)transform.position + Vector2.right * speed * Time.fixedDeltaTime);
                 break;
 
             case PatrolState.GoLeft:
                 _enemy.animator.SetBool("walk", true);
                 npcController.SetMove(false, true);
-                // _rb2D.MovePosition((Vector2)transform.position + Vector2.left * speed * Time.fixedDeltaTime);
                 break;
         }
     }
+
 
     void CheckState()
     {

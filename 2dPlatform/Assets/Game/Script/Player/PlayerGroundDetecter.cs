@@ -19,6 +19,8 @@ public class PlayerGroundDetecter : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (PlayerBehaviour.instance.health.isDead)
+            return;
         var cols = Physics2D.OverlapCircleAll(transform.position, radius);
         foreach (var col in cols)
         {
@@ -31,7 +33,6 @@ public class PlayerGroundDetecter : MonoBehaviour
                 _cols.Add(col);
             }
         }
-
         for (var i = _cols.Count - 1; i >= 0; i--)
         {
             var col = _cols[i];
