@@ -11,13 +11,14 @@ public class MusouloomExposion : MonoBehaviour
         //Debug.Log("OK");
     }
 
-   
+
     public void ExplosionHurtPlayer()
     {
         if (MusouloomBehaviour.instance.explosionDamageArea.playerIsInDamageArea)
         {
-            PlayerBehaviour.instance.OnHit();
-            PlayerBehaviour.instance.OnHit();
+            var attackCollider = MusouloomBehaviour.instance.explosionDamageArea.GetComponent<Collider2D>();
+            PlayerBehaviour.instance.OnHit(attackCollider);
+            PlayerBehaviour.instance.OnHit(attackCollider);
         }
     }
 }

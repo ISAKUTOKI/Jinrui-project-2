@@ -22,14 +22,14 @@ public class ChatText : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F12))
-        {
-            if (currentCoroutine != null)
-            {
-                EndChat();
-                StopCoroutine(currentCoroutine);
-            }
-        }
+        //if (Input.GetKeyDown(KeyCode.F12))
+        //{
+        //    if (currentCoroutine != null)
+        //    {
+        //        EndChat();
+        //        StopCoroutine(currentCoroutine);
+        //    }
+        //}
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

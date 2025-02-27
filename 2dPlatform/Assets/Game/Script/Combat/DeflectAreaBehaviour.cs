@@ -28,7 +28,6 @@ public class DeflectAreaBehaviour : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // ºÏ≤‚µ–»À
         var ENE = collision.GetComponent<EnemyBehaviour>();
         if (ENE != null)
         {
@@ -37,8 +36,6 @@ public class DeflectAreaBehaviour : MonoBehaviour
                 hitSources.Add(collision);
             }
         }
-
-        // ºÏ≤‚ƒ¢πΩ±¨’®∑∂Œß
         var MSEA = collision.GetComponent<MusouloomExplosionDamageArea>();
         if (MSEA != null)
         {
@@ -47,8 +44,6 @@ public class DeflectAreaBehaviour : MonoBehaviour
                 hitSources.Add(collision);
             }
         }
-
-        // ºÏ≤‚∆‰À˚…À∫¶¿¥‘¥
         var MBA1 = collision.GetComponent<MeowbodyAttack1>();
         if (MBA1 != null)
         {
@@ -57,7 +52,6 @@ public class DeflectAreaBehaviour : MonoBehaviour
                 hitSources.Add(collision);
             }
         }
-
         var MBA2 = collision.GetComponent<MeowbodyAttack2>();
         if (MBA2 != null)
         {
@@ -66,7 +60,6 @@ public class DeflectAreaBehaviour : MonoBehaviour
                 hitSources.Add(collision);
             }
         }
-
         var MBFA = collision.GetComponent<MeowbodyFastAttack>();
         if (MBFA != null)
         {
@@ -75,7 +68,6 @@ public class DeflectAreaBehaviour : MonoBehaviour
                 hitSources.Add(collision);
             }
         }
-
         var MBDA = collision.GetComponent<MeowbodyDiedAttack>();
         if (MBDA != null)
         {
@@ -84,7 +76,6 @@ public class DeflectAreaBehaviour : MonoBehaviour
                 hitSources.Add(collision);
             }
         }
-
         var MBPFA = collision.GetComponent<MeowbodyPunishFastAttack>();
         if (MBPFA != null)
         {
@@ -93,7 +84,6 @@ public class DeflectAreaBehaviour : MonoBehaviour
                 hitSources.Add(collision);
             }
         }
-
         var MLEA = collision.GetComponent<MusouloomExplosionDamageArea>();
         if (MLEA != null)
         {
