@@ -50,7 +50,6 @@ public class MeowbodyAttackBehaviour : MonoBehaviour
         {
             if (!MeowbodyBehaviour.instance.punishFastAttack.isChecking) 
                 return;//并且正在检查区域
-
             if (Input.GetKeyDown(KeyCode.J))
             {
                 if (MeowbodyBehaviour.instance.weaponPowerSystem.power < 0.1f)
@@ -174,9 +173,9 @@ public class MeowbodyAttackBehaviour : MonoBehaviour
         CheckPlayerPosition(-1);
         //Debug.Log("正在进行 DiedAttack!");
     }
-    public void AttackTakeDamage(int damage)
+    public void AttackTakeDamage(int damage,Collider2D attackCollider)
     {
-        PlayerBehaviour.instance.OnHit();
+        PlayerBehaviour.instance.OnHit(attackCollider);
     }
 
     ///转向

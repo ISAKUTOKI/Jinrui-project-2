@@ -9,7 +9,8 @@ public class MeowbodyAnimeEvents : MonoBehaviour
     {
         if (MeowbodyBehaviour.instance.attack.attack1CanAttackNeko)
         {
-            MeowbodyBehaviour.instance.attack.AttackTakeDamage(1);
+            var attackCollider = MeowbodyBehaviour.instance.attack1.GetComponent<Collider2D>();
+            MeowbodyBehaviour.instance.attack.AttackTakeDamage(1, attackCollider);
         }
     }
 
@@ -17,7 +18,8 @@ public class MeowbodyAnimeEvents : MonoBehaviour
     {
         if (MeowbodyBehaviour.instance.attack.attack2CanAttackNeko)
         {
-            MeowbodyBehaviour.instance.attack.AttackTakeDamage(1);
+            var attackCollider = MeowbodyBehaviour.instance.attack2.GetComponent<Collider2D>();
+            MeowbodyBehaviour.instance.attack.AttackTakeDamage(1, attackCollider);
         }
     }
 
@@ -25,7 +27,8 @@ public class MeowbodyAnimeEvents : MonoBehaviour
     {
         if (MeowbodyBehaviour.instance.attack.fastAttackCanAttackNeko)
         {
-            MeowbodyBehaviour.instance.attack.AttackTakeDamage(2);
+            var attackCollider = MeowbodyBehaviour.instance.fastAttack.GetComponent<Collider2D>();
+            MeowbodyBehaviour.instance.attack.AttackTakeDamage(2, attackCollider);
         }
     }
 
@@ -33,9 +36,11 @@ public class MeowbodyAnimeEvents : MonoBehaviour
     {
         if (MeowbodyBehaviour.instance.attack.diedAttackCanAttackNeko)
         {
-            MeowbodyBehaviour.instance.attack.AttackTakeDamage(1);
+            var attackCollider = MeowbodyBehaviour.instance.diedAttack.GetComponent<Collider2D>();
+            MeowbodyBehaviour.instance.attack.AttackTakeDamage(1, attackCollider);
         }
     }
+
 
     public void AttackBegin()
     {

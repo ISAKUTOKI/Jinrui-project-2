@@ -11,8 +11,15 @@ public class MeowbodyBehaviour : MonoBehaviour
     public MeowbodyHealthBehaviour health { get; private set; }
     public MeowbodyView MeowbodyView { get; private set; }
     public Animator animator { get; private set; }
-    public MeowbodyPunishFastAttack punishFastAttack { get; private set; }
     public GameObject view { get; private set; }
+
+
+    public MeowbodyAttack1 attack1 { get; private set; }
+    public MeowbodyAttack2 attack2 { get; private set; }
+    public MeowbodyDiedAttack diedAttack { get; private set; }
+    public MeowbodyFastAttack fastAttack { get; private set; }
+    public MeowbodyPunishFastAttack punishFastAttack { get; private set; }
+
 
 
     public GameObject Neko;
@@ -32,6 +39,11 @@ public class MeowbodyBehaviour : MonoBehaviour
 
         MeowbodyView = GetComponentInChildren<MeowbodyView>();
         animator = GetComponentInChildren<Animator>();
+
+        attack1=GetComponentInChildren<MeowbodyAttack1>();
+        attack2 = GetComponentInChildren<MeowbodyAttack2>();
+        diedAttack = GetComponentInChildren<MeowbodyDiedAttack>();
+        fastAttack = GetComponentInChildren<MeowbodyFastAttack>();
         punishFastAttack = GetComponentInChildren<MeowbodyPunishFastAttack>();
 
         view = MeowbodyView.gameObject;
