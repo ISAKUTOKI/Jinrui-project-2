@@ -51,7 +51,7 @@ public class PlayerBehaviour : MonoBehaviour
     /// 3 敌人的身体部分，比如大型猫敌人的尾巴攻击，用的是这个攻击特定的攻击判定框的transform判断弹反
     /// </summary>
     /// <param name="hitSource"></param>
-    public void OnHit(Collider2D hitSourceCollider = null)
+    public void OnHit(Collider2D hitSourceCollider = null,bool isSuperAttack=false)
     {
         if (hitSourceCollider != null)
         {
@@ -64,7 +64,7 @@ public class PlayerBehaviour : MonoBehaviour
                 {
                     if (defend.isDeflecting)
                     {
-                        defend.TriggerDeflect();
+                        defend.TriggerDeflect(isSuperAttack);
                         return;
                     }
 

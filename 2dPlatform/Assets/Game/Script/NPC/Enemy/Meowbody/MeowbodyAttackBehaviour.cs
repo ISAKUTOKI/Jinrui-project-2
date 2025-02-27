@@ -1,11 +1,12 @@
 using Assets.Game.Script.HUD_interface.Combat;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
 public class MeowbodyAttackBehaviour : MonoBehaviour
 {
-    // 攻击间隔范围
+    // 攻击之间的间隔时间
     public float minAttackInterval = 2f;
     public float maxAttackInterval = 5f;
 
@@ -13,12 +14,14 @@ public class MeowbodyAttackBehaviour : MonoBehaviour
     public float attack1Cooldown = 5f;
     public float attack2Cooldown = 3f;
 
-    // 玩家引用
-
     // 计时器
     private float attackTimer;
     private float attack1Timer;
     private float attack2Timer;
+
+    //快速攻击逻辑
+    private bool canFastAttack;
+    private float fastAttackCD;
 
     [HideInInspector] public bool isAttacking;
     [HideInInspector] public bool attack1CanAttackNeko;
@@ -46,20 +49,9 @@ public class MeowbodyAttackBehaviour : MonoBehaviour
             ResetAttackTimer(); // 重置攻击间隔计时器
         }
 
-        if (!isAttacking)//如果Meowbody不在攻击
-        {
-            if (!MeowbodyBehaviour.instance.punishFastAttack.isChecking) 
-                return;//并且正在检查区域
-            if (Input.GetKeyDown(KeyCode.J))
-            {
-                if (MeowbodyBehaviour.instance.weaponPowerSystem.power < 0.1f)
-                {
-                    FastAttack();
-                    MeowbodyBehaviour.instance.punishFastAttack.ResetCheckTimer();
+        //玩家无能量攻击的惩罚检测
+        FastAttackCheck();
 
-                }
-            }
-        }
     }
 
     // 重置攻击间隔计时器
@@ -164,18 +156,60 @@ public class MeowbodyAttackBehaviour : MonoBehaviour
         ResetCooldowns();
         CheckPlayerPosition(-1);
         MeowbodyBehaviour.instance.animator.SetTrigger("fastAttack");
+        MeowbodyBehaviour.instance.health.canBeHurt = false;//快速攻击后一段时间内不会受伤
+        MeowbodyBehaviour.instance.punishFastAttack.ResetCheckTimer();
         //Debug.Log("正在进行 FastAttack!");
         attack1Timer = 0;
         attack2Timer = 0;
+    }
+    void FastAttackCheck()
+    {
+        if (MeowbodyBehaviour.instance.health.hurtCount == 5)
+        {
+            MeowbodyBehaviour.instance.health.hurtCount = 0;
+            FastAttack();
+        }
+
+        FastAttackCheckTimer();
+
+        if (isAttacking)//如果Meowbody在攻击
+            return;
+        if (!MeowbodyBehaviour.instance.punishFastAttack.isChecking)//如果玩家不在Meowbody的快速攻击检查范围内
+            return;
+        if (!canFastAttack)//如果不能快速攻击
+            return;
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            if (MeowbodyBehaviour.instance.weaponPowerSystem.power < 0.1f)
+            {
+                FastAttack();
+            }
+        }
+    }
+    void FastAttackCheckTimer()//刚受伤的一段时间内不能快速攻击
+    {
+        if (MeowbodyBehaviour.instance.health.isHurting)
+        {
+            fastAttackCD = 0.5f;
+        }
+        fastAttackCD -= Time.deltaTime;
+        if (fastAttackCD <= 0)
+        {
+            canFastAttack = true;
+        }
+        else
+        {
+            canFastAttack = false;
+        }
     }
     public void DiedAttack()
     {
         CheckPlayerPosition(-1);
         //Debug.Log("正在进行 DiedAttack!");
     }
-    public void AttackTakeDamage(int damage,Collider2D attackCollider)
+    public void AttackTakeDamage(int damage, Collider2D attackCollider, bool isSuperAttack = false)
     {
-        PlayerBehaviour.instance.OnHit(attackCollider);
+        PlayerBehaviour.instance.OnHit(attackCollider, isSuperAttack);
     }
 
     ///转向

@@ -28,7 +28,7 @@ public class MeowbodyAnimeEvents : MonoBehaviour
         if (MeowbodyBehaviour.instance.attack.fastAttackCanAttackNeko)
         {
             var attackCollider = MeowbodyBehaviour.instance.fastAttack.GetComponent<Collider2D>();
-            MeowbodyBehaviour.instance.attack.AttackTakeDamage(2, attackCollider);
+            MeowbodyBehaviour.instance.attack.AttackTakeDamage(2, attackCollider, true);
         }
     }
 

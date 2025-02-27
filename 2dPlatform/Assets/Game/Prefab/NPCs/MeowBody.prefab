@@ -317,9 +317,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minAttackInterval: 2
-  maxAttackInterval: 5
-  attack1Cooldown: 3
-  attack2Cooldown: 5
+  maxAttackInterval: 3
+  attack1Cooldown: 1.5
+  attack2Cooldown: 2
   isAttacking: 0
   attack1CanAttackNeko: 0
   attack2CanAttackNeko: 0
@@ -338,6 +338,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  isHurting: 0
 --- !u!70 &5345675522856608461
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -370,8 +371,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.04107642, y: -0.6269825}
-  m_Size: {x: 1.6889424, y: 1.0510867}
+  m_Offset: {x: 0.10840597, y: -0.9785994}
+  m_Size: {x: 3.011187, y: 1.9637969}
   m_Direction: 1
 --- !u!1 &5057971352458724910
 GameObject:
@@ -474,7 +475,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 3.111439, y: 0.32933426}
+  m_Offset: {x: 3.2066708, y: 0.32933426}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -485,7 +486,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 6.308059, y: 3.2321568}
+  m_Size: {x: 6.797821, y: 3.2321568}
   m_EdgeRadius: 0
 --- !u!114 &1344740264116325914
 MonoBehaviour:

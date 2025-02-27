@@ -30,7 +30,7 @@ public class PlayerAttackBehaviour : MonoBehaviour
     public int damage_swing3;
     public int damage_swing3_Super;
     private int _attackMovementPhase;//0 没有攻击 1~3 第1~3次斩击 
-    public bool isSuperAttack;//弹反攻击
+    [HideInInspector]public bool isSuperAttack;//有能量攻击
     //public PlayerActionPerformDependency dependency;
     private bool _comboOn;
 
@@ -128,7 +128,7 @@ public class PlayerAttackBehaviour : MonoBehaviour
                 float normalizedTime = stateInfo.normalizedTime;
                 float clipLength = stateInfo.length;
                 float playbackTime = normalizedTime * clipLength;
-                Debug.Log("isAttackingButCanInterrupt clip " + clip.name + " playbackTime " + playbackTime);
+                //Debug.Log("isAttackingButCanInterrupt clip " + clip.name + " playbackTime " + playbackTime);
                 return playbackTime < 0.35f;
             }
 

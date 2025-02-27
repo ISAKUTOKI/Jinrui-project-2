@@ -20,11 +20,12 @@ public class MeowbodyPunishFastAttack : MonoBehaviour
             checkTimer -= Time.deltaTime;
         }
 
-        if (checkTimer <= 0)
+        if (checkTimer <= 0 && MeowbodyBehaviour.instance.health.isHurting)
         {
             MeowbodyBehaviour.instance.attack.FastAttack();
             ResetCheckTimer();
         }
+
 
         //if (Input.GetKeyDown(KeyCode.F11))
         //{
