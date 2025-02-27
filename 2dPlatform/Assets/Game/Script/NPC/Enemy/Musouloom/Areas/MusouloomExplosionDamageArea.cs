@@ -13,7 +13,6 @@ public class MusouloomExplosionDamageArea : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        //Debug.Log("有东西进入区域 " + other.name);
         if (other.gameObject == MusouloomBehaviour.instance.Neko)
         {
             Debug.Log("玩家进入蘑菇爆炸范围");

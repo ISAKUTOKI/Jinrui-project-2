@@ -51,30 +51,33 @@ public class PlayerBehaviour : MonoBehaviour
     /// 3 敌人的身体部分，比如大型猫敌人的尾巴攻击，用的是这个攻击特定的攻击判定框的transform判断弹反
     /// </summary>
     /// <param name="hitSource"></param>
-    public void OnHit(Transform hitSource = null)
+    public void OnHit(Collider2D hitSourceCollider = null)
     {
-        //Debug.Log("neko OnHit");
-        var inDeflectArea = defend.deflectArea.InAreaCheck(hitSource);
-        //Debug.Log("inDeflectArea " + inDeflectArea);
-        if (hitSource != null && inDeflectArea)
+        if (hitSourceCollider != null)
         {
-            //Debug.Log("inDeflectArea");
-            if (defend.isDefending)
+            // 判断伤害来源是否在弹反区域内
+            bool inDeflectArea = deflect.deflectArea.InAreaCheck(hitSourceCollider);
+
+            if (inDeflectArea)
             {
-                if (defend.isDeflecting)
+                if (defend.isDefending)
                 {
-                    defend.TriggerDeflect();
+                    if (defend.isDeflecting)
+                    {
+                        defend.TriggerDeflect();
+                        return;
+                    }
+
+                    var dx = hitSourceCollider.transform.position.x - transform.position.x;
+                    bool isToRight = dx < 0;
+
+                    defend.TriggerDefend(isToRight);
                     return;
                 }
-
-                var dx = hitSource.position.x - transform.position.x;
-                bool isToRight = dx < 0;
-
-                defend.TriggerDefend(isToRight);
-                return;
             }
         }
 
+        // 如果未弹反或防御，则正常受到伤害
         health.TakeDamage(1);
     }
 

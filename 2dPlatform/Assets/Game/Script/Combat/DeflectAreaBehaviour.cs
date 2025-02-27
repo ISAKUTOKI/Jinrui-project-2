@@ -4,94 +4,116 @@ using UnityEngine;
 
 public class DeflectAreaBehaviour : MonoBehaviour
 {
-    private List<Transform> hitSources;
+    private List<Collider2D> hitSources; // 改为记录 Collider2D
+    private Collider2D _deflectCollider; // 弹反区域的 Collider2D
+
+    private void Awake()
+    {
+        _deflectCollider = GetComponent<Collider2D>(); // 获取弹反区域的 Collider2D
+        if (_deflectCollider == null)
+        {
+            Debug.LogError("DeflectAreaBehaviour: No Collider2D found on this GameObject!");
+        }
+    }
 
     private void OnEnable()
     {
-        hitSources = new List<Transform>();
+        hitSources = new List<Collider2D>();
     }
 
     private void OnDisable()
     {
-        hitSources = new List<Transform>();
+        hitSources = new List<Collider2D>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //Debug.LogWarning("DeflectAreaBehaviour OnTriggerEnter2D " + collision.gameObject);
-        var ene = collision.GetComponent<EnemyBehaviour>();
-        if (ene != null)
+        // 检测敌人
+        var ENE = collision.GetComponent<EnemyBehaviour>();
+        if (ENE != null)
         {
-            if (!hitSources.Contains(ene.transform))
+            if (!hitSources.Contains(collision))
             {
-                hitSources.Add(ene.transform);
+                hitSources.Add(collision);
             }
         }
 
+        // 检测蘑菇爆炸范围
+        var MSEA = collision.GetComponent<MusouloomExplosionDamageArea>();
+        if (MSEA != null)
+        {
+            if (!hitSources.Contains(collision))
+            {
+                hitSources.Add(collision);
+            }
+        }
+
+        // 检测其他伤害来源
         var MBA1 = collision.GetComponent<MeowbodyAttack1>();
         if (MBA1 != null)
         {
-            if (!hitSources.Contains(MBA1.transform))
+            if (!hitSources.Contains(collision))
             {
-                hitSources.Add(MBA1.transform);
+                hitSources.Add(collision);
             }
         }
 
         var MBA2 = collision.GetComponent<MeowbodyAttack2>();
         if (MBA2 != null)
         {
-            if (!hitSources.Contains(MBA2.transform))
+            if (!hitSources.Contains(collision))
             {
-                hitSources.Add(MBA2.transform);
+                hitSources.Add(collision);
             }
         }
 
         var MBFA = collision.GetComponent<MeowbodyFastAttack>();
         if (MBFA != null)
         {
-            if (!hitSources.Contains(MBFA.transform))
+            if (!hitSources.Contains(collision))
             {
-                hitSources.Add(MBFA.transform);
+                hitSources.Add(collision);
             }
         }
 
         var MBDA = collision.GetComponent<MeowbodyDiedAttack>();
         if (MBDA != null)
         {
-            if (!hitSources.Contains(MBDA.transform))
+            if (!hitSources.Contains(collision))
             {
-                hitSources.Add(MBDA.transform);
+                hitSources.Add(collision);
             }
         }
 
         var MBPFA = collision.GetComponent<MeowbodyPunishFastAttack>();
         if (MBPFA != null)
         {
-            if (!hitSources.Contains(MBPFA.transform))
+            if (!hitSources.Contains(collision))
             {
-                hitSources.Add(MBPFA.transform);
+                hitSources.Add(collision);
             }
         }
 
         var MLEA = collision.GetComponent<MusouloomExplosionDamageArea>();
         if (MLEA != null)
         {
-            if (!hitSources.Contains(MLEA.transform))
+            if (!hitSources.Contains(collision))
             {
-                hitSources.Add(MLEA.transform);
+                hitSources.Add(collision);
             }
         }
     }
 
     /// <summary>
-    /// 最终的受到伤害的处理函数，接受的参数是伤害来源，可能的情况有
-    /// 1 敌人身体，比如史莱姆的近战攻击，用的是整个敌人的transform判断弹反
-    /// 2 飞射性物体projectile，也就是远程攻击，用的是敌人的子弹的transform判断弹反
-    /// 3 敌人的身体部分，比如大型猫敌人的尾巴攻击，用的是这个攻击特定的攻击判定框的transform判断弹反
+    /// 判断伤害来源是否在弹反区域内
     /// </summary>
-    /// <param name="hitSource"></param>
-    public bool InAreaCheck(Transform hitSource)
+    /// <param name="hitSourceCollider">伤害来源的 Collider2D</param>
+    public bool InAreaCheck(Collider2D hitSourceCollider)
     {
-        return hitSources.Contains(hitSource);
+        if (hitSourceCollider == null || _deflectCollider == null)
+            return false;
+
+        // 检测两个 Collider 是否重叠
+        return _deflectCollider.IsTouching(hitSourceCollider);
     }
 }

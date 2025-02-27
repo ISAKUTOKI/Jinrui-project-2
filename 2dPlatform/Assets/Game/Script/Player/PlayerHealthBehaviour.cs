@@ -119,13 +119,13 @@ public class PlayerHealthBehaviour : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.tag == "Kill")
-        {
-            this.Die(true);
-        }
-    }
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (collision.tag == "Kill")
+    //    {
+    //        this.Die(true);
+    //    }
+    //}
 
     public void Die(bool fromFall = false)
     {

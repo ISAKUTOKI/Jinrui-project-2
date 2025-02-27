@@ -737,8 +737,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d967cd8a9027a94eabd4ee298cb3313, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInTest: 0
   hpbar: {fileID: 1404627194}
   hpMax: 190
+  _isWounded: 0
   dieSound: 
   deathFadeDelay: 0.1
   npcController: {fileID: 0}
@@ -793,6 +795,7 @@ MonoBehaviour:
   safePoint_Right: {fileID: 1349932632}
   stopDuration: 1
   npcController: {fileID: 0}
+  enemyBehaviour: {fileID: 0}
   state: 0
 --- !u!114 &51076806
 MonoBehaviour:
@@ -808,6 +811,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skills: []
   meleeCenter: {fileID: 0}
+  smashXDistance: 1.5
 --- !u!114 &51076807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2199,6 +2203,7 @@ MonoBehaviour:
   freq: 6
   offset: 0
   amplitude: 0.16
+  someLerpSpeed: 0
   xAxis: 0
   yAxis: 1
   zAxis: 0
@@ -8363,6 +8368,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71b08a5895ddfb143979c13d28885981, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canMove: 1
   speed: 5.2
   dependency:
     notCrouching: 0
@@ -8463,8 +8469,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpView: {fileID: 1870491489}
   hpMax: 6
-  dieSound: 
   deathFadeDelay: 0
+  slowMoDuration: 0
+  canBeWounded: 0
   woundClip: {fileID: 0}
 --- !u!114 &909911389
 MonoBehaviour:
@@ -8492,9 +8499,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1f957cdbd8b01c40be6524498b2243c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageOrigin: {fileID: 33872038}
-  damageRadius: 1.5
-  ps: {fileID: 0}
+  canAttack: 0
   clip_swing1:
     clip: {fileID: 7400000, guid: 7422036d27913ca4aad1931dfcae239b, type: 2}
     speedRatio: 0.7
@@ -8504,23 +8509,17 @@ MonoBehaviour:
   clip_swing3:
     clip: {fileID: 7400000, guid: c6e2da7389fc0ae4f8e979345228dc65, type: 2}
     speedRatio: 0.7
+  superAttackSwingSpeedMultiplier: 2
+  swing1_Cols: []
+  swing2_Cols: []
+  swing3_Cols: []
   damage_swing1: 30
-  damage_swing1_2: 0
+  damage_swing1_Super: 0
   damage_swing2: 30
-  damage_swing2_2: 0
+  damage_swing2_Super: 0
   damage_swing3: 120
-  damage_swing3_2: 0
-  currentAttackSwingPhase: 0
-  dependency:
-    notCrouching: 0
-    notPerformingCrouching: 0
-    noGunDrawn: 0
-    notPerformingDrawGun: 0
-    notTurnedBack: 0
-    notTurning: 0
-    notShooting: 0
-    notWalking: 0
-    notHiting: 0
+  damage_swing3_Super: 0
+  isSuperAttack: 0
 --- !u!114 &909911391
 MonoBehaviour:
   m_ObjectHideFlags: 0

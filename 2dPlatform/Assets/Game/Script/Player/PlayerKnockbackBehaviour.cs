@@ -29,13 +29,15 @@ public class PlayerKnockbackBehaviour : MonoBehaviour
 
     public void KnockBack(Vector2 dir, float speed)
     {
-        Debug.Log("KnockBack " + dir.x + " speed " + speed);
+        //Debug.Log("KnockBack " + dir.x + " speed " + speed);
         _dir = dir;
         _speed = speed;
     }
 
     void Update()
     {
+        if (PlayerBehaviour.instance.health.isDead)
+            return;
         if (_speed <= 0)
             return;
         if (rb.isKinematic)

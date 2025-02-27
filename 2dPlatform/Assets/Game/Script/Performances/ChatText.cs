@@ -12,7 +12,7 @@ public class ChatText : MonoBehaviour
     [SerializeField] bool isExitEndChat = false;
     [SerializeField] bool canChatAgain = false;
     [SerializeField] bool isSafeChat = false;
-    bool isChatted = false;
+    [HideInInspector] public bool isChatted = false;
     Coroutine currentCoroutine;
 
     private void Start()

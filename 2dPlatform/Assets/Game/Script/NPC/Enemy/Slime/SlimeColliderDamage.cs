@@ -18,9 +18,19 @@ public class SlimeColliderDamage : MonoBehaviour
 
     void DealDamage()
     {
-        //造成伤害
-        PlayerBehaviour.instance.OnHit();
-        _lastDealDamageTime = Time.time;
+        // 获取史莱姆的 Collider2D
+        var slimeCollider = GetComponent<Collider2D>();
+        if (slimeCollider != null)
+        {
+            // 造成伤害，并传递史莱姆的 Collider2D 作为伤害来源
+            PlayerBehaviour.instance.OnHit(slimeCollider);
+        }
+        else
+        {
+            Debug.LogError("SlimeColliderDamage: No Collider2D found on this GameObject!");
+        }
+
+        _lastDealDamageTime = Time.time; // 记录本次伤害的时间
     }
 
     void PlayerIsInCheckArea(float radius)
@@ -30,7 +40,7 @@ public class SlimeColliderDamage : MonoBehaviour
         {
             if (a[i].gameObject.CompareTag("Player"))
             {
-                Debug.Log("玩家在史莱姆伤害范围内");
+                //Debug.Log("玩家在史莱姆伤害范围内");
                 DealDamage();
                 break;
             }

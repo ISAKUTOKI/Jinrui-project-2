@@ -97,7 +97,7 @@ UI
             bool isWounding = PlayerBehaviour.instance.health.isWounding;
             bool isGrounded = !PlayerBehaviour.instance.jump.IsJumping;
             //bool isWalking = false;
-            Debug.Log(isAttacking + "" + isAttackingButInCanDeflectState);
+            //Debug.Log(isAttacking + "" + isAttackingButInCanDeflectState);
             return (!isAttacking || isAttackingButInCanDeflectState)
                 && isGrounded
                 && !isWounding;
@@ -126,7 +126,7 @@ UI
         //perform deflect
         //stop walking
         //有能量就进入防御持续
-        Debug.Log("bougyo_start");
+        //Debug.Log("bougyo_start");
         PlayerBehaviour.instance.animator.ResetTrigger("bougyo_out");
         PlayerBehaviour.instance.animator.SetTrigger("bougyo_start");
         _isDefending = true;
@@ -240,7 +240,7 @@ UI
 
     public void TriggerDefend(bool isToRight)
     {
-        Debug.Log("TriggerDefend isToRight " + isToRight);
+        //Debug.Log("TriggerDefend isToRight " + isToRight);
         //击退
         if (isToRight)
             PlayerBehaviour.instance.move.knockback.KnockBackToRight(1);
@@ -256,5 +256,20 @@ UI
     {
         // 如果按下攻击键，使用 deflect_to_attack 的 Trigger 进入攻击动画
         PlayerBehaviour.instance.animator.SetTrigger("deflect_to_attack");
+    }
+
+    public bool IsInDeflectArea(Transform hitSource)
+    {
+        // 计算伤害来源与玩家的方向
+        Vector2 directionToSource = (hitSource.position - transform.position).normalized;
+
+        // 判断伤害来源是否在玩家前方（假设弹反区域为玩家前方）
+        float dot = Vector2.Dot(transform.right, directionToSource);
+        if (dot > 0) // 如果伤害来源在玩家前方
+        {
+            return true;
+        }
+
+        return false;
     }
 }

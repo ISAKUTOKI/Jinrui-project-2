@@ -6,8 +6,8 @@ namespace com
 {
     public class CreateSpriteVfxSystem : MonoBehaviour
     {
-        public SpriteVfxInstance prefab;
         public static CreateSpriteVfxSystem instance;
+        public SpriteVfxInstance prefab;
         public SpriteVfxData[] datas;
         public Transform spawnParent;
 
@@ -18,6 +18,13 @@ namespace com
 
         public void Create(string id, Vector2 pos)
         {
+            // 如果特效系统未初始化或 id 为空，直接返回
+            if (prefab == null || datas == null || string.IsNullOrEmpty(id))
+            {
+                //Debug.LogWarning($"CreateSpriteVfxSystem: Skipping VFX creation for id {id}");
+                return;
+            }
+
             foreach (var d in datas)
             {
                 if (d.id == id)
@@ -26,6 +33,8 @@ namespace com
                     return;
                 }
             }
+
+            //Debug.LogWarning($"CreateSpriteVfxSystem: VFX with id {id} not found!");
         }
 
         public void Create(int index, Vector2 pos)
